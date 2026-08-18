@@ -48,6 +48,18 @@ export default function AboutPage() {
             giving neighbours a reason to bump into each other.
           </p>
           <p>
+            Our coffee is Bourbon Cream, a Brazil/Colombia blend from{" "}
+            <a
+              href="https://www.pactcoffee.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-amber-700 hover:underline"
+            >
+              Pact Coffee
+            </a>
+            , roasted days before it reaches us — regular or decaf, always your choice.
+          </p>
+          <p>
             We&rsquo;re always looking for ways to do more for the community around
             us — whether that&rsquo;s hosting a local market, running a free workshop, or
             simply keeping the lights on a little later for a evening catch-up. If you

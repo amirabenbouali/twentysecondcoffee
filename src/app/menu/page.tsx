@@ -28,9 +28,16 @@ export default function MenuPage() {
         <div className="grid gap-x-16 gap-y-14 md:grid-cols-2">
           {menu.map((section, i) => (
             <Reveal key={section.title} delayMs={i * 80}>
-              <h2 className="font-display text-2xl font-semibold text-ink-950">
-                {section.title}
-              </h2>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h2 className="font-display text-2xl font-semibold text-ink-950">
+                  {section.title}
+                </h2>
+                {section.description && (
+                  <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">
+                    {section.description}
+                  </p>
+                )}
+              </div>
               <ul className="mt-6 divide-y divide-ink-950/10">
                 {section.items.map((item) => (
                   <li

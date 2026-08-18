@@ -116,6 +116,10 @@ body {
   .btn-press:active {
     transform: translateY(0);
   }
+
+  .scroll-cue {
+    animation: scroll-cue 2.2s ease-in-out infinite;
+  }
 }
 
 @keyframes fade-up {
@@ -135,5 +139,17 @@ body {
   }
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
   }
 }

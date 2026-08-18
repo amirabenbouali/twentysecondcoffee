@@ -11,69 +11,111 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero — the logo mark is the hero, not a corner decoration */}
-      <section className="bg-espresso-950 text-paper-50">
-        <div className="mx-auto max-w-3xl px-6 pb-20 pt-32 text-center md:pb-28 md:pt-40">
-          <div
-            className="reveal flex flex-wrap items-center justify-center gap-3"
-            style={{ "--reveal-delay": "0ms" } as CSSProperties}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
-              {site.neighborhood}
+      {/* Hero — full-bleed photo, editorial overlay */}
+      <section className="relative flex min-h-screen items-end overflow-hidden bg-espresso-950 text-paper-50">
+        <div className="absolute inset-0">
+          <Image
+            src="/hero-placeholder.jpg"
+            alt="Coffee, pastry, and flowers on a sunlit cafe table — placeholder photo, swap for 22nd Coffee's own"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: "62% 55%" }}
+          />
+          {/* Scrim only behind the text zone — keep the photo itself bright and visible */}
+          <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-espresso-950 via-espresso-950/45 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-espresso-950/60 via-transparent to-transparent lg:w-2/3" />
+        </div>
+
+        <div className="relative w-full px-6 pb-20 pt-40 sm:px-10 md:pb-24 lg:px-16">
+          <div className="max-w-xl">
+            <div
+              className="reveal flex flex-wrap items-center gap-3"
+              style={{ "--reveal-delay": "0ms" } as CSSProperties}
+            >
+              <Image
+                src="/logo-light-small.png"
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain"
+              />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
+                {site.neighborhood}
+              </p>
+              <span className="inline-flex items-center gap-1 rounded-full bg-paper-50/10 px-3 py-1 text-xs font-semibold text-paper-100/80 backdrop-blur-sm">
+                ★ {site.googleRating.value} · {site.googleRating.count} reviews
+              </span>
+            </div>
+
+            <h1
+              className="reveal mt-6 font-display text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl"
+              style={{ "--reveal-delay": "160ms" } as CSSProperties}
+            >
+              Built by the <span className="font-script text-amber-300">community</span>,
+              for the community.
+            </h1>
+
+            <p
+              className="reveal mt-5 max-w-md text-paper-100/80"
+              style={{ "--reveal-delay": "320ms" } as CSSProperties}
+            >
+              {site.name} is Royal Wharf&rsquo;s neighbourhood spot for great coffee,
+              familiar faces, and the kind of morning that starts a good day.
             </p>
-            <span className="inline-flex items-center gap-1 rounded-full bg-paper-50/10 px-3 py-1 text-xs font-semibold text-paper-100/80">
-              ★ {site.googleRating.value} · {site.googleRating.count} Google reviews
-            </span>
-          </div>
 
-          <div
-            className="reveal mx-auto mt-10 w-full max-w-md sm:max-w-lg"
-            style={{ "--reveal-delay": "160ms" } as CSSProperties}
-          >
-            <Image
-              src="/logo-light.png"
-              alt={`${site.name} — a hand-drawn coffee cup with a coffee-ring stain`}
-              width={900}
-              height={664}
-              className="w-full"
-              priority
-            />
-          </div>
-
-          <h1
-            className="reveal mt-8 font-display text-2xl font-semibold sm:text-3xl"
-            style={{ "--reveal-delay": "340ms" } as CSSProperties}
-          >
-            Built by the community, for the community.
-          </h1>
-
-          <p
-            className="reveal mx-auto mt-4 max-w-sm text-sm text-paper-100/65"
-            style={{ "--reveal-delay": "460ms" } as CSSProperties}
-          >
-            Royal Wharf&rsquo;s neighbourhood spot for great coffee, familiar faces, and the
-            kind of morning that starts a good day.
-          </p>
-
-          <div
-            className="reveal mt-9 flex flex-wrap justify-center gap-4"
-            style={{ "--reveal-delay": "560ms" } as CSSProperties}
-          >
-            <Link
-              href="/menu"
-              className="btn-press min-w-[180px] rounded-full bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-espresso-950 transition-colors hover:bg-amber-300"
+            <div
+              className="reveal mt-9 flex flex-wrap gap-4"
+              style={{ "--reveal-delay": "460ms" } as CSSProperties}
             >
-              See the menu
-            </Link>
-            <Link
-              href="/events"
-              className="btn-press min-w-[180px] rounded-full border border-paper-50/25 px-6 py-3 text-center text-sm font-semibold text-paper-50 transition-colors hover:border-paper-50"
-            >
-              Upcoming events
-            </Link>
+              <Link
+                href="/menu"
+                className="btn-press min-w-[180px] rounded-full bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-espresso-950 transition-colors hover:bg-amber-300"
+              >
+                See the menu
+              </Link>
+              <Link
+                href="/events"
+                className="btn-press min-w-[180px] rounded-full border border-paper-50/40 px-6 py-3 text-center text-sm font-semibold text-paper-50 transition-colors hover:border-paper-50"
+              >
+                Upcoming events
+              </Link>
+            </div>
           </div>
         </div>
+
+        <div
+          className="scroll-cue absolute bottom-8 right-8 hidden flex-col items-center gap-3 text-paper-50/70 sm:flex"
+          aria-hidden="true"
+        >
+          <span
+            className="text-[10px] font-semibold uppercase tracking-[0.3em]"
+            style={{ writingMode: "vertical-rl" } as CSSProperties}
+          >
+            Scroll
+          </span>
+          <span className="h-8 w-px bg-paper-50/40" />
+        </div>
       </section>
+
+      {/* Info strip */}
+      <div className="border-b border-ink-950/10 bg-amber-100">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-6 py-4 text-sm">
+          <p className="font-semibold uppercase tracking-wide text-ink-950">
+            {site.neighborhood}
+          </p>
+          <a
+            href={site.mapsUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="font-semibold text-amber-700 hover:underline"
+          >
+            {site.address} →
+          </a>
+          <p className="text-ink-900/70">Mon–Sat 8am–8pm · Sun 10am–6pm</p>
+        </div>
+      </div>
 
       {/* Community intro — asymmetric bento, not matched cards */}
       <section className="bg-paper-50">

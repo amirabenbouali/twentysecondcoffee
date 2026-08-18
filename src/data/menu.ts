@@ -6,6 +6,7 @@ export type MenuItem = {
 
 export type MenuSection = {
   title: string;
+  description?: string;
   items: MenuItem[];
 };
 
@@ -14,6 +15,7 @@ export type MenuSection = {
 export const menu: MenuSection[] = [
   {
     title: "Coffee",
+    description: "Bourbon Cream beans from Pact Coffee — decaf available",
     items: [
       { name: "Espresso", price: "£2.60" },
       { name: "Americano", price: "£2.90" },
@@ -54,6 +56,28 @@ export const menu: MenuSection[] = [
       { name: "Banana Bread", price: "£3.20" },
       { name: "Avocado Toast", price: "£6.50" },
       { name: "Breakfast Bagel", price: "£5.50" },
+    ],
+  },
+  {
+    title: "Beer & Cider",
+    description: "On tap from 12pm",
+    items: [
+      { name: "Guinness", description: "Draught", price: "£5.80" },
+      { name: "Asahi", description: "Draught", price: "£5.60" },
+      { name: "Peroni", description: "Draught", price: "£5.40" },
+      { name: "Hawkstone Lager", description: "Draught", price: "£5.60" },
+      { name: "Hawkstone Cider", description: "Draught", price: "£5.60" },
+    ],
+  },
+  {
+    title: "Cocktails",
+    description: "On demand from 12pm",
+    items: [
+      {
+        name: "Ask your bartender",
+        description: "Classic or seasonal — made to order, tell us what you fancy",
+        price: "Ask instore",
+      },
     ],
   },
 ];
