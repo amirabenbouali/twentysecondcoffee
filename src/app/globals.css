@@ -62,27 +62,11 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-/* Subtle film-grain overlay for cinematic dark sections.
-   Applied as a pseudo-element so it never interferes with content stacking. */
-.grain {
-  position: relative;
-  isolation: isolate;
-}
-
-.grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-}
-
 /* ---- Motion system ------------------------------------------------
-   Everything below is inert by default (final, visible state) and only
-   animates for users who haven't asked for reduced motion. */
+   One idea, used consistently: a quiet fade + rise, and the coffee-ring
+   drawing itself on. Everything is inert by default (final, visible
+   state) and only animates for users who haven't asked for reduced
+   motion. */
 
 .reveal,
 .reveal-on-scroll {
@@ -92,10 +76,6 @@ body {
 .ring-stroke {
   stroke-dasharray: 944;
   stroke-dashoffset: 0;
-}
-
-.ghost-numeral {
-  opacity: 0.04;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -119,16 +99,9 @@ body {
     transform: translateY(0);
   }
 
-  .ghost-numeral {
-    opacity: 0;
-    animation:
-      ghost-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) both,
-      breathe 7s ease-in-out 1.4s infinite;
-  }
-
   .ring-stroke {
     stroke-dashoffset: 944;
-    animation: ring-draw 1.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: ring-draw 1.9s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--reveal-delay, 0ms);
   }
 
@@ -137,11 +110,11 @@ body {
   }
 
   .btn-press:hover {
-    transform: translateY(-2px) scale(1.02);
+    transform: translateY(-2px);
   }
 
   .btn-press:active {
-    transform: translateY(0) scale(0.97);
+    transform: translateY(0);
   }
 }
 
@@ -156,27 +129,6 @@ body {
   }
 }
 
-@keyframes ghost-in {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 0.04;
-    transform: scale(1);
-  }
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.015);
-  }
-}
-
 @keyframes ring-draw {
   from {
     stroke-dashoffset: 944;
@@ -185,30 +137,3 @@ body {
     stroke-dashoffset: 0;
   }
 }
-
-/* ---- Marquee ticker ------------------------------------------------ */
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .marquee-track {
-    animation: marquee 26s linear infinite;
-  }
-
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-

@@ -1,8 +1,6 @@
-import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { site } from "@/data/site";
 import { menu } from "@/data/menu";
-import CoffeeRing from "@/components/CoffeeRing";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -13,34 +11,21 @@ export const metadata: Metadata = {
 export default function MenuPage() {
   return (
     <>
-      <section className="grain relative overflow-hidden bg-espresso-950 text-paper-50">
-        <CoffeeRing
-          seed={5}
-          delayMs={200}
-          className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 opacity-40"
-        />
-        <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-28">
-          <p className="reveal text-sm font-semibold uppercase tracking-[0.2em] text-amber-300">
-            Menu
-          </p>
-          <h1
-            className="reveal mt-4 font-display text-4xl font-semibold sm:text-5xl"
-            style={{ "--reveal-delay": "140ms" } as CSSProperties}
-          >
-            What we&rsquo;re pouring
-          </h1>
-          <p
-            className="reveal mt-4 max-w-xl text-paper-100/70"
-            style={{ "--reveal-delay": "260ms" } as CSSProperties}
-          >
-            Our menu changes as our baristas dream up new drinks — check back often. Prices
-            below are indicative and may vary in-store.
-          </p>
-        </div>
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-32">
+        <p className="reveal text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+          Menu
+        </p>
+        <h1 className="reveal mt-4 font-display text-5xl font-semibold text-ink-950 sm:text-6xl">
+          What we&rsquo;re pouring
+        </h1>
+        <p className="reveal mt-4 max-w-xl text-ink-900/70">
+          Our menu changes as our baristas dream up new drinks — check back often. Prices
+          below are indicative and may vary in-store.
+        </p>
       </section>
 
-      <section className="mx-auto max-w-4xl px-6 py-16">
-        <div className="space-y-14">
+      <section className="mx-auto max-w-6xl px-6 pb-24">
+        <div className="grid gap-x-16 gap-y-14 md:grid-cols-2">
           {menu.map((section, i) => (
             <Reveal key={section.title} delayMs={i * 80}>
               <h2 className="font-display text-2xl font-semibold text-ink-950">

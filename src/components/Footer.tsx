@@ -4,8 +4,8 @@ import { nav, site } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto grain bg-espresso-950 text-paper-100">
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:grid-cols-2 md:grid-cols-4">
+    <footer className="mt-auto bg-espresso-950 text-paper-100">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 sm:grid-cols-2 md:grid-cols-4">
         <div>
           <Image
             src="/logo-light-small.png"
@@ -59,7 +59,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-paper-100/10">
+      <div className="border-t border-paper-100/10">
         <div className="mx-auto flex max-w-6xl flex-col-reverse items-center justify-between gap-4 px-6 py-6 text-xs text-paper-100/50 sm:flex-row">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.

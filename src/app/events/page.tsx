@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/data/site";
 import { events } from "@/data/events";
-import CoffeeRing from "@/components/CoffeeRing";
 import EventCard from "@/components/EventCard";
 
 export const metadata: Metadata = {
@@ -14,25 +13,20 @@ export const metadata: Metadata = {
 export default function EventsPage() {
   return (
     <>
-      <section className="grain relative overflow-hidden bg-espresso-950 text-paper-50">
-        <CoffeeRing
-          seed={8}
-          delayMs={200}
-          className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 opacity-40"
-        />
-        <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-28">
-          <p className="reveal text-sm font-semibold uppercase tracking-[0.2em] text-amber-300">
+      <section className="bg-espresso-950 text-paper-50">
+        <div className="mx-auto max-w-4xl px-6 pb-16 pt-32">
+          <p className="reveal text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
             Events
           </p>
           <h1
             className="reveal mt-4 font-display text-4xl font-semibold sm:text-5xl"
-            style={{ "--reveal-delay": "140ms" } as CSSProperties}
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
           >
             What&rsquo;s happening at {site.name}
           </h1>
           <p
             className="reveal mt-4 max-w-xl text-paper-100/70"
-            style={{ "--reveal-delay": "260ms" } as CSSProperties}
+            style={{ "--reveal-delay": "240ms" } as CSSProperties}
           >
             From tastings to community meetups, here&rsquo;s what&rsquo;s coming up. Got an
             idea for an event? <Link href="/contact" className="underline hover:text-white">Let us know</Link>.

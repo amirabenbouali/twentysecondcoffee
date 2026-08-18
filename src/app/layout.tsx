@@ -39,8 +39,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-paper-50 text-ink-950">
         <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <div className="flex min-h-full flex-1 flex-col md:pl-20">
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

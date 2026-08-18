@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { site } from "@/data/site";
-import CoffeeRing from "@/components/CoffeeRing";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -12,38 +11,41 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <section className="grain relative overflow-hidden bg-espresso-950 text-paper-50">
-        <CoffeeRing
-          seed={2}
-          delayMs={200}
-          className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 opacity-40"
-        />
-        <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-28">
-          <p className="reveal text-sm font-semibold uppercase tracking-[0.2em] text-amber-300">
+      <section className="bg-espresso-950 text-paper-50">
+        <div className="mx-auto max-w-4xl px-6 pb-16 pt-32">
+          <p className="reveal text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
             About us
           </p>
           <h1
             className="reveal mt-4 font-display text-4xl font-semibold sm:text-5xl"
-            style={{ "--reveal-delay": "140ms" } as CSSProperties}
+            style={{ "--reveal-delay": "120ms" } as CSSProperties}
           >
             Our story
           </h1>
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-6 py-16">
-        <Reveal className="space-y-6 text-ink-900/80">
+      <section className="mx-auto max-w-2xl px-6 py-16">
+        <Reveal className="text-lg leading-relaxed text-ink-900/80">
           <p>
             {site.name} opened its doors in {site.neighborhood} with a simple idea: a
             coffee shop should feel like part of the neighbourhood, not just a place you
             pass through. We wanted somewhere locals could rely on for a genuinely good
             coffee and a familiar, friendly welcome.
           </p>
+        </Reveal>
+
+        <Reveal delayMs={100} className="my-12 text-center">
+          <p className="font-script text-4xl leading-tight text-amber-700 sm:text-5xl">
+            &ldquo;Every cup we serve is about more than the coffee itself.&rdquo;
+          </p>
+        </Reveal>
+
+        <Reveal delayMs={180} className="space-y-6 text-lg leading-relaxed text-ink-900/80">
           <p>
             Royal Wharf is a young, growing community, and we&rsquo;ve tried to grow
             alongside it — getting to know our regulars, supporting local events, and
-            giving neighbours a reason to bump into each other. Every cup we serve is
-            about more than the coffee itself.
+            giving neighbours a reason to bump into each other.
           </p>
           <p>
             We&rsquo;re always looking for ways to do more for the community around

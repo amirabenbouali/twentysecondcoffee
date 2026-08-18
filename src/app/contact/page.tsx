@@ -1,8 +1,6 @@
-import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { site } from "@/data/site";
 import ContactForm from "@/components/ContactForm";
-import CoffeeRing from "@/components/CoffeeRing";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -13,38 +11,25 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="grain relative overflow-hidden bg-espresso-950 text-paper-50">
-        <CoffeeRing
-          seed={13}
-          delayMs={200}
-          className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 opacity-40"
-        />
-        <div className="relative mx-auto max-w-4xl px-6 pb-16 pt-28">
-          <p className="reveal text-sm font-semibold uppercase tracking-[0.2em] text-amber-300">
-            Contact
-          </p>
-          <h1
-            className="reveal mt-4 font-display text-4xl font-semibold sm:text-5xl"
-            style={{ "--reveal-delay": "140ms" } as CSSProperties}
-          >
-            Get in touch
-          </h1>
-          <p
-            className="reveal mt-4 max-w-xl text-paper-100/70"
-            style={{ "--reveal-delay": "260ms" } as CSSProperties}
-          >
-            Feedback on your last visit, an idea for a community event, or a business
-            opportunity you&rsquo;d like to bring to us — we&rsquo;d love to hear it.
-          </p>
-        </div>
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-32">
+        <p className="reveal text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+          Contact
+        </p>
+        <h1 className="reveal mt-4 font-display text-5xl font-semibold text-ink-950 sm:text-6xl">
+          Get in touch
+        </h1>
+        <p className="reveal mt-4 max-w-xl text-ink-900/70">
+          Feedback on your last visit, an idea for a community event, or a business
+          opportunity you&rsquo;d like to bring to us — we&rsquo;d love to hear it.
+        </p>
       </section>
 
-      <section className="mx-auto grid max-w-4xl gap-12 px-6 py-16 md:grid-cols-[1.2fr_1fr]">
+      <section className="mx-auto grid max-w-6xl gap-12 px-6 pb-24 md:grid-cols-[1.2fr_1fr]">
         <Reveal>
           <ContactForm />
         </Reveal>
 
-        <Reveal delayMs={140} className="space-y-8">
+        <Reveal delayMs={140} className="space-y-8 border-t border-ink-950/10 pt-8 md:border-t-0 md:border-l md:pl-10 md:pt-0">
           <div>
             <p className="text-sm font-semibold text-amber-700">Visit us</p>
             <p className="mt-2 text-sm text-ink-900/70">{site.address}</p>
