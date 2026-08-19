@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: `Menu — ${site.name}`,
-  description: `Coffee, tea, and food available at ${site.name} in ${site.neighborhood}.`,
+  description: `Coffee, tea, and drinks available at ${site.name} in ${site.neighborhood}.`,
 };
 
 export default function MenuPage() {
@@ -19,40 +19,65 @@ export default function MenuPage() {
           What we&rsquo;re pouring
         </h1>
         <p className="reveal mt-4 max-w-xl text-ink-900/70">
-          Our menu changes as our baristas dream up new drinks — check back often. Prices
-          below are indicative and may vary in-store.
+          Straight off our menu board — check back often, and prices may vary in-store.
         </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
         <div className="grid gap-x-16 gap-y-14 md:grid-cols-2">
           {menu.map((section, i) => (
-            <Reveal key={section.title} delayMs={i * 80}>
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h2 className="font-display text-2xl font-semibold text-ink-950">
-                  {section.title}
-                </h2>
+            <Reveal key={section.title} delayMs={i * 60}>
+              <div className="border-b-2 border-ink-950 pb-2">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h2 className="font-sans text-lg font-bold uppercase tracking-[0.12em] text-ink-950">
+                    {section.title}
+                  </h2>
+                  {section.sharedPrice && (
+                    <p className="whitespace-nowrap text-sm font-bold text-amber-700">
+                      {section.sharedPrice} each
+                    </p>
+                  )}
+                </div>
                 {section.description && (
-                  <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-amber-700">
                     {section.description}
                   </p>
                 )}
               </div>
-              <ul className="mt-6 divide-y divide-ink-950/10">
+
+              <ul className="divide-y divide-ink-950/10">
                 {section.items.map((item) => (
                   <li
                     key={item.name}
-                    className="flex items-baseline justify-between gap-6 py-4"
+                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-4"
                   >
                     <div>
-                      <p className="font-medium text-ink-950">{item.name}</p>
+                      <p className="font-display text-lg italic text-ink-950">{item.name}</p>
                       {item.description && (
                         <p className="mt-1 text-sm text-ink-900/60">{item.description}</p>
                       )}
                     </div>
-                    <p className="whitespace-nowrap font-semibold text-amber-700">
-                      {item.price}
-                    </p>
+
+                    {!section.sharedPrice &&
+                      (item.sizes ? (
+                        <p className="whitespace-nowrap text-sm font-semibold text-amber-700">
+                          {item.sizes.map((s, idx) => (
+                            <span key={s.label}>
+                              {idx > 0 && <span className="mx-1.5 text-ink-950/20">·</span>}
+                              <span className="text-[10px] font-normal uppercase text-ink-900/40">
+                                {s.label}{" "}
+                              </span>
+                              {s.price}
+                            </span>
+                          ))}
+                        </p>
+                      ) : (
+                        item.price && (
+                          <p className="whitespace-nowrap font-semibold text-amber-700">
+                            {item.price}
+                          </p>
+                        )
+                      ))}
                   </li>
                 ))}
               </ul>

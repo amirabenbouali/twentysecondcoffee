@@ -5,6 +5,7 @@ import { site } from "@/data/site";
 import { events } from "@/data/events";
 import Reveal from "@/components/Reveal";
 import EventCard from "@/components/EventCard";
+import BeanField from "@/components/BeanField";
 
 export default function Home() {
   const nextEvents = events.slice(0, 2);
@@ -116,6 +117,40 @@ export default function Home() {
           <p className="text-ink-900/70">Mon–Sat 8am–8pm · Sun 10am–6pm</p>
         </div>
       </div>
+
+      {/* Every bean — "22" traced in coffee beans */}
+      <section className="bg-paper-100">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:gap-16">
+          <BeanField className="mx-auto max-w-md text-ink-950" creaseColor="var(--color-paper-100)" />
+
+          <Reveal delayMs={80}>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
+              The coffee line
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-semibold text-ink-950 sm:text-4xl">
+              Every bean, sourced with care.
+            </h2>
+            <p className="mt-4 max-w-md text-ink-900/70">
+              We pour Bourbon Cream, a Brazil/Colombia blend roasted weekly by{" "}
+              <a
+                href="https://www.pactcoffee.com"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-amber-700 hover:underline"
+              >
+                Pact Coffee
+              </a>
+              . Regular or decaf — always your choice.
+            </p>
+            <Link
+              href="/menu"
+              className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:underline"
+            >
+              See the full menu →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
 
       {/* Community intro — asymmetric bento, not matched cards */}
       <section className="bg-paper-50">

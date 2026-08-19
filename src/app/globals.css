@@ -69,7 +69,8 @@ body {
    motion. */
 
 .reveal,
-.reveal-on-scroll {
+.reveal-on-scroll,
+.bean {
   opacity: 1;
 }
 
@@ -119,6 +120,27 @@ body {
 
   .scroll-cue {
     animation: scroll-cue 2.2s ease-in-out infinite;
+  }
+
+  .bean {
+    opacity: 0;
+    transform: scale(0.25);
+  }
+
+  .bean.is-visible {
+    animation: bean-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--bean-delay, 0ms);
+  }
+}
+
+@keyframes bean-in {
+  from {
+    opacity: 0;
+    transform: scale(0.25);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
