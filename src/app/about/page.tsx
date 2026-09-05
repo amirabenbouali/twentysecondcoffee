@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { site } from "@/data/site";
 import Reveal from "@/components/Reveal";
 
@@ -24,6 +25,17 @@ export default function AboutPage() {
           </h1>
         </div>
       </section>
+
+      <div className="relative h-[38vh] w-full overflow-hidden sm:h-[46vh]">
+        <Image
+          src="/photo-storefront.jpg"
+          alt="The 22nd Coffee storefront on Royal Crest Avenue"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "50% 40%" }}
+        />
+      </div>
 
       <section className="mx-auto max-w-2xl px-6 py-16">
         <Reveal className="text-lg leading-relaxed text-ink-900/80">
@@ -65,6 +77,27 @@ export default function AboutPage() {
             simply keeping the lights on a little later for a evening catch-up. If you
             have an idea, we&rsquo;d love to hear it.
           </p>
+        </Reveal>
+
+        <Reveal delayMs={80} className="mt-16 grid grid-cols-2 gap-4">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+            <Image
+              src="/photo-counter.jpg"
+              alt="Behind the counter at 22nd Coffee, pulling shots"
+              fill
+              sizes="(min-width: 640px) 320px, 45vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+            <Image
+              src="/photo-sign.jpg"
+              alt="Our sign hanging outside the shop"
+              fill
+              sizes="(min-width: 640px) 320px, 45vw"
+              className="object-cover"
+            />
+          </div>
         </Reveal>
 
         <div className="mt-16 grid gap-10 sm:grid-cols-3">

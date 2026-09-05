@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { site } from "@/data/site";
 import { menu } from "@/data/menu";
 import Reveal from "@/components/Reveal";
@@ -21,6 +22,39 @@ export default function MenuPage() {
         <p className="reveal mt-4 max-w-xl text-ink-900/70">
           Straight off our menu board — check back often, and prices may vary in-store.
         </p>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-16">
+        <Reveal className="grid grid-cols-2 gap-4 sm:gap-6">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+            <Image
+              src="/photo-guinness.jpg"
+              alt="Pulling a pint of Guinness at 22nd Coffee"
+              fill
+              sizes="(min-width: 640px) 480px, 45vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso-950/80 to-transparent p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-paper-50">
+                Beer &amp; cocktails from 12pm
+              </p>
+            </div>
+          </div>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+            <Image
+              src="/photo-pastries.jpg"
+              alt="Pastries in the case at 22nd Coffee"
+              fill
+              sizes="(min-width: 640px) 480px, 45vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso-950/80 to-transparent p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] text-paper-50">
+                Baked and ready daily
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">

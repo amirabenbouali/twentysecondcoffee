@@ -16,13 +16,13 @@ export default function Home() {
       <section className="relative flex min-h-screen items-end overflow-hidden bg-espresso-950 text-paper-50">
         <div className="absolute inset-0">
           <Image
-            src="/hero-placeholder.jpg"
-            alt="Coffee, pastry, and flowers on a sunlit cafe table — placeholder photo, swap for 22nd Coffee's own"
+            src="/photo-hero.jpg"
+            alt="Inside 22nd Coffee — regulars settled into the leather armchairs by our chalkboard sign"
             fill
             priority
             sizes="100vw"
             className="object-cover"
-            style={{ objectPosition: "62% 55%" }}
+            style={{ objectPosition: "50% 38%" }}
           />
           {/* Scrim only behind the text zone — keep the photo itself bright and visible */}
           <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-espresso-950 via-espresso-950/45 to-transparent" />
@@ -172,18 +172,29 @@ export default function Home() {
               </p>
             </Reveal>
 
-            <Reveal delayMs={120} className="rounded-2xl bg-espresso-950 p-8 text-paper-50">
-              <h2 className="font-display text-2xl font-semibold">Fresh drinks, always</h2>
-              <p className="mt-3 text-sm leading-relaxed text-paper-100/70">
-                Our baristas are always working on something new. Check the menu for our
-                current lineup and seasonal specials.
-              </p>
-              <Link
-                href="/menu"
-                className="mt-4 inline-block text-sm font-semibold text-amber-300 hover:underline"
-              >
-                See the menu →
-              </Link>
+            <Reveal delayMs={120} className="relative overflow-hidden rounded-2xl p-8 text-paper-50">
+              <Image
+                src="/photo-espresso.jpg"
+                alt="Espresso pouring at 22nd Coffee"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+                style={{ objectPosition: "50% 30%" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-espresso-950 via-espresso-950/70 to-espresso-950/20" />
+              <div className="relative">
+                <h2 className="font-display text-2xl font-semibold">Fresh drinks, always</h2>
+                <p className="mt-3 text-sm leading-relaxed text-paper-100/80">
+                  Our baristas are always working on something new. Check the menu for our
+                  current lineup and seasonal specials.
+                </p>
+                <Link
+                  href="/menu"
+                  className="mt-4 inline-block text-sm font-semibold text-amber-300 hover:underline"
+                >
+                  See the menu →
+                </Link>
+              </div>
             </Reveal>
 
             <Reveal delayMs={220} className="rounded-2xl bg-amber-100 p-8">
