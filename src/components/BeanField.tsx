@@ -59,7 +59,11 @@ export default function BeanField({ className = "", color, creaseColor }: BeanFi
         >
           <div
             className={`bean ${visible ? "is-visible" : ""}`}
-            style={{ "--bean-delay": `${(i % 90) * 9}ms` } as CSSProperties}
+            style={
+              {
+                "--bean-delay": `${Math.round((i / beanField.length) * 1100)}ms`,
+              } as CSSProperties
+            }
           >
             <Bean color={color} creaseColor={creaseColor} />
           </div>

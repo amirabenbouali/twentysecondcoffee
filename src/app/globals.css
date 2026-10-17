@@ -25,6 +25,8 @@
   --color-amber-700: #8c4a1e;
 
   --color-rust-600: #8c3016;
+  --color-cherry-700: #a51f1b;
+  --color-blush-100: #f4d9ca;
 }
 
 @theme inline {
@@ -50,16 +52,22 @@
   --color-amber-700: var(--color-amber-700);
 
   --color-rust-600: var(--color-rust-600);
+  --color-cherry-700: var(--color-cherry-700);
+  --color-blush-100: var(--color-blush-100);
 
-  --font-display: var(--font-fraunces);
-  --font-script: var(--font-caveat);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-instrument-serif);
+  --font-script: var(--font-instrument-serif);
+  --font-sans: var(--font-dm-sans);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.font-script {
+  font-style: italic;
 }
 
 /* ---- Motion system ------------------------------------------------
@@ -124,23 +132,31 @@ body {
 
   .bean {
     opacity: 0;
-    transform: scale(0.25);
+    transform: scale(0.3) translateY(-12px) rotate(-16deg);
   }
 
   .bean.is-visible {
-    animation: bean-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: bean-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--bean-delay, 0ms);
   }
 }
 
+.bean svg {
+  filter: drop-shadow(0 1.5px 1.5px rgba(24, 20, 16, 0.18));
+}
+
 @keyframes bean-in {
-  from {
+  0% {
     opacity: 0;
-    transform: scale(0.25);
+    transform: scale(0.3) translateY(-12px) rotate(-16deg);
   }
-  to {
+  65% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.08) translateY(1px) rotate(4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0) rotate(0deg);
   }
 }
 

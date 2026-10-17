@@ -1,270 +1,209 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/data/site";
-import { events } from "@/data/events";
 import Reveal from "@/components/Reveal";
-import EventCard from "@/components/EventCard";
-import BeanField from "@/components/BeanField";
+import { site } from "@/data/site";
 
-export default function Home() {
-  const nextEvents = events.slice(0, 2);
+const reasons = [
+  {
+    title: "Thoughtfully made",
+    text: "Freshly roasted Pact coffee, carefully prepared from the first cup to the last.",
+  },
+  {
+    title: "Proudly local",
+    text: "Independent, familiar, and made for the people who call Royal Wharf home.",
+  },
+  {
+    title: "Here all day",
+    text: "Coffee and pastries in the morning; light bites, beer, and good company later on.",
+  },
+];
+
+const moments = [
+  {
+    eyebrow: "First cup",
+    title: "Coffee, your way.",
+    text: "Our house Bourbon Cream blend, available regular or decaf.",
+    image: "/photo-espresso.jpg",
+    tone: "bg-[#ded0bd]",
+  },
+  {
+    eyebrow: "Something to eat",
+    title: "A reason to stay.",
+    text: "Pastries, cakes, and convenient light bites from the counter.",
+    image: "/photo-pastries.jpg",
+    tone: "bg-[#c99991]",
+  },
+  {
+    eyebrow: "From midday",
+    title: "One more round.",
+    text: "Draught beer, bottled favourites, and a slower pace into the evening.",
+    image: "/photo-guinness.jpg",
+    tone: "bg-[#c9b58f]",
+  },
+];
+
+function FeatureIcon({ type }: { type: "cup" | "shop" | "day" }) {
+  if (type === "cup") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 48 56" className="h-12 w-10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M11 25h24v10c0 7-5 12-12 12s-12-5-12-12V25Z" />
+        <path d="M35 29h3.5a5.5 5.5 0 0 1 0 11H35M8 50h31" />
+        <path d="M17 19c-4-4 4-6 0-11M25 19c-4-4 4-6 0-11" />
+        <circle cx="38.5" cy="12.5" r="3.5" fill="currentColor" stroke="none" />
+      </svg>
+    );
+  }
+
+  if (type === "shop") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 48 56" className="h-12 w-10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M8 22h32l-3-10H11L8 22Z" />
+        <path d="M11 22v25h26V22M18 47V33h12v14" />
+        <path d="M8 22c0 4 6 5 8 1 2 4 8 4 10 0 2 4 8 3 10-1 1 3 4 3 4 0" />
+        <path d="M5 50h38M16 8h16" />
+        <circle cx="26" cy="39" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    );
+  }
 
   return (
+    <svg aria-hidden="true" viewBox="0 0 48 56" className="h-12 w-10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 35h24v8c0 5-4 9-12 9S8 48 8 43v-8Z" />
+      <path d="M32 38h3a4.5 4.5 0 0 1 0 9h-4M5 53h34" />
+      <path d="M28 22a9 9 0 1 1-2-17 10 10 0 0 0 2 17Z" />
+      <path d="M11 28c-3-3 3-5 0-8M18 28c-3-3 3-5 0-8" />
+      <path d="M38 10v5M35.5 12.5h5" />
+    </svg>
+  );
+}
+
+export default function Home() {
+  return (
     <>
-      {/* Hero — full-bleed photo, editorial overlay */}
-      <section className="relative flex min-h-screen items-end overflow-hidden bg-espresso-950 text-paper-50">
-        <div className="absolute inset-0">
-          <Image
-            src="/photo-hero.jpg"
-            alt="Inside 22nd Coffee — regulars settled into the leather armchairs by our chalkboard sign"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            style={{ objectPosition: "50% 38%" }}
-          />
-          {/* Scrim only behind the text zone — keep the photo itself bright and visible */}
-          <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-espresso-950 via-espresso-950/45 to-transparent" />
-          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-espresso-950/60 via-transparent to-transparent lg:w-2/3" />
-        </div>
+      <section className="relative min-h-[760px] overflow-hidden bg-ink-950 text-paper-50 sm:min-h-[820px]">
+        <Image
+          src="/photo-counter.jpg"
+          alt="A barista working behind the counter at 22nd Coffee"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "50% 45%" }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.3),rgba(16,12,9,0.22)_35%,rgba(16,12,9,0.76))]" />
 
-        <div className="relative w-full px-6 pb-20 pt-40 sm:px-10 md:pb-24 lg:px-16">
-          <div className="max-w-xl">
-            <div
-              className="reveal flex flex-wrap items-center gap-3"
-              style={{ "--reveal-delay": "0ms" } as CSSProperties}
-            >
-              <Image
-                src="/logo-light-small.png"
-                alt=""
-                width={40}
-                height={40}
-                className="h-10 w-10 object-contain"
-              />
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
-                {site.neighborhood}
-              </p>
-              <span className="inline-flex items-center gap-1 rounded-full bg-paper-50/10 px-3 py-1 text-xs font-semibold text-paper-100/80 backdrop-blur-sm">
-                ★ {site.googleRating.value} · {site.googleRating.count} reviews
-              </span>
-            </div>
-
-            <h1
-              className="reveal mt-6 font-display text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl"
-              style={{ "--reveal-delay": "160ms" } as CSSProperties}
-            >
-              Built by the <span className="font-script text-amber-300">community</span>,
-              for the community.
-            </h1>
-
-            <p
-              className="reveal mt-5 max-w-md text-paper-100/80"
-              style={{ "--reveal-delay": "320ms" } as CSSProperties}
-            >
-              {site.name} is Royal Wharf&rsquo;s neighbourhood spot for great coffee,
-              familiar faces, and the kind of morning that starts a good day.
-            </p>
-
-            <div
-              className="reveal mt-9 flex flex-wrap gap-4"
-              style={{ "--reveal-delay": "460ms" } as CSSProperties}
-            >
-              <Link
-                href="/menu"
-                className="btn-press min-w-[180px] rounded-full bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-espresso-950 transition-colors hover:bg-amber-300"
-              >
-                See the menu
-              </Link>
-              <Link
-                href="/events"
-                className="btn-press min-w-[180px] rounded-full border border-paper-50/40 px-6 py-3 text-center text-sm font-semibold text-paper-50 transition-colors hover:border-paper-50"
-              >
-                Upcoming events
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="scroll-cue absolute bottom-8 right-8 hidden flex-col items-center gap-3 text-paper-50/70 sm:flex"
-          aria-hidden="true"
-        >
-          <span
-            className="text-[10px] font-semibold uppercase tracking-[0.3em]"
-            style={{ writingMode: "vertical-rl" } as CSSProperties}
-          >
-            Scroll
-          </span>
-          <span className="h-8 w-px bg-paper-50/40" />
-        </div>
-      </section>
-
-      {/* Info strip */}
-      <div className="border-b border-ink-950/10 bg-amber-100">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-6 py-4 text-sm">
-          <p className="font-semibold uppercase tracking-wide text-ink-950">
-            {site.neighborhood}
+        <div className="relative mx-auto flex min-h-[760px] max-w-7xl flex-col items-center justify-end px-5 pb-20 pt-32 text-center sm:min-h-[820px] sm:px-8 sm:pb-24 lg:px-10">
+          <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/80">
+            Independent coffee · Royal Wharf
           </p>
-          <a
-            href={site.mapsUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold text-amber-700 hover:underline"
-          >
-            {site.address} →
-          </a>
-          <p className="text-ink-900/70">Mon–Sat 8am–8pm · Sun 10am–6pm</p>
-        </div>
-      </div>
-
-      {/* Every bean — "22" traced in coffee beans */}
-      <section className="bg-paper-100">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:gap-16">
-          <BeanField className="mx-auto max-w-md text-ink-950" creaseColor="var(--color-paper-100)" />
-
-          <Reveal delayMs={80}>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">
-              The coffee line
-            </p>
-            <h2 className="mt-4 font-display text-3xl font-semibold text-ink-950 sm:text-4xl">
-              Every bean, sourced with care.
-            </h2>
-            <p className="mt-4 max-w-md text-ink-900/70">
-              We pour Bourbon Cream, a Brazil/Colombia blend roasted weekly by{" "}
-              <a
-                href="https://www.pactcoffee.com"
-                target="_blank"
-                rel="noreferrer"
-                className="font-medium text-amber-700 hover:underline"
-              >
-                Pact Coffee
-              </a>
-              . Regular or decaf — always your choice.
-            </p>
-            <Link
-              href="/menu"
-              className="mt-6 inline-block text-sm font-semibold text-amber-700 hover:underline"
-            >
-              See the full menu →
+          <h1 className="reveal mt-5 max-w-4xl font-display text-[clamp(4rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">
+            Coffee for your<br />kind of day.
+          </h1>
+          <p className="reveal mt-7 max-w-md text-sm leading-6 text-paper-50/78 sm:text-base">
+            Carefully made coffee, familiar faces, and a place that feels easy from morning to evening.
+          </p>
+          <div className="reveal mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/menu" className="rounded-full bg-paper-50 px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-950 transition-transform hover:-translate-y-0.5">
+              Explore the menu
             </Link>
-          </Reveal>
+            <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="rounded-full border border-paper-50/65 px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-paper-50 transition-colors hover:bg-paper-50 hover:text-ink-950">
+              Find the shop
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Community intro — asymmetric bento, not matched cards */}
-      <section className="bg-paper-50">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="grid gap-5 md:grid-cols-2">
-            <Reveal className="rounded-2xl bg-paper-100 p-8 md:row-span-2 md:p-10">
-              <p className="font-script text-3xl leading-none text-amber-700">
-                &ldquo;Come as a stranger,
-                <br />
-                leave as a regular.&rdquo;
-              </p>
-              <h2 className="mt-6 font-display text-2xl font-semibold text-ink-950">
-                More than a coffee shop
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink-900/70">
-                We&rsquo;re proud to be part of Royal Wharf. Whether you&rsquo;re grabbing a
-                quick espresso before work or settling in for the afternoon, this is a
-                place to slow down and connect with your neighbours.
-              </p>
-            </Reveal>
-
-            <Reveal delayMs={120} className="relative overflow-hidden rounded-2xl p-8 text-paper-50">
-              <Image
-                src="/photo-espresso.jpg"
-                alt="Espresso pouring at 22nd Coffee"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-                style={{ objectPosition: "50% 30%" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-espresso-950 via-espresso-950/70 to-espresso-950/20" />
-              <div className="relative">
-                <h2 className="font-display text-2xl font-semibold">Fresh drinks, always</h2>
-                <p className="mt-3 text-sm leading-relaxed text-paper-100/80">
-                  Our baristas are always working on something new. Check the menu for our
-                  current lineup and seasonal specials.
-                </p>
-                <Link
-                  href="/menu"
-                  className="mt-4 inline-block text-sm font-semibold text-amber-300 hover:underline"
-                >
-                  See the menu →
-                </Link>
+      <section id="why-22nd" className="scroll-mt-20 border-b border-ink-950/15 bg-paper-50 text-ink-950">
+        <div className="mx-auto grid max-w-7xl px-5 sm:px-8 md:grid-cols-3 lg:px-10">
+          {reasons.map((reason, index) => (
+            <div key={reason.title} className="grid grid-cols-[48px_1fr] gap-4 border-b border-ink-950/15 py-8 last:border-b-0 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+              <div className="text-cherry-700">
+                <FeatureIcon type={(["cup", "shop", "day"] as const)[index]} />
               </div>
-            </Reveal>
-
-            <Reveal delayMs={220} className="rounded-2xl bg-amber-100 p-8">
-              <h2 className="font-display text-2xl font-semibold text-ink-950">
-                We want to hear from you
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink-900/70">
-                Feedback, event ideas, or a business opportunity? We read every message.
-              </p>
-              <Link
-                href="/contact"
-                className="mt-4 inline-block text-sm font-semibold text-amber-700 hover:underline"
-              >
-                Get in touch →
-              </Link>
-            </Reveal>
-          </div>
+              <div>
+                <h2 className="font-display text-2xl leading-none">{reason.title}</h2>
+                <p className="mt-3 max-w-xs text-xs leading-5 text-ink-900/60">{reason.text}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Upcoming events */}
-      <section className="bg-paper-200">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="flex items-end justify-between gap-4">
-            <h2 className="font-display text-2xl font-semibold text-ink-950">
-              What&rsquo;s coming up
+      <section className="bg-[#f5efe3] text-ink-950">
+        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10 lg:py-32">
+          <Reveal className="grid gap-7 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">From the counter</p>
+              <p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/60">A short menu, built around the things people come back for.</p>
+            </div>
+            <h2 className="max-w-3xl font-display text-5xl leading-[0.94] tracking-[-0.035em] sm:text-7xl lg:text-8xl">
+              Your favourites,<br /><span className="italic">all day long.</span>
             </h2>
-            <Link href="/events" className="text-sm font-semibold text-amber-700 hover:underline">
-              View all events →
-            </Link>
-          </div>
+          </Reveal>
 
-          <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2">
-            {nextEvents.map((event, i) => (
-              <EventCard
-                key={event.title}
-                event={event}
-                notchColor="var(--color-paper-200)"
-                delayMs={i * 120}
-              />
+          <div className="mt-14 grid gap-5 lg:grid-cols-3">
+            {moments.map((moment, index) => (
+              <Reveal key={moment.title} delayMs={index * 90} className={`overflow-hidden rounded-[1.25rem] ${moment.tone}`}>
+                <div className="relative aspect-[5/4] overflow-hidden">
+                  <Image
+                    src={moment.image}
+                    alt={moment.title}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-700 hover:scale-[1.025]"
+                  />
+                </div>
+                <div className="flex min-h-64 flex-col p-7 sm:p-8">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-900/55">{moment.eyebrow}</p>
+                  <h3 className="mt-5 font-display text-4xl leading-[0.95] tracking-[-0.025em]">{moment.title}</h3>
+                  <p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/65">{moment.text}</p>
+                  <Link href="/menu" aria-label={`View ${moment.title} on the menu`} className="mt-auto flex h-10 w-10 items-center justify-center self-end rounded-full border border-ink-950/50 text-lg transition-colors hover:bg-ink-950 hover:text-paper-50">→</Link>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-espresso-950 text-paper-50">
-        <Reveal className="mx-auto max-w-6xl px-6 py-24 text-center">
-          <h2 className="font-script text-5xl text-amber-300 sm:text-6xl">
-            Come say hello
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-sm text-paper-100/70">
-            Find us in {site.neighborhood}. Open every day — see our full hours and get in
-            touch below.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/contact"
-              className="btn-press min-w-[150px] rounded-full bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-espresso-950 transition-colors hover:bg-amber-300"
-            >
-              Contact us
-            </Link>
-            <Link
-              href="/about"
-              className="btn-press min-w-[150px] rounded-full border border-paper-50/25 px-6 py-3 text-center text-sm font-semibold text-paper-50 transition-colors hover:border-paper-50"
-            >
-              Our story
-            </Link>
+      <section className="bg-paper-50 text-ink-950">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
+          <Reveal className="relative min-h-[520px] lg:min-h-[760px]">
+            <Image src="/photo-hero.jpg" alt="Inside 22nd Coffee in Royal Wharf" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          </Reveal>
+          <div className="flex items-center px-5 py-20 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
+            <Reveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">Our place</p>
+              <h2 className="mt-6 max-w-xl font-display text-5xl leading-[0.92] tracking-[-0.035em] sm:text-7xl">
+                Globally sourced.<br /><span className="italic">Locally known.</span>
+              </h2>
+              <p className="mt-7 max-w-md text-sm leading-7 text-ink-900/65 sm:text-base">
+                Our coffee is roasted by Pact and made here in Royal Wharf. The rest is simple: a warm welcome, good food, and enough room to settle in.
+              </p>
+              <Link href="/about" className="mt-9 inline-flex items-center gap-3 border-b border-ink-950 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em]">
+                Read our story <span>↗</span>
+              </Link>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-ink-950 text-paper-50">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <div className="flex items-center px-5 py-20 sm:px-8 lg:px-10 lg:py-28 xl:pr-20">
+            <Reveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/55">Come and see us</p>
+              <h2 className="mt-6 font-display text-6xl leading-[0.9] tracking-[-0.04em] sm:text-8xl">Your table is waiting.</h2>
+              <p className="mt-7 max-w-sm text-sm leading-7 text-paper-50/65">{site.address}</p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="rounded-full bg-paper-50 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-950">Get directions</a>
+                <Link href="/contact" className="rounded-full border border-paper-50/50 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.14em]">Contact us</Link>
+              </div>
+            </Reveal>
+          </div>
+          <Reveal className="relative min-h-[500px] lg:min-h-[680px]">
+            <Image src="/photo-storefront.jpg" alt="The 22nd Coffee storefront" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
+          </Reveal>
+        </div>
       </section>
     </>
   );

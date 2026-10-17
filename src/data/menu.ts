@@ -21,10 +21,9 @@ export type MenuSection = {
   items: MenuItem[];
 };
 
-// Transcribed from the in-store menu board (Aug 2026) — the board was
-// shot at a steep angle, so a couple of values (Cappuccino's single
-// price, Macchiato's second size) are a best reconstruction. Double
-// check against the board in person and correct here if needed.
+// Transcribed from the complete in-store drinks boards supplied by the
+// owner (Oct 2026). Beer prices were confirmed separately: draught is
+// £6.00 and bottled Hawkstone products are £5.99.
 export const menu: MenuSection[] = [
   {
     title: "Coffee",
@@ -39,12 +38,13 @@ export const menu: MenuSection[] = [
         ],
       },
       { name: "Cappuccino", price: "£4.00" },
-      { name: "Flat White", price: "£3.70" },
+      { name: "Flat White", price: "£4.00" },
       {
         name: "Americano",
         sizes: [
-          { label: "S", price: "£3.85" },
-          { label: "M", price: "£4.20" },
+          { label: "S", price: "£3.70" },
+          { label: "M", price: "£3.95" },
+          { label: "L / Iced", price: "£4.20" },
         ],
       },
       {
@@ -75,7 +75,7 @@ export const menu: MenuSection[] = [
         name: "Macchiato",
         sizes: [
           { label: "Single", price: "£3.15" },
-          { label: "Double", price: "£3.65" },
+          { label: "Double", price: "£3.55" },
         ],
       },
     ],
@@ -133,6 +133,7 @@ export const menu: MenuSection[] = [
         sizes: [
           { label: "S", price: "£4.85" },
           { label: "M", price: "£5.55" },
+          { label: "Iced", price: "£5.55" },
         ],
       },
       {
@@ -140,6 +141,7 @@ export const menu: MenuSection[] = [
         sizes: [
           { label: "S", price: "£4.85" },
           { label: "M", price: "£5.55" },
+          { label: "Iced", price: "£5.55" },
         ],
       },
       {
@@ -147,6 +149,7 @@ export const menu: MenuSection[] = [
         sizes: [
           { label: "S", price: "£4.85" },
           { label: "M", price: "£5.55" },
+          { label: "Iced", price: "£5.55" },
         ],
       },
     ],
@@ -182,34 +185,25 @@ export const menu: MenuSection[] = [
     ],
   },
   {
-    title: "Food",
-    items: [
-      { name: "Almond Croissant", price: "£3.50" },
-      { name: "Banana Bread", price: "£3.20" },
-      { name: "Avocado Toast", price: "£6.50" },
-      { name: "Breakfast Bagel", price: "£5.50" },
-    ],
-  },
-  {
     title: "Extras",
     items: [
-      { name: "1 Pump Syrup", price: "£1.00" },
+      { name: "1 Pump Syrup", price: "£0.60" },
       { name: "Whipped Cream", price: "£0.60" },
       { name: "1 Extra Shot", price: "£1.50" },
       { name: "Paper Cup", price: "£0.50" },
       { name: "Choc-cino", description: "Kids' hot chocolate", price: "Ask instore" },
-      { name: "Puppyccino", description: "On the house for your dog", price: "Free" },
+      { name: "Puppuccino", description: "A little treat for your dog", price: "£0.60" },
     ],
   },
   {
     title: "Beer & Cider",
-    description: "On tap from 12pm",
+    description: "Available from 12pm",
     items: [
-      { name: "Guinness", description: "Draught", price: "£5.80" },
-      { name: "Asahi", description: "Draught", price: "£5.60" },
-      { name: "Peroni", description: "Draught", price: "£5.40" },
-      { name: "Hawkstone Lager", description: "Draught", price: "£5.60" },
-      { name: "Hawkstone Cider", description: "Draught", price: "£5.60" },
+      { name: "Guinness", description: "Draught", price: "£6.00" },
+      { name: "Asahi", description: "Draught", price: "£6.00" },
+      { name: "Peroni", description: "Draught", price: "£6.00" },
+      { name: "Hawkstone Lager", description: "Bottle", price: "£5.99" },
+      { name: "Hawkstone Cider", description: "Bottle", price: "£5.99" },
     ],
   },
   {

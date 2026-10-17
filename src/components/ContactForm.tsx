@@ -11,6 +11,12 @@ const topics = [
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+const fieldClass =
+  "mt-2 w-full border-0 border-b border-ink-950/25 bg-transparent px-0 py-3 text-sm text-ink-950 outline-none transition-colors focus:border-ink-950 focus:ring-0";
+
+const labelClass =
+  "block text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-900/50";
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -39,9 +45,9 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-xl border border-amber-600/20 bg-amber-100 p-6 text-ink-950">
-        <p className="font-display text-lg font-semibold">Thanks — message sent!</p>
-        <p className="mt-2 text-sm text-ink-900/70">
+      <div className="border-y border-ink-950/20 py-8 text-ink-950" aria-live="polite">
+        <p className="font-display text-5xl">Thank you.</p>
+        <p className="mt-3 text-sm leading-6 text-ink-900/65">
           We&rsquo;ve received your message and will get back to you soon.
         </p>
       </div>
@@ -49,16 +55,16 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-8">
       <div>
-        <label htmlFor="topic" className="block text-sm font-medium text-ink-900">
+        <label htmlFor="topic" className={labelClass}>
           What&rsquo;s this about?
         </label>
         <select
           id="topic"
           name="topic"
           defaultValue="feedback"
-          className="mt-2 w-full rounded-lg border border-ink-950/15 bg-white px-4 py-2.5 text-sm text-ink-950 outline-none focus:border-amber-600"
+          className={fieldClass}
         >
           {topics.map((t) => (
             <option key={t.value} value={t.value}>
@@ -68,9 +74,9 @@ export default function ContactForm() {
         </select>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-8 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-ink-900">
+          <label htmlFor="name" className={labelClass}>
             Name
           </label>
           <input
@@ -78,11 +84,12 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
-            className="mt-2 w-full rounded-lg border border-ink-950/15 bg-white px-4 py-2.5 text-sm text-ink-950 outline-none focus:border-amber-600"
+            autoComplete="name"
+            className={fieldClass}
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-ink-900">
+          <label htmlFor="email" className={labelClass}>
             Email
           </label>
           <input
@@ -90,13 +97,14 @@ export default function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-lg border border-ink-950/15 bg-white px-4 py-2.5 text-sm text-ink-950 outline-none focus:border-amber-600"
+            autoComplete="email"
+            className={fieldClass}
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-ink-900">
+        <label htmlFor="message" className={labelClass}>
           Message
         </label>
         <textarea
@@ -104,12 +112,12 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="mt-2 w-full rounded-lg border border-ink-950/15 bg-white px-4 py-2.5 text-sm text-ink-950 outline-none focus:border-amber-600"
+          className={fieldClass}
         />
       </div>
 
       {status === "error" && (
-        <p className="text-sm text-red-600">
+        <p className="text-sm text-cherry-700" role="alert">
           Something went wrong sending your message. Please try again, or email us directly.
         </p>
       )}
@@ -117,7 +125,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="btn-press rounded-full bg-amber-500 px-6 py-3 text-sm font-semibold text-espresso-950 transition-colors hover:bg-amber-300 disabled:opacity-60"
+        className="btn-press rounded-full bg-ink-950 px-8 py-3.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-paper-50 transition-colors hover:bg-cherry-700 disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Send message"}
       </button>

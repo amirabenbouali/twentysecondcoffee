@@ -12,14 +12,11 @@ export default function Bean({
 }: BeanProps) {
   return (
     <svg viewBox="0 0 32 20" className={className} aria-hidden="true">
-      <path
-        d="M16 1C24.5 1 30.5 5.2 30.5 10C30.5 14.8 24.5 19 16 19C7.5 19 1.5 14.8 1.5 10C1.5 5.2 7.5 1 16 1Z"
-        fill={color}
-      />
+      <ellipse cx="16" cy="10" rx="14.5" ry="8.5" fill={color} />
       <path
         d="M16 2.5C12.5 6.3 12.5 13.7 16 17.5"
         stroke={creaseColor}
-        strokeWidth="2"
+        strokeWidth="1.8"
         fill="none"
         strokeLinecap="round"
       />
