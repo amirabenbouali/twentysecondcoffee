@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import CoffeeBeanIntro from "@/components/CoffeeBeanIntro";
 import Reveal from "@/components/Reveal";
 import { site } from "@/data/site";
 
@@ -80,19 +81,20 @@ function FeatureIcon({ type }: { type: "cup" | "shop" | "day" }) {
 export default function Home() {
   return (
     <>
-      <section className="relative min-h-[760px] overflow-hidden bg-ink-950 text-paper-50 sm:min-h-[820px]">
+      <CoffeeBeanIntro />
+      <section className="relative min-h-[700px] overflow-hidden bg-ink-950 text-paper-50 sm:min-h-[780px]">
         <Image
-          src="/photo-counter.jpg"
-          alt="A barista working behind the counter at 22nd Coffee"
+          src="/home-hero.jpeg"
+          alt="A quiet seating corner inside 22nd Coffee"
           fill
           priority
           sizes="100vw"
           className="object-cover"
-          style={{ objectPosition: "50% 45%" }}
+          style={{ objectPosition: "50% 54%" }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.3),rgba(16,12,9,0.22)_35%,rgba(16,12,9,0.76))]" />
 
-        <div className="relative mx-auto flex min-h-[760px] max-w-7xl flex-col items-center justify-end px-5 pb-20 pt-32 text-center sm:min-h-[820px] sm:px-8 sm:pb-24 lg:px-10">
+        <div className="relative mx-auto flex min-h-[700px] max-w-7xl flex-col items-center justify-end px-5 pb-16 pt-32 text-center sm:min-h-[780px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/80">
             Independent coffee · Royal Wharf
           </p>
@@ -116,7 +118,7 @@ export default function Home() {
       <section id="why-22nd" className="scroll-mt-20 border-b border-ink-950/15 bg-paper-50 text-ink-950">
         <div className="mx-auto grid max-w-7xl px-5 sm:px-8 md:grid-cols-3 lg:px-10">
           {reasons.map((reason, index) => (
-            <div key={reason.title} className="grid grid-cols-[48px_1fr] gap-4 border-b border-ink-950/15 py-8 last:border-b-0 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+            <div key={reason.title} className="grid grid-cols-[48px_1fr] gap-4 border-b border-ink-950/15 py-7 last:border-b-0 md:border-b-0 md:border-r md:px-7 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
               <div className="text-cherry-700">
                 <FeatureIcon type={(["cup", "shop", "day"] as const)[index]} />
               </div>
@@ -130,7 +132,7 @@ export default function Home() {
       </section>
 
       <section className="bg-[#f5efe3] text-ink-950">
-        <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-10 lg:py-32">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <Reveal className="grid gap-7 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">From the counter</p>
@@ -141,7 +143,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
             {moments.map((moment, index) => (
               <Reveal key={moment.title} delayMs={index * 90} className={`overflow-hidden rounded-[1.25rem] ${moment.tone}`}>
                 <div className="relative aspect-[5/4] overflow-hidden">
@@ -167,7 +169,7 @@ export default function Home() {
 
       <section className="bg-paper-50 text-ink-950">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <Reveal className="relative min-h-[520px] lg:min-h-[760px]">
+          <Reveal className="relative min-h-[440px] sm:min-h-[520px] lg:min-h-[760px]">
             <Image src="/photo-hero.jpg" alt="Inside 22nd Coffee in Royal Wharf" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </Reveal>
           <div className="flex items-center px-5 py-20 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
@@ -179,7 +181,7 @@ export default function Home() {
               <p className="mt-7 max-w-md text-sm leading-7 text-ink-900/65 sm:text-base">
                 Our coffee is roasted by Pact and made here in Royal Wharf. The rest is simple: a warm welcome, good food, and enough room to settle in.
               </p>
-              <Link href="/about" className="mt-9 inline-flex items-center gap-3 border-b border-ink-950 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em]">
+              <Link href="/about" className="mt-8 inline-flex items-center gap-3 border-b border-ink-950 pb-1 text-[11px] font-semibold uppercase tracking-[0.16em]">
                 Read our story <span>↗</span>
               </Link>
             </Reveal>
@@ -194,13 +196,13 @@ export default function Home() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/55">Come and see us</p>
               <h2 className="mt-6 font-display text-6xl leading-[0.9] tracking-[-0.04em] sm:text-8xl">Your table is waiting.</h2>
               <p className="mt-7 max-w-sm text-sm leading-7 text-paper-50/65">{site.address}</p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="rounded-full bg-paper-50 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-950">Get directions</a>
                 <Link href="/contact" className="rounded-full border border-paper-50/50 px-6 py-3 text-[10px] font-semibold uppercase tracking-[0.14em]">Contact us</Link>
               </div>
             </Reveal>
           </div>
-          <Reveal className="relative min-h-[500px] lg:min-h-[680px]">
+          <Reveal className="relative min-h-[440px] sm:min-h-[500px] lg:min-h-[680px]">
             <Image src="/photo-storefront.jpg" alt="The 22nd Coffee storefront" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
           </Reveal>
         </div>

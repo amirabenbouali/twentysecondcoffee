@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.tagline}`,
+  title: `${site.name} | ${site.tagline}`,
   description: `${site.name} is a community coffee shop in ${site.neighborhood}. See our menu, upcoming events, and get in touch.`,
   icons: {
     icon: "/icon-192.png",

@@ -29,6 +29,10 @@
   --color-blush-100: #f4d9ca;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

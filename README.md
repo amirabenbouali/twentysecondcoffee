@@ -1,6 +1,6 @@
 # 22nd Coffee
 
-The website for **22nd Coffee**, a community coffee shop in Royal Wharf, London — menu, events, the shop's story, and a way for customers to get in touch, leave feedback, or reach the team about opportunities.
+The website for **22nd Coffee**, a community coffee shop in Royal Wharf, London. It includes the menu, events, the shop's story, and a way for customers to get in touch, leave feedback, or reach the team about opportunities.
 
 **Live repo:** [github.com/amirabenbouali/twentysecondcoffee](https://github.com/amirabenbouali/twentysecondcoffee)
 
@@ -8,13 +8,13 @@ The website for **22nd Coffee**, a community coffee shop in Royal Wharf, London 
 
 - [Next.js 16](https://nextjs.org) (App Router) + [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS 4](https://tailwindcss.com)
-- No external UI, animation, or CMS libraries — the motion system and visual identity are hand-built to keep the project lean
+- No external UI, animation, or CMS libraries. The motion system and visual identity are hand-built to keep the project lean
 
 ## Features
 
 - **Home, Menu, Events, About, Contact** pages
 - A contact form (feedback / event ideas / business opportunities) posting to an API route
-- A visual identity sourced directly from the shop's logo — extracted brand colors, a hand-drawn coffee-ring motif, and a script accent font
+- A visual identity sourced directly from the shop's logo, with extracted brand colors, a hand-drawn coffee-ring motif, and a script accent font
 - An entrance/scroll animation system (staggered reveals, a coffee-ring "draw-in" effect, a scroll-aware header) that fully respects `prefers-reduced-motion`
 - Editorial, non-templated layouts: a scrolling brand ticker, an asymmetric bento grid, ticket-stub event cards, torn-paper section dividers
 
@@ -47,7 +47,7 @@ Most day-to-day content lives in plain data files, not scattered across componen
 | Menu items and prices          | `src/data/menu.ts`       |
 | Upcoming events                | `src/data/events.ts`     |
 
-Editing one of these files and redeploying is enough to update the menu, hours, or events — no component changes required.
+Editing one of these files and redeploying is enough to update the menu, hours, or events. No component changes are required.
 
 ## Contact form
 
@@ -73,4 +73,4 @@ src/
 
 ## Deployment
 
-Any Next.js host works; [Vercel](https://vercel.com/new) is the path of least resistance for this project — connect the GitHub repo and it deploys on every push to `main`.
+Any Next.js host works. [Vercel](https://vercel.com/new) is the path of least resistance for this project. Connect the GitHub repo and it deploys on every push to `main`.

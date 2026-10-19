@@ -1,4 +1,4 @@
-// Point cloud tracing "22" — generated once from a bold numeral render,
+// Point cloud tracing "22", generated once from a bold numeral render,
 // then stippled and shuffled. Each point places one bean; x/y are
 // normalized (0-1) within the numeral's bounding box, r is a rotation
 // in degrees, s is a scale multiplier for organic size variation.

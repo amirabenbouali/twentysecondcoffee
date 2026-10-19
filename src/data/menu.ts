@@ -16,7 +16,7 @@ export type MenuSection = {
   title: string;
   description?: string;
   /** When every item in the section costs the same, set this instead of
-   *  pricing each item individually — it's shown once next to the title. */
+   *  pricing each item individually. It's shown once next to the title. */
   sharedPrice?: string;
   items: MenuItem[];
 };
@@ -27,7 +27,7 @@ export type MenuSection = {
 export const menu: MenuSection[] = [
   {
     title: "Coffee",
-    description: "Bourbon Cream beans from Pact Coffee — decaf available",
+    description: "Bourbon Cream beans from Pact Coffee. Decaf available",
     items: [
       {
         name: "Latte",
@@ -126,7 +126,7 @@ export const menu: MenuSection[] = [
   },
   {
     title: "Super Food Lattes",
-    description: "Iced available — add white chocolate +£1.00",
+    description: "Iced available. Add white chocolate +£1.00",
     items: [
       {
         name: "Matcha",
@@ -212,7 +212,7 @@ export const menu: MenuSection[] = [
     items: [
       {
         name: "Ask your bartender",
-        description: "Classic or seasonal — made to order, tell us what you fancy",
+        description: "Classic or seasonal, made to order. Tell us what you fancy",
         price: "Ask instore",
       },
     ],

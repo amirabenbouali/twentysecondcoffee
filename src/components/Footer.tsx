@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer id="site-footer" className="scroll-mt-20 mt-auto bg-[#171310] text-paper-50">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-        <div className="grid gap-10 border-b border-paper-50/15 py-16 sm:py-20 lg:grid-cols-[1fr_auto] lg:items-end lg:py-24">
+        <div className="grid gap-10 border-b border-paper-50/15 py-14 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-end lg:py-20">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/50">
               Coffee, food & good company
@@ -25,7 +25,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <div className="grid gap-12 border-b border-paper-50/15 py-14 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_0.85fr_0.85fr] lg:gap-10 lg:py-16">
+        <div className="grid gap-10 border-b border-paper-50/15 py-12 sm:grid-cols-2 lg:grid-cols-[1.15fr_0.85fr_0.85fr_0.85fr] lg:py-14">
           <div>
             <Link href="/" className="inline-flex items-center gap-3" aria-label={`${site.name} home`}>
               <Image src="/logo-light-small.png" alt="" width={38} height={38} className="h-9 w-9 object-contain" />
@@ -63,7 +63,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-7 py-7 text-[10px] uppercase tracking-[0.14em] text-paper-50/35 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-6 py-6 text-[10px] uppercase tracking-[0.14em] text-paper-50/35 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {site.name}</p>
           <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Footer navigation">
             {nav.map((item) => (

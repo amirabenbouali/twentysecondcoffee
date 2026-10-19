@@ -9,7 +9,7 @@ type ContactPayload = {
 
 // NOTE: this endpoint currently just logs submissions server-side.
 // To actually receive messages, wire this up to an email service
-// (e.g. Resend, Postmark) or forward `body` to a webhook — see README.
+// (e.g. Resend, Postmark) or forward `body` to a webhook. See README.
 export async function POST(request: Request) {
   const body: ContactPayload = await request.json();
   const { topic, name, email, message } = body;

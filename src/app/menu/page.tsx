@@ -6,7 +6,7 @@ import { menu } from "@/data/menu";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: `Menu — ${site.name}`,
+  title: `Menu | ${site.name}`,
   description: `Coffee, tea, and drinks available at ${site.name} in ${site.neighborhood}.`,
 };
 
@@ -14,13 +14,44 @@ function sectionId(title: string) {
   return title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
+function MenuStripIcon({ type }: { type: "coffee" | "tea" | "bar" }) {
+  if (type === "coffee") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 32 32" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 14h17v6a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-6Z" />
+        <path d="M23 17h2.5a3.5 3.5 0 0 1 0 7H22M4 29h23" />
+        <path d="M11 11c-3-3 3-4 0-8M17 11c-3-3 3-4 0-8" />
+      </svg>
+    );
+  }
+
+  if (type === "tea") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 32 32" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 13h17v7a7 7 0 0 1-7 7h-3a7 7 0 0 1-7-7v-7Z" />
+        <path d="M24 16h2a3.5 3.5 0 0 1 0 7h-3M5 29h23" />
+        <path d="M16 11c0-5 2-7 6-8 0 4-2 7-6 8Z" />
+        <path d="M16 11c-1-4-3-6-6-6 0 3 2 5 6 6Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" viewBox="0 0 32 32" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 4h14l-2 9-5 4-5-4-2-9Z" />
+      <path d="M16 17v10M11 28h10M11 9h10" />
+      <circle cx="25.5" cy="6.5" r="2.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export default function MenuPage() {
   return (
     <>
-      <section className="relative min-h-[720px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50">
+      <section className="relative min-h-[680px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50 sm:min-h-[740px]">
         <Image src="/menu-drinks.jpeg" alt="A draught drink being poured behind the bar at 22nd Coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 40%" }} />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.2),rgba(16,12,9,0.2)_30%,rgba(16,12,9,0.82))]" />
-        <div className="relative mx-auto flex min-h-[648px] max-w-7xl flex-col items-center justify-end px-5 pb-20 text-center sm:px-8 sm:pb-24 lg:px-10">
+        <div className="relative mx-auto flex min-h-[608px] max-w-7xl flex-col items-center justify-end px-5 pb-16 text-center sm:min-h-[668px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/72">Coffee · Tea · Bar</p>
           <h1 className="reveal mt-5 max-w-5xl font-display text-[clamp(4rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">What are you having?</h1>
           <p className="reveal mt-7 max-w-lg text-sm leading-7 text-paper-50/72 sm:text-base">Coffee and tea all day, iced favourites, and something stronger from midday. Stay awhile or take it with you.</p>
@@ -30,9 +61,9 @@ export default function MenuPage() {
 
       <section className="border-b border-ink-950/15 bg-paper-50 text-ink-950">
         <div className="mx-auto grid max-w-7xl gap-5 px-5 py-7 text-xs sm:grid-cols-3 sm:px-8 lg:px-10">
-          <p><span className="mr-2 font-display text-xl text-cherry-700">☕</span><span className="mr-2 font-semibold uppercase tracking-[0.16em]">Coffee</span>Pact Bourbon Cream</p>
-          <p className="sm:text-center"><span className="mr-2 font-display text-xl text-cherry-700">♨</span><span className="mr-2 font-semibold uppercase tracking-[0.16em]">Tea</span>Classic + speciality</p>
-          <p className="sm:text-right"><span className="mr-2 font-display text-xl text-cherry-700">✦</span><span className="mr-2 font-semibold uppercase tracking-[0.16em]">Bar</span>From 12pm</p>
+          <p className="flex items-center gap-3"><span className="shrink-0 text-cherry-700"><MenuStripIcon type="coffee" /></span><span><span className="mr-2 font-semibold uppercase tracking-[0.16em]">Coffee</span>Pact Bourbon Cream</span></p>
+          <p className="flex items-center gap-3 sm:justify-center"><span className="shrink-0 text-cherry-700"><MenuStripIcon type="tea" /></span><span><span className="mr-2 font-semibold uppercase tracking-[0.16em]">Tea</span>Classic + speciality</span></p>
+          <p className="flex items-center gap-3 sm:justify-end"><span className="shrink-0 text-cherry-700"><MenuStripIcon type="bar" /></span><span><span className="mr-2 font-semibold uppercase tracking-[0.16em]">Bar</span>From 12pm</span></p>
         </div>
       </section>
 
@@ -51,8 +82,8 @@ export default function MenuPage() {
       </nav>
 
       <section id="menu-list" className="scroll-mt-36 bg-[#f5efe3] text-ink-950">
-        <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
-          <div className="grid items-start gap-x-16 gap-y-20 lg:grid-cols-2">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+          <div className="grid items-start gap-x-16 gap-y-16 lg:grid-cols-2 lg:gap-y-20">
             {menu.map((section, index) => {
               const featured = section.title === "Coffee" || section.title === "Frappes";
 
@@ -122,7 +153,7 @@ export default function MenuPage() {
 
       <section className="bg-ink-950 text-paper-50">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <div className="relative min-h-[460px] lg:min-h-[650px]">
+          <div className="relative min-h-[420px] sm:min-h-[460px] lg:min-h-[650px]">
             <Image
               src="/menu-pastries.jpeg"
               alt="Muffins and cookies on the counter at 22nd Coffee"
@@ -138,7 +169,7 @@ export default function MenuPage() {
               Our selection changes with the seasons, so ask the team about dietary
               options, current specials, and anything new we are pouring.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="rounded-full bg-paper-50 px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-950">Get directions</a>
               <Link href="/contact" className="rounded-full border border-paper-50/35 px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.14em]">Ask us a question</Link>
             </div>

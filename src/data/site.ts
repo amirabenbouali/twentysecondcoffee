@@ -1,5 +1,5 @@
 // Address, phone, and hours below are pulled from the shop's public Google
-// Business listing (Aug 2026) — double-check with the owner before relying
+// Business listing (Aug 2026). Double-check with the owner before relying
 // on them, since listings can go stale. Email and Instagram are still
 // placeholders: no public email or confirmed current Instagram handle was
 // found, so get the real ones from the owner.
@@ -14,8 +14,9 @@ export const site = {
   instagram: "https://instagram.com/22ndcoffee",
   googleRating: { value: 4.4, count: 388 },
   hours: [
-    { day: "Sunday", time: "10:00am – 6:00pm" },
-    { day: "Monday – Saturday", time: "8:00am – 8:00pm" },
+    { day: "Sunday", time: "10:00am to 6:00pm" },
+    { day: "Monday to Thursday", time: "8:00am to 8:00pm" },
+    { day: "Friday and Saturday", time: "8:00am to 9:00pm" },
   ],
 };
 
