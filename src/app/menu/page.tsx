@@ -49,7 +49,7 @@ export default function MenuPage() {
   return (
     <>
       <section className="relative min-h-[680px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50 sm:min-h-[740px]">
-        <Image src="/menu-drinks.jpeg" alt="A draught drink being poured behind the bar at 22nd Coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 40%" }} />
+        <Image src="/menu-drinks.jpeg" alt="A draught drink being poured behind the bar at twenty second coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 40%" }} />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.2),rgba(16,12,9,0.2)_30%,rgba(16,12,9,0.82))]" />
         <div className="relative mx-auto flex min-h-[608px] max-w-7xl flex-col items-center justify-end px-5 pb-16 text-center sm:min-h-[668px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/72">Coffee · Tea · Bar</p>
@@ -156,7 +156,7 @@ export default function MenuPage() {
           <div className="relative min-h-[420px] sm:min-h-[460px] lg:min-h-[650px]">
             <Image
               src="/menu-pastries.jpeg"
-              alt="Muffins and cookies on the counter at 22nd Coffee"
+              alt="Muffins and cookies on the counter at twenty second coffee"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"

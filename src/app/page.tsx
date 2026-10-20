@@ -85,7 +85,7 @@ export default function Home() {
       <section className="relative min-h-[700px] overflow-hidden bg-ink-950 text-paper-50 sm:min-h-[780px]">
         <Image
           src="/home-hero.jpeg"
-          alt="A quiet seating corner inside 22nd Coffee"
+          alt="A quiet seating corner inside twenty second coffee"
           fill
           priority
           sizes="100vw"
@@ -115,7 +115,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="why-22nd" className="scroll-mt-20 border-b border-ink-950/15 bg-paper-50 text-ink-950">
+      <section id="why-twenty-second" className="scroll-mt-20 border-b border-ink-950/15 bg-paper-50 text-ink-950">
         <div className="mx-auto grid max-w-7xl px-5 sm:px-8 md:grid-cols-3 lg:px-10">
           {reasons.map((reason, index) => (
             <div key={reason.title} className="grid grid-cols-[48px_1fr] gap-4 border-b border-ink-950/15 py-7 last:border-b-0 md:border-b-0 md:border-r md:px-7 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
@@ -170,7 +170,7 @@ export default function Home() {
       <section className="bg-paper-50 text-ink-950">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
           <Reveal className="relative min-h-[440px] sm:min-h-[520px] lg:min-h-[760px]">
-            <Image src="/photo-hero.jpg" alt="Inside 22nd Coffee in Royal Wharf" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+            <Image src="/photo-hero.jpg" alt="Inside twenty second coffee in Royal Wharf" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </Reveal>
           <div className="flex items-center px-5 py-20 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
             <Reveal>
@@ -203,7 +203,7 @@ export default function Home() {
             </Reveal>
           </div>
           <Reveal className="relative min-h-[440px] sm:min-h-[500px] lg:min-h-[680px]">
-            <Image src="/photo-storefront.jpg" alt="The 22nd Coffee storefront" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
+            <Image src="/photo-storefront.jpg" alt="The twenty second coffee storefront" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
           </Reveal>
         </div>
       </section>

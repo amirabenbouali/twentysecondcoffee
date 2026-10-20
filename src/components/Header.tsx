@@ -45,16 +45,16 @@ export default function Header() {
             ))}
           </nav>
 
-          <Link href="/" className="col-start-2 flex items-center gap-2.5" aria-label={`${site.name} home`}>
+          <Link href="/" className="col-start-2 flex items-center gap-2 sm:gap-2.5" aria-label={`${site.name} home`}>
             <Image
               src={transparent ? "/logo-light-small.png" : "/logo-small.png"}
               alt=""
               width={32}
               height={32}
-              className="h-8 w-8 object-contain"
+              className="h-7 w-7 object-contain sm:h-8 sm:w-8"
               priority
             />
-            <span className="font-display text-[1.65rem] leading-none tracking-[-0.035em]">{site.name}</span>
+            <span className="whitespace-nowrap font-display text-[1.12rem] leading-none tracking-[-0.035em] sm:text-[1.4rem] lg:text-[1.55rem]">{site.name}</span>
           </Link>
 
           <nav className="hidden items-center justify-end gap-6 md:flex" aria-label="Secondary navigation">

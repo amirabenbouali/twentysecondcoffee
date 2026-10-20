@@ -13,7 +13,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="relative min-h-[680px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50 sm:min-h-[740px]">
-        <Image src="/contact-storefront.jpeg" alt="The 22nd Coffee storefront on Royal Crest Avenue" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 45%" }} />
+        <Image src="/contact-storefront.jpeg" alt="The twenty second coffee storefront on Royal Crest Avenue" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 45%" }} />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.16),rgba(16,12,9,0.28)_35%,rgba(16,12,9,0.84))]" />
         <div className="relative mx-auto flex min-h-[608px] max-w-7xl flex-col items-center justify-end px-5 pb-16 text-center sm:min-h-[668px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/72">Contact · Visit · Collaborate</p>

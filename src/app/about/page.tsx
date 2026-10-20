@@ -19,7 +19,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="relative min-h-[680px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50 sm:min-h-[740px]">
-        <Image src="/about-hero.jpeg" alt="The welcoming interior of 22nd Coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 48%" }} />
+        <Image src="/about-hero.jpeg" alt="The welcoming interior of twenty second coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 48%" }} />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(18,13,10,0.18),rgba(18,13,10,0.24)_35%,rgba(18,13,10,0.82))]" />
         <div className="relative mx-auto flex min-h-[608px] max-w-7xl flex-col items-center justify-end px-5 pb-16 text-center sm:min-h-[668px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/72">Our story · Royal Wharf</p>
@@ -61,7 +61,7 @@ export default function AboutPage() {
       <section className="bg-paper-50 text-ink-950">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
           <Reveal className="relative min-h-[440px] sm:min-h-[520px] lg:min-h-[760px]">
-            <Image src="/about-counter.jpeg" alt="A view along the counter at 22nd Coffee" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+            <Image src="/about-counter.jpeg" alt="A view along the counter at twenty second coffee" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </Reveal>
           <div className="flex items-center px-5 py-20 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
             <Reveal>
@@ -99,8 +99,8 @@ export default function AboutPage() {
       <section className="bg-[#f5efe3] text-ink-950">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <div className="grid gap-5 sm:grid-cols-[0.78fr_1.22fr]">
-            <Reveal className="relative min-h-[360px] overflow-hidden rounded-[1.25rem] sm:min-h-[560px]"><Image src="/about-sign.jpeg" alt="The round 22nd Coffee sign outside the shop" fill sizes="(min-width: 640px) 40vw, 100vw" className="object-cover" /></Reveal>
-            <Reveal delayMs={100} className="relative min-h-[360px] overflow-hidden rounded-[1.25rem] sm:min-h-[560px]"><Image src="/about-interior.jpeg" alt="The seating and illustrated feature wall inside 22nd Coffee" fill sizes="(min-width: 640px) 60vw, 100vw" className="object-cover" /></Reveal>
+            <Reveal className="relative min-h-[360px] overflow-hidden rounded-[1.25rem] sm:min-h-[560px]"><Image src="/about-sign.jpeg" alt="The round twenty second coffee sign outside the shop" fill sizes="(min-width: 640px) 40vw, 100vw" className="object-cover" /></Reveal>
+            <Reveal delayMs={100} className="relative min-h-[360px] overflow-hidden rounded-[1.25rem] sm:min-h-[560px]"><Image src="/about-interior.jpeg" alt="The seating and illustrated feature wall inside twenty second coffee" fill sizes="(min-width: 640px) 60vw, 100vw" className="object-cover" /></Reveal>
           </div>
           <Reveal className="mx-auto mt-16 max-w-3xl text-center">
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">The next chapter</p>

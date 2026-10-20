@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 };
 
 const eventTypes = [
-  { eyebrow: "Meet", title: "Coffee mornings", text: "Easy-going gatherings for neighbours, regulars, and anyone new to Royal Wharf.", image: "/events-coffee.jpeg", alt: "Espresso pouring into a cup at 22nd Coffee", tone: "bg-[#ded0bd]" },
-  { eyebrow: "Learn", title: "Tastings & workshops", text: "Small sessions built around coffee, conversation, and learning something together.", image: "/events-workshop.jpeg", alt: "Pastries on display at 22nd Coffee", tone: "bg-[#c99991]" },
-  { eyebrow: "Discover", title: "Local pop-ups", text: "A welcoming space for independent makers, creative ideas, and local collaborations.", image: "/events-popup.jpeg", alt: "The bar taps at 22nd Coffee", tone: "bg-[#c9b58f]" },
+  { eyebrow: "Meet", title: "Coffee mornings", text: "Easy-going gatherings for neighbours, regulars, and anyone new to Royal Wharf.", image: "/events-coffee.jpeg", alt: "Espresso pouring into a cup at twenty second coffee", tone: "bg-[#ded0bd]" },
+  { eyebrow: "Learn", title: "Tastings & workshops", text: "Small sessions built around coffee, conversation, and learning something together.", image: "/events-workshop.jpeg", alt: "Pastries on display at twenty second coffee", tone: "bg-[#c99991]" },
+  { eyebrow: "Discover", title: "Local pop-ups", text: "A welcoming space for independent makers, creative ideas, and local collaborations.", image: "/events-popup.jpeg", alt: "The bar taps at twenty second coffee", tone: "bg-[#c9b58f]" },
 ];
 
 function EventDetailIcon({ type }: { type: "gather" | "local" | "stay" }) {
@@ -56,7 +56,7 @@ export default function EventsPage() {
   return (
     <>
       <section className="relative min-h-[680px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50 sm:min-h-[740px]">
-        <Image src="/events-hero.jpeg" alt="A cosy reading corner inside 22nd Coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 48%" }} />
+        <Image src="/events-hero.jpeg" alt="A cosy reading corner inside twenty second coffee" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "50% 48%" }} />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.18),rgba(16,12,9,0.24)_35%,rgba(16,12,9,0.82))]" />
         <div className="relative mx-auto flex min-h-[608px] max-w-7xl flex-col items-center justify-end px-5 pb-16 text-center sm:min-h-[668px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/72">Around our table</p>
@@ -119,7 +119,7 @@ export default function EventsPage() {
 
       <section className="bg-ink-950 text-paper-50">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative min-h-[420px] sm:min-h-[460px] lg:min-h-[680px]"><Image src="/events-host.jpeg" alt="The bar area at 22nd Coffee" fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div>
+          <div className="relative min-h-[420px] sm:min-h-[460px] lg:min-h-[680px]"><Image src="/events-host.jpeg" alt="The bar area at twenty second coffee" fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div>
           <div className="flex items-center px-5 py-20 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
             <Reveal><p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/48">Bring an idea to life</p><h2 className="mt-6 font-display text-5xl leading-[0.92] tracking-[-0.035em] sm:text-7xl">Something worth gathering for?</h2><p className="mt-7 max-w-lg text-sm leading-7 text-paper-50/62 sm:text-base">We love hearing from local makers, organisers, and neighbours. If you have a thoughtful idea for the community, let&rsquo;s start a conversation.</p><Link href="/contact" className="mt-8 inline-flex rounded-full bg-paper-50 px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-950">Get in touch</Link></Reveal>
           </div>

@@ -9,10 +9,10 @@ export default function Footer() {
         <div className="grid gap-10 border-b border-paper-50/15 py-14 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-end lg:py-20">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/50">
-              Coffee, food & good company
+              Coffee, conversation & good company
             </p>
             <p className="mt-5 max-w-4xl font-display text-6xl leading-[0.88] tracking-[-0.045em] sm:text-8xl lg:text-[7.5rem]">
-              See you at 22nd.
+              See you at twenty second.
             </p>
           </div>
           <a

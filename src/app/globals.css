@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Palette sampled directly from the 22nd Coffee logo mark:
+  /* Palette sampled directly from the twenty second coffee logo mark:
      near-black brush ink, and the warm coffee-ring stain gradient. */
   --background: #faf6ef;
   --foreground: #1c1613;
@@ -31,6 +31,13 @@
 
 html {
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @theme inline {

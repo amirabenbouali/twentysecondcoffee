@@ -51,7 +51,7 @@ function makeBeans(
   context.textAlign = "center";
   context.textBaseline = "middle";
   context.font = `600 ${firstSize}px ${sansFont}, Arial, sans-serif`;
-  context.fillText("22 SECOND", width / 2, centreY - secondSize * 0.42);
+  context.fillText("TWENTY SECOND", width / 2, centreY - secondSize * 0.42);
   context.font = `italic ${secondSize}px ${displayFont}, Georgia, serif`;
   context.fillText("Coffee", width / 2, centreY + secondSize * 0.48);
 
@@ -247,7 +247,7 @@ export default function CoffeeBeanIntro() {
   const opening = phase === "opening";
 
   return (
-    <div className={`fixed inset-0 z-[100] overflow-hidden ${opening ? "pointer-events-none" : ""}`} aria-label="22 Second Coffee introduction">
+    <div className={`fixed inset-0 z-[100] overflow-hidden ${opening ? "pointer-events-none" : ""}`} aria-label="twenty second coffee introduction">
       <div
         className="absolute inset-x-0 top-0 h-[50.5%] bg-[#181410] transition-transform duration-[850ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
         style={{ transform: opening ? "translateY(-101%)" : "translateY(0)" }}
@@ -268,7 +268,7 @@ export default function CoffeeBeanIntro() {
       <p className={`absolute inset-x-0 top-7 z-30 text-center text-[9px] font-semibold uppercase tracking-[0.32em] text-paper-50/38 transition-opacity duration-300 sm:top-9 ${opening ? "opacity-0" : "opacity-100"}`}>
         Royal Wharf, London
       </p>
-      <span className="sr-only">22 Second Coffee</span>
+      <span className="sr-only">twenty second coffee</span>
     </div>
   );
 }

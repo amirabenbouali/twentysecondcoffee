@@ -4,7 +4,7 @@
 // placeholders: no public email or confirmed current Instagram handle was
 // found, so get the real ones from the owner.
 export const site = {
-  name: "22nd Coffee",
+  name: "twenty second coffee",
   tagline: "Royal Wharf's community coffee shop",
   neighborhood: "Royal Wharf, London",
   address: "38 Royal Crest Avenue, Royal Wharf, London E16 2TF",
@@ -23,6 +23,7 @@ export const site = {
 export const nav = [
   { href: "/", label: "Home" },
   { href: "/menu", label: "Menu" },
+  { href: "/loyalty", label: "Loyalty" },
   { href: "/events", label: "Events" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
