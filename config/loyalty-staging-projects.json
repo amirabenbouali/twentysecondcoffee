@@ -1,0 +1,4 @@
+{
+  "description": "Non-secret allowlist of Supabase projects permitted for loyalty staging mutations. Add only an approved staging project reference. Never add the production project reference.",
+  "permittedProjectRefs": ["egyctkvkzplhdtpyrtni"]
+}

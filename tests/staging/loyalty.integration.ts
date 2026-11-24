@@ -1,23 +1,21 @@
 import { randomUUID } from "node:crypto";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { hashStaffPassword } from "@/lib/loyalty/password";
+import stagingProjects from "../../config/loyalty-staging-projects.json";
+import { validateStagingTarget } from "../../scripts/staging-target-safety.mjs";
 
-const url = process.env.LOYALTY_STAGING_SUPABASE_URL?.replace(/\/$/, "") ?? "";
 const key = process.env.LOYALTY_STAGING_SUPABASE_SERVICE_ROLE_KEY ?? "";
-const projectRef = process.env.LOYALTY_STAGING_PROJECT_REF ?? "";
-const mutationApproval = process.env.ALLOW_STAGING_LOYALTY_MUTATIONS;
-
-if (
-  mutationApproval !== "STAGING_ONLY" ||
-  !url ||
-  !key ||
-  !projectRef ||
-  !new URL(url).hostname.startsWith(`${projectRef}.`)
-) {
-  throw new Error(
-    "Staging loyalty tests are locked. Set the dedicated LOYALTY_STAGING_* variables and ALLOW_STAGING_LOYALTY_MUTATIONS=STAGING_ONLY. Never use production credentials.",
-  );
-}
+const target = validateStagingTarget({
+  productionProjectRef: process.env.LOYALTY_PRODUCTION_SUPABASE_PROJECT_REF,
+  stagingProjectRef: process.env.LOYALTY_STAGING_SUPABASE_PROJECT_REF,
+  stagingUrl: process.env.LOYALTY_STAGING_SUPABASE_URL,
+  permittedProjectRefs: stagingProjects.permittedProjectRefs,
+  requireServiceRoleKey: true,
+  hasServiceRoleKey: Boolean(key),
+  requiredApproval: "STAGING_ONLY",
+  approval: process.env.ALLOW_STAGING_LOYALTY_MUTATIONS,
+});
+const url = target.url;
 
 async function request(path: string, init: RequestInit = {}) {
   const response = await fetch(`${url}/rest/v1/${path}`, {

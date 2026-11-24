@@ -17,9 +17,16 @@ Prepared 24 November 2026. This plan is for a non-production rollout first. It m
 ### Stage 4A: staging infrastructure and migration review
 
 1. Create or nominate a Supabase project used only for staging.
+   Record its non-secret project reference in
+   `config/loyalty-staging-projects.json`, and configure the known production
+   project reference as an explicit deny target. The two references must never
+   match.
 2. Configure a separate Upstash Redis database or isolated staging prefix.
 3. Use a Google Wallet demo issuer and test accounts only.
 4. Add the Stage 4 migration, review every grant and security-definer function, then apply migrations in order to staging.
+   Use `npm run migrate:staging:loyalty` so the target is validated, the dry run
+   is shown, and the exact project-specific confirmation is required before the
+   real push.
 5. Create synthetic staff and customer records for testing. Never copy production records.
 
 Deliverables:

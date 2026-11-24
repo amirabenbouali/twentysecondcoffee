@@ -84,14 +84,12 @@ Managers can undo actions and inspect the attributed action history. Baristas ca
 The integration test creates only synthetic `example.invalid` records and removes them when it finishes. It refuses to run without dedicated staging variables and an explicit mutation confirmation:
 
 ```bash
-LOYALTY_STAGING_SUPABASE_URL=https://staging-project.supabase.co \
-LOYALTY_STAGING_SUPABASE_SERVICE_ROLE_KEY=staging-only-key \
-LOYALTY_STAGING_PROJECT_REF=staging-project \
-ALLOW_STAGING_LOYALTY_MUTATIONS=STAGING_ONLY \
 npm run test:staging:loyalty
 ```
 
-Never supply production credentials to this command. The Stage 4 rollout and release gates are in `docs/stage-4-loyalty-production-plan.md`.
+Local staging setup is documented in `docs/staging-configuration.md`. The dedicated `check:staging:loyalty`, `dev:staging`, `test:staging:loyalty`, and `migrate:staging:loyalty` commands explicitly load their ignored local environment files. Values from those files override same-named variables inherited from the shell, and placeholders are rejected before a child command starts. Before running integration tests, add the approved non-secret staging project reference to `config/loyalty-staging-projects.json`. Configure `LOYALTY_PRODUCTION_SUPABASE_PROJECT_REF`, the dedicated `LOYALTY_STAGING_*` variables, and `ALLOW_STAGING_LOYALTY_MUTATIONS=STAGING_ONLY` in `.env.staging.integration.local`. The validator rejects missing references, production targets, non-allowlisted targets, and URLs that do not exactly match the approved staging reference. It never includes credentials in error output.
+
+Migration application has a separate interactive guard. Configure `ALLOW_STAGING_MIGRATIONS=STAGING_ONLY`, then run `npm run migrate:staging:loyalty`. The wrapper validates the same target, performs a Supabase dry run, and requires the exact project-specific confirmation phrase before invoking the real push. Do not bypass this wrapper for Stage 4. Never supply production credentials to either command. The Stage 4 rollout and release gates are in `docs/stage-4-loyalty-production-plan.md`.
 
 ### Google Wallet
 

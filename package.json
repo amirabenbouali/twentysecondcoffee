@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:staging": "node scripts/run-staging-command.mjs preview",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:staging:loyalty": "vitest run tests/staging/loyalty.integration.ts --testTimeout=60000 --hookTimeout=60000",
+    "check:staging:loyalty": "node scripts/run-staging-command.mjs check",
+    "test:staging:loyalty": "node scripts/run-staging-command.mjs integration",
+    "migrate:staging:loyalty": "node scripts/run-staging-command.mjs migration",
     "loyalty:hash-password": "node scripts/hash-loyalty-password.mjs"
   },
   "dependencies": {
@@ -27,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "supabase": "3.3.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "4.1.12"
