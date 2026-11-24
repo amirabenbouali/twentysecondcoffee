@@ -53,7 +53,7 @@ export default function MenuPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(16,12,9,0.2),rgba(16,12,9,0.2)_30%,rgba(16,12,9,0.82))]" />
         <div className="relative mx-auto flex min-h-[608px] max-w-7xl flex-col items-center justify-end px-5 pb-16 text-center sm:min-h-[668px] sm:px-8 sm:pb-20 lg:px-10">
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/72">Coffee · Tea · Bar</p>
-          <h1 className="reveal mt-5 max-w-5xl font-display text-[clamp(4rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">What are you having?</h1>
+          <h1 className="reveal mt-5 max-w-5xl font-display text-[clamp(3.2rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">What are you having?</h1>
           <p className="reveal mt-7 max-w-lg text-sm leading-7 text-paper-50/72 sm:text-base">Coffee and tea all day, iced favourites, and something stronger from midday. Stay awhile or take it with you.</p>
           <a href="#menu-list" className="reveal mt-8 rounded-full bg-paper-50 px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-950">View the menu</a>
         </div>
@@ -96,7 +96,7 @@ export default function MenuPage() {
                   <article id={sectionId(section.title)} className="scroll-mt-40 border-t border-ink-950/35 pt-5">
                     <header className="flex flex-wrap items-start justify-between gap-4">
                       <div>
-                        <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-900/40">
+                        <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-700">
                           {String(index + 1).padStart(2, "0")}
                         </p>
                         <h2 className="mt-2 font-display text-5xl tracking-[-0.035em] text-ink-950 sm:text-6xl">
@@ -111,7 +111,7 @@ export default function MenuPage() {
                     </header>
 
                     {section.description && (
-                      <p className="mt-4 max-w-xl text-xs font-medium uppercase leading-5 tracking-[0.12em] text-ink-900/55">
+                      <p className="mt-4 max-w-xl text-xs font-medium uppercase leading-5 tracking-[0.12em] text-ink-700">
                         {section.description}
                       </p>
                     )}
@@ -121,7 +121,7 @@ export default function MenuPage() {
                         <li key={item.name} className="flex items-start justify-between gap-5 border-b border-ink-950/12 py-4 first:pt-0">
                           <div className="min-w-0">
                             <h3 className="font-display text-xl font-medium text-ink-950">{item.name}</h3>
-                            {item.description && <p className="mt-1 text-xs leading-5 text-ink-900/55">{item.description}</p>}
+                            {item.description && <p className="mt-1 text-xs leading-5 text-ink-700">{item.description}</p>}
                           </div>
 
                           {!section.sharedPrice && (
@@ -130,7 +130,7 @@ export default function MenuPage() {
                                 <div className="space-y-1">
                                   {item.sizes.map((size) => (
                                     <p key={size.label}>
-                                      <span className="mr-2 text-[9px] font-medium uppercase tracking-[0.12em] text-ink-900/40">{size.label}</span>
+                                      <span className="mr-2 text-[9px] font-medium uppercase tracking-[0.12em] text-ink-700">{size.label}</span>
                                       {size.price}
                                     </p>
                                   ))}
@@ -163,7 +163,7 @@ export default function MenuPage() {
             />
           </div>
           <Reveal className="flex flex-col justify-center px-5 py-20 sm:px-12 lg:px-16 xl:px-24">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/50">A note from us</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-100">A note from us</p>
             <h2 className="mt-6 font-display text-5xl leading-[0.92] tracking-[-0.035em] sm:text-7xl">See something you like?</h2>
             <p className="mt-7 max-w-lg text-sm leading-7 text-paper-50/65">
               Our selection changes with the seasons, so ask the team about dietary

@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import AccessibleDialog from "@/components/AccessibleDialog";
 import type { StaffLoyaltyMember } from "@/lib/loyalty/types";
 
 type BarcodeDetectorInstance = {
@@ -115,25 +116,29 @@ export default function StaffScanner({
       <button type="button" onClick={() => { setError(""); setOpen(true); }} className="rounded-full bg-cherry-700 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-paper-50">
         Scan customer QR
       </button>
-      {open && (
-        <div className="fixed inset-0 z-[80] flex items-end bg-ink-950/65 p-4 backdrop-blur-sm sm:items-center sm:justify-center" role="dialog" aria-modal="true" aria-labelledby="scanner-title">
-          <div className="w-full max-w-lg rounded-[1.5rem] bg-paper-50 p-5 text-ink-950 shadow-2xl sm:p-7">
+      <AccessibleDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        labelledBy="scanner-title"
+        describedBy="scanner-description"
+        className="w-[calc(100%-2rem)] max-w-lg"
+      >
+          <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-[1.5rem] bg-paper-50 p-5 text-ink-950 shadow-2xl sm:p-7">
             <div className="flex items-start justify-between gap-4">
-              <div><p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-cherry-700">Staff scanner</p><h2 id="scanner-title" className="mt-2 font-display text-4xl">Find a card</h2></div>
-              <button type="button" onClick={() => setOpen(false)} aria-label="Close scanner" className="flex h-9 w-9 items-center justify-center rounded-full border border-ink-950/20 text-lg">×</button>
+              <div><p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-cherry-700">Staff scanner</p><h2 id="scanner-title" className="mt-2 font-display text-4xl">Find a card</h2><p id="scanner-description" className="sr-only">Scan a customer QR code or enter their card code manually.</p></div>
+              <button type="button" data-dialog-initial-focus onClick={() => setOpen(false)} aria-label="Close scanner" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-950/20 text-lg">×</button>
             </div>
             <div className="mt-5 aspect-square max-h-[48vh] overflow-hidden rounded-2xl bg-ink-950">
               <video ref={videoRef} muted playsInline className="h-full w-full object-cover" />
             </div>
-            <form onSubmit={submit} className="mt-5 flex gap-2">
+            <form onSubmit={submit} className="mt-5 grid gap-2 min-[380px]:grid-cols-[1fr_auto]">
               <label className="sr-only" htmlFor="scan-code">Card code</label>
               <input id="scan-code" name="code" autoComplete="off" placeholder="Enter the 8-character code" className="min-w-0 flex-1 rounded-xl border border-ink-950/18 bg-transparent px-4 py-3 text-sm uppercase outline-none focus:border-cherry-700" />
-              <button disabled={pending} className="rounded-xl bg-ink-950 px-5 text-[9px] font-semibold uppercase tracking-[0.14em] text-paper-50 disabled:opacity-50">Find</button>
+              <button disabled={pending} className="min-h-11 rounded-xl bg-ink-950 px-5 text-[9px] font-semibold uppercase tracking-[0.14em] text-paper-50 disabled:opacity-50">{pending ? "Finding" : "Find"}</button>
             </form>
             {error && <p className="mt-4 text-sm leading-6 text-rust-600" role="alert">{error}</p>}
           </div>
-        </div>
-      )}
+      </AccessibleDialog>
     </>
   );
 }

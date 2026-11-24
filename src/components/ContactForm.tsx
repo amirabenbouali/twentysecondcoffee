@@ -9,7 +9,7 @@ const fieldClass =
   "mt-2 w-full border-0 border-b border-ink-950/25 bg-transparent px-0 py-3 text-sm text-ink-950 outline-none transition-colors focus:border-ink-950 focus:ring-0";
 
 const labelClass =
-  "block text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-900/50";
+  "block text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-700";
 
 type ContactFormProps = {
   fallbackEmail?: string | null;
@@ -164,7 +164,7 @@ export default function ContactForm({
         />
       </div>
 
-      <p className="text-[11px] leading-5 text-ink-900/48">
+      <p className="text-[11px] leading-5 text-ink-700">
         We use the details you provide to respond to your enquiry. Read our{" "}
         <a href="/privacy" className="font-semibold text-ink-950 underline underline-offset-4">
           privacy notice
@@ -193,7 +193,7 @@ export default function ContactForm({
       )}
 
       {status === "submitting" && (
-        <p className="text-sm text-ink-900/60" role="status">
+        <p className="text-sm text-ink-700" role="status">
           Sending your message.
         </p>
       )}

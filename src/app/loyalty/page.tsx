@@ -34,7 +34,7 @@ export default function LoyaltyPage() {
         <div className="mx-auto grid min-h-[680px] max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10 lg:py-24">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-cherry-700">Twenty Second Rewards</p>
-            <h1 className="mt-6 max-w-3xl font-display text-[clamp(4.5rem,8.5vw,8.5rem)] leading-[0.82] tracking-[-0.05em]">
+            <h1 className="mt-6 max-w-3xl font-display text-[clamp(3.3rem,8.5vw,8.5rem)] leading-[0.82] tracking-[-0.05em]">
               Your tenth cup,<br /><span className="italic">on us.</span>
             </h1>
             <p className="mt-8 max-w-md text-base leading-7 text-ink-900/65">A simple thank you for coming back. Collect nine coffee beans and your next standard coffee is free.</p>
@@ -50,14 +50,14 @@ export default function LoyaltyPage() {
               </div>
               <div className="mt-8 grid grid-cols-3 gap-4">
                 {Array.from({ length: BEANS_PER_REWARD }, (_, index) => (
-                  <span key={index} className={`flex aspect-square items-center justify-center rounded-full border p-4 ${index < 5 ? "border-paper-50 bg-paper-50 text-cherry-700" : "border-paper-50/40 text-paper-50/38"}`}>
+                  <span key={index} className={`flex aspect-square items-center justify-center rounded-full border p-3 min-[380px]:p-4 ${index < 5 ? "border-paper-50 bg-paper-50 text-cherry-700" : "border-paper-50/60 text-paper-100"}`}>
                     <BeanMark filled={index < 5} />
                   </span>
                 ))}
               </div>
               <div className="mt-8 flex items-end justify-between gap-6">
                 <p className="max-w-[13rem] font-display text-3xl leading-none">Four more beans until your free coffee.</p>
-                <span className="font-mono text-[9px] tracking-[0.16em] text-paper-50/60">COFFEE01</span>
+                <span className="font-mono text-[9px] tracking-[0.16em] text-paper-100">COFFEE01</span>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function LoyaltyPage() {
             <article key={step.number} className="border-b border-ink-950/15 py-9 last:border-b-0 md:border-b-0 md:border-r md:px-8 md:py-12 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
               <p className="font-mono text-[10px] tracking-[0.18em] text-cherry-700">{step.number}</p>
               <h2 className="mt-5 font-display text-3xl leading-none">{step.title}</h2>
-              <p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/58">{step.text}</p>
+              <p className="mt-4 max-w-xs text-sm leading-6 text-ink-700">{step.text}</p>
             </article>
           ))}
         </div>
@@ -82,7 +82,7 @@ export default function LoyaltyPage() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">Keep it close</p>
             <h2 className="mt-5 max-w-xl font-display text-6xl leading-[0.9] tracking-[-0.04em] sm:text-8xl">One card.<br /><span className="italic">No app.</span></h2>
             <p className="mt-7 max-w-md text-sm leading-7 text-ink-900/62">Your card lives in the browser, so there is nothing to download. Bookmark it, add it to your home screen or keep a screenshot of the QR code.</p>
-            <div className="mt-8 border-t border-ink-950/15 pt-6 text-xs leading-6 text-ink-900/50">
+            <div className="mt-8 border-t border-ink-950/15 pt-6 text-xs leading-6 text-ink-700">
               <p>Qualifying drinks are confirmed by the team at the counter. The reward covers one standard coffee. Alternative milks, syrups and other extras remain chargeable.</p>
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function LoyaltyPage() {
       </section>
 
       <section className="bg-ink-950 px-5 py-12 text-center text-paper-50 sm:px-8">
-        <p className="text-sm text-paper-50/58">Already joined but cannot find your card?</p>
+        <p className="text-sm text-paper-100">Already joined but cannot find your card?</p>
         <Link href="/contact" className="mt-3 inline-flex border-b border-paper-50/45 pb-1 text-[10px] font-semibold uppercase tracking-[0.16em]">Ask the team for help</Link>
       </section>
     </>

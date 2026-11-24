@@ -15,8 +15,8 @@ export default function LoyaltyCard({ member, qrCode, googleWalletUrl }: Loyalty
   return (
     <article className="overflow-hidden rounded-[1.5rem] border border-ink-950/15 bg-[#f7efe2] shadow-[0_30px_80px_rgba(38,25,15,0.12)]">
       <div className="border-b border-ink-950/15 bg-cherry-700 px-6 py-5 text-paper-50 sm:px-8">
-        <div className="flex items-center justify-between gap-4 sm:gap-6">
-          <p className="font-display text-2xl tracking-[-0.03em]">twenty second rewards</p>
+        <div className="flex items-center justify-between gap-3 sm:gap-6">
+          <p className="font-display text-xl tracking-[-0.03em] min-[380px]:text-2xl">twenty second rewards</p>
           <svg aria-hidden="true" viewBox="0 0 48 48" className="h-9 w-9" fill="none" stroke="currentColor" strokeWidth="1.3">
             <circle cx="24" cy="24" r="18" />
             <circle cx="24" cy="24" r="14" opacity=".5" />
@@ -31,14 +31,14 @@ export default function LoyaltyCard({ member, qrCode, googleWalletUrl }: Loyalty
             <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-cherry-700">Member</p>
             <h1 className="mt-2 font-display text-4xl leading-none tracking-[-0.03em]">{member.first_name}&apos;s card</h1>
           </div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-900/55">{member.member_code}</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-700">{member.member_code}</p>
         </div>
 
         {hasReward ? (
           <div className="my-7 rounded-2xl bg-ink-950 px-6 py-7 text-paper-50">
             <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-amber-300">Reward ready</p>
             <p className="mt-3 font-display text-4xl leading-none">Your next coffee is on us.</p>
-            <p className="mt-4 text-xs leading-5 text-paper-50/60">Show this card to the team before ordering. Paid extras are not included.</p>
+            <p className="mt-4 text-xs leading-5 text-paper-100">Show this card to the team before ordering. Paid extras are not included.</p>
           </div>
         ) : (
           <div className="my-7">

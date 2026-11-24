@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import AccessibleDialog from "@/components/AccessibleDialog";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -80,15 +81,21 @@ export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: s
         </button>
       </div>
 
-      {showInstructions && (
-        <div className="fixed inset-0 z-[70] flex items-end bg-ink-950/55 p-4 backdrop-blur-sm sm:items-center sm:justify-center" role="dialog" aria-modal="true" aria-labelledby="home-screen-title" onClick={() => setShowInstructions(false)}>
-          <div className="w-full max-w-md rounded-[1.5rem] bg-paper-50 p-6 text-ink-950 shadow-2xl sm:p-8" onClick={(event) => event.stopPropagation()}>
+      <AccessibleDialog
+        open={showInstructions}
+        onClose={() => setShowInstructions(false)}
+        labelledBy="home-screen-title"
+        describedBy="home-screen-description"
+        className="w-[calc(100%-2rem)] max-w-md"
+      >
+          <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-[1.5rem] bg-paper-50 p-6 text-ink-950 shadow-2xl sm:p-8">
             <div className="flex items-start justify-between gap-5">
               <div>
                 <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-cherry-700">Keep your card close</p>
                 <h2 id="home-screen-title" className="mt-3 font-display text-4xl leading-none tracking-[-0.03em]">Save it to your iPhone.</h2>
+                <p id="home-screen-description" className="sr-only">Instructions for adding your loyalty card to an iPhone home screen.</p>
               </div>
-              <button type="button" onClick={() => setShowInstructions(false)} aria-label="Close instructions" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink-950/20 text-lg">×</button>
+              <button type="button" data-dialog-initial-focus onClick={() => setShowInstructions(false)} aria-label="Close instructions" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-950/20 text-lg">×</button>
             </div>
             <ol className="mt-7 space-y-5 text-sm leading-6 text-ink-900/65">
               <li className="grid grid-cols-[36px_1fr] items-start gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-cherry-700/30 text-cherry-700"><ShareIcon /></span><span>Open this card in Safari, then tap the Share symbol at the bottom of the screen.</span></li>
@@ -97,8 +104,7 @@ export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: s
             </ol>
             <button type="button" onClick={() => setShowInstructions(false)} className="mt-7 w-full rounded-full bg-ink-950 px-6 py-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-paper-50">Got it</button>
           </div>
-        </div>
-      )}
+      </AccessibleDialog>
     </>
   );
 }

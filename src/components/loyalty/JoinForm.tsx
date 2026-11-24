@@ -28,25 +28,33 @@ export default function JoinForm() {
     setError("");
 
     const form = new FormData(event.currentTarget);
-    const response = await fetch("/api/loyalty/join", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstName: form.get("firstName"),
-        email: form.get("email"),
-        marketingConsent: form.get("marketingConsent") === "on",
-      }),
-    });
-    const result = (await response.json()) as { cardUrl?: string; error?: string };
+    try {
+      const response = await fetch("/api/loyalty/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: form.get("firstName"),
+          email: form.get("email"),
+          marketingConsent: form.get("marketingConsent") === "on",
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        cardUrl?: string;
+        error?: string;
+      } | null;
 
-    if (!response.ok || !result.cardUrl) {
-      setError(result.error ?? "Something went wrong. Please try again.");
+      if (!response.ok || !result?.cardUrl) {
+        setError(result?.error ?? "We could not create your card. Please try again.");
+        return;
+      }
+
+      window.localStorage.setItem(SAVED_CARD_KEY, result.cardUrl);
+      router.push(result.cardUrl);
+    } catch {
+      setError("We could not reach the loyalty service. Please check your connection and try again.");
+    } finally {
       setPending(false);
-      return;
     }
-
-    window.localStorage.setItem(SAVED_CARD_KEY, result.cardUrl);
-    router.push(result.cardUrl);
   }
 
   return (
@@ -61,7 +69,7 @@ export default function JoinForm() {
         </Link>
       )}
 
-      <form onSubmit={submit} className="mt-7 space-y-5">
+      <form onSubmit={submit} className="mt-7 space-y-5" aria-busy={pending}>
         <label className="block">
           <span className="text-[10px] font-semibold uppercase tracking-[0.17em] text-ink-900/65">First name</span>
           <input
@@ -86,23 +94,26 @@ export default function JoinForm() {
             className="mt-2 w-full rounded-xl border border-ink-950/18 bg-transparent px-4 py-3 text-base outline-none transition-colors placeholder:text-ink-900/30 focus:border-cherry-700"
             placeholder="you@example.com"
           />
-          <span className="mt-2 block text-xs leading-5 text-ink-900/48">Used to identify and recover your card with help from our team.</span>
+          <span className="mt-2 block text-xs leading-5 text-ink-700">Used to identify and recover your card with help from our team.</span>
         </label>
 
         <fieldset className="rounded-xl border border-ink-950/12 p-4">
-          <legend className="px-1 text-[9px] font-semibold uppercase tracking-[0.17em] text-ink-900/52">
+          <legend className="px-1 text-[9px] font-semibold uppercase tracking-[0.17em] text-ink-700">
             Optional marketing
           </legend>
           <label className="flex items-start gap-3 text-xs leading-5 text-ink-900/62">
             <input name="marketingConsent" type="checkbox" className="mt-1 h-4 w-4 accent-cherry-700" />
             <span>{MARKETING_CONSENT_TEXT}</span>
           </label>
-          <p className="mt-3 text-[11px] leading-5 text-ink-900/45">
+          <p className="mt-3 text-[11px] leading-5 text-ink-700">
             Your choice does not affect your loyalty card.
           </p>
         </fieldset>
 
-        {error && <p className="rounded-xl bg-blush-100 px-4 py-3 text-sm text-rust-600" role="alert">{error}</p>}
+        <div aria-live="polite" aria-atomic="true">
+          {error && <p className="rounded-xl bg-blush-100 px-4 py-3 text-sm text-rust-600" role="alert">{error}</p>}
+          {pending && <p className="text-sm text-ink-700" role="status">Creating your loyalty card.</p>}
+        </div>
 
         <button
           type="submit"
@@ -113,7 +124,7 @@ export default function JoinForm() {
         </button>
       </form>
 
-      <p className="mt-5 text-[11px] leading-5 text-ink-900/48">
+      <p className="mt-5 text-[11px] leading-5 text-ink-700">
         One account per customer. We use your details to operate and recover your loyalty card. Read our{" "}
         <Link href="/privacy" className="font-semibold text-ink-950 underline underline-offset-4">
           privacy notice

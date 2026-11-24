@@ -71,7 +71,7 @@ export default function EventsPage() {
           {[{ icon: "gather" as const, title: "Small gatherings", text: "Relaxed events with room to talk." }, { icon: "local" as const, title: "Local ideas", text: "Made with and for the neighbourhood." }, { icon: "stay" as const, title: "Worth staying for", text: "Good company and one more cup." }].map((item) => (
             <div key={item.title} className="grid grid-cols-[42px_1fr] gap-4 border-b border-ink-950/15 py-7 last:border-b-0 md:border-b-0 md:border-r md:px-7 md:py-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
               <div className="text-cherry-700"><EventDetailIcon type={item.icon} /></div>
-              <div><h2 className="font-display text-2xl leading-none">{item.title}</h2><p className="mt-3 text-xs leading-5 text-ink-900/60">{item.text}</p></div>
+              <div><h2 className="font-display text-2xl leading-none">{item.title}</h2><p className="mt-3 text-xs leading-5 text-ink-700">{item.text}</p></div>
             </div>
           ))}
         </div>
@@ -80,7 +80,7 @@ export default function EventsPage() {
       <section id="whats-on" className="scroll-mt-24 bg-[#f5efe3] text-ink-950">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
           <Reveal className="grid gap-8 border-b border-ink-950/20 pb-10 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
-            <div><p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">Coming up</p><p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/55">Dates, gatherings, and reasons to get together.</p></div>
+            <div><p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">Coming up</p><p className="mt-4 max-w-xs text-sm leading-6 text-ink-700">Dates, gatherings, and reasons to get together.</p></div>
             <h2 className="font-display text-5xl leading-[0.94] tracking-[-0.035em] sm:text-7xl lg:text-8xl">{hasEvents ? "Save yourself a seat." : "The next dates are brewing."}</h2>
           </Reveal>
 
@@ -110,7 +110,7 @@ export default function EventsPage() {
             {eventTypes.map((type, index) => (
               <Reveal key={type.title} delayMs={index * 90} className={`overflow-hidden rounded-[1.25rem] ${type.tone}`}>
                 <div className="relative aspect-[5/4] overflow-hidden"><Image src={type.image} alt={type.alt} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 hover:scale-[1.025]" /></div>
-                <div className="min-h-64 p-7 sm:p-8"><p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-900/50">{type.eyebrow}</p><h3 className="mt-5 font-display text-4xl leading-[0.95]">{type.title}</h3><p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/62">{type.text}</p></div>
+                <div className="min-h-64 p-7 sm:p-8"><p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-700">{type.eyebrow}</p><h3 className="mt-5 font-display text-4xl leading-[0.95]">{type.title}</h3><p className="mt-4 max-w-xs text-sm leading-6 text-ink-700">{type.text}</p></div>
               </Reveal>
             ))}
           </div>
@@ -121,7 +121,7 @@ export default function EventsPage() {
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative min-h-[420px] sm:min-h-[460px] lg:min-h-[680px]"><Image src="/events-host.jpeg" alt="The bar area at twenty second coffee" fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" /></div>
           <div className="flex items-center px-5 py-20 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
-            <Reveal><p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/48">Bring an idea to life</p><h2 className="mt-6 font-display text-5xl leading-[0.92] tracking-[-0.035em] sm:text-7xl">Something worth gathering for?</h2><p className="mt-7 max-w-lg text-sm leading-7 text-paper-50/62 sm:text-base">We love hearing from local makers, organisers, and neighbours. If you have a thoughtful idea for the community, let&rsquo;s start a conversation.</p><Link href="/contact" className="mt-8 inline-flex rounded-full bg-paper-50 px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-950">Get in touch</Link></Reveal>
+            <Reveal><p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-100">Bring an idea to life</p><h2 className="mt-6 font-display text-5xl leading-[0.92] tracking-[-0.035em] sm:text-7xl">Something worth gathering for?</h2><p className="mt-7 max-w-lg text-sm leading-7 text-paper-100 sm:text-base">We love hearing from local makers, organisers, and neighbours. If you have a thoughtful idea for the community, let&rsquo;s start a conversation.</p><Link href="/contact" className="mt-8 inline-flex rounded-full bg-paper-50 px-7 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-950">Get in touch</Link></Reveal>
           </div>
         </div>
       </section>

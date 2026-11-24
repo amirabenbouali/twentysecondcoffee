@@ -21,20 +21,20 @@ function ReviewItem({ children }: { children: ReactNode }) {
 
 export default function PrivacyPage() {
   return (
-    <main className="bg-[#f5efe3] text-ink-950">
+    <div className="bg-[#f5efe3] text-ink-950">
       <header className="border-b border-ink-950/15 px-5 pb-16 pt-32 sm:px-8 sm:pb-20 sm:pt-40 lg:px-10">
         <div className="mx-auto max-w-5xl">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">
             Privacy notice draft
           </p>
-          <h1 className="mt-6 max-w-4xl font-display text-[clamp(4rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">
+          <h1 className="mt-6 max-w-4xl font-display text-[clamp(3.1rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">
             Your information, explained clearly.
           </h1>
           <div className="mt-10 max-w-3xl rounded-2xl border border-cherry-700/25 bg-paper-50 p-5 text-sm leading-6">
             <p className="font-semibold">Not yet approved for publication as a final legal notice.</p>
             <p className="mt-2 text-ink-900/65">{reviewNote}</p>
           </div>
-          <p className="mt-6 text-xs text-ink-900/50">
+          <p className="mt-6 text-xs text-ink-700">
             Draft version {PRIVACY_NOTICE_VERSION}. Last updated 24 November 2026.
           </p>
         </div>
@@ -120,6 +120,6 @@ export default function PrivacyPage() {
           </section>
         </article>
       </div>
-    </main>
+    </div>
   );
 }

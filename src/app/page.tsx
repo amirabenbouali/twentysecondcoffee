@@ -98,7 +98,7 @@ export default function Home() {
           <p className="reveal text-[10px] font-semibold uppercase tracking-[0.3em] text-paper-50/80">
             Independent coffee · Royal Wharf
           </p>
-          <h1 className="reveal mt-5 max-w-4xl font-display text-[clamp(4rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">
+          <h1 className="reveal mt-5 max-w-4xl font-display text-[clamp(3.2rem,9vw,8rem)] leading-[0.86] tracking-[-0.045em]">
             Coffee for your<br />kind of day.
           </h1>
           <p className="reveal mt-7 max-w-md text-sm leading-6 text-paper-50/78 sm:text-base">
@@ -124,7 +124,7 @@ export default function Home() {
               </div>
               <div>
                 <h2 className="font-display text-2xl leading-none">{reason.title}</h2>
-                <p className="mt-3 max-w-xs text-xs leading-5 text-ink-900/60">{reason.text}</p>
+                <p className="mt-3 max-w-xs text-xs leading-5 text-ink-700">{reason.text}</p>
               </div>
             </div>
           ))}
@@ -136,7 +136,7 @@ export default function Home() {
           <Reveal className="grid gap-7 lg:grid-cols-[0.65fr_1.35fr] lg:items-end">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">From the counter</p>
-              <p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/60">A short menu, built around the things people come back for.</p>
+              <p className="mt-4 max-w-xs text-sm leading-6 text-ink-700">A short menu, built around the things people come back for.</p>
             </div>
             <h2 className="max-w-3xl font-display text-5xl leading-[0.94] tracking-[-0.035em] sm:text-7xl lg:text-8xl">
               Your favourites,<br /><span className="italic">all day long.</span>
@@ -156,7 +156,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex min-h-64 flex-col p-7 sm:p-8">
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-900/55">{moment.eyebrow}</p>
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-700">{moment.eyebrow}</p>
                   <h3 className="mt-5 font-display text-4xl leading-[0.95] tracking-[-0.025em]">{moment.title}</h3>
                   <p className="mt-4 max-w-xs text-sm leading-6 text-ink-900/65">{moment.text}</p>
                   <Link href="/menu" aria-label={`View ${moment.title} on the menu`} className="mt-auto flex h-10 w-10 items-center justify-center self-end rounded-full border border-ink-950/50 text-lg transition-colors hover:bg-ink-950 hover:text-paper-50">→</Link>
@@ -193,7 +193,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
           <div className="flex items-center px-5 py-20 sm:px-8 lg:px-10 lg:py-28 xl:pr-20">
             <Reveal>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/55">Come and see us</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-100">Come and see us</p>
               <h2 className="mt-6 font-display text-6xl leading-[0.9] tracking-[-0.04em] sm:text-8xl">Your table is waiting.</h2>
               <p className="mt-7 max-w-sm text-sm leading-7 text-paper-50/65">{site.address}</p>
               <div className="mt-8 flex flex-wrap gap-3">
