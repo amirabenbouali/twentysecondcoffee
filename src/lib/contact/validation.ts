@@ -2,6 +2,7 @@ export const CONTACT_TOPICS = [
   { value: "feedback", label: "Feedback" },
   { value: "event", label: "Event idea" },
   { value: "opportunity", label: "Business opportunity" },
+  { value: "privacy", label: "Privacy or data request" },
   { value: "other", label: "Something else" },
 ] as const;
 

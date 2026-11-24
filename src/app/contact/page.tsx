@@ -9,7 +9,10 @@ export const metadata: Metadata = {
   description: `Get in touch with ${site.name}. Feedback, event ideas, and business opportunities are welcome.`,
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: PageProps<"/contact">) {
+  const query = await searchParams;
+  const initialTopic = query.topic === "privacy" ? "privacy" : "feedback";
+
   return (
     <>
       <section className="relative min-h-[680px] overflow-hidden bg-ink-950 pt-[72px] text-paper-50 sm:min-h-[740px]">
@@ -58,7 +61,7 @@ export default function ContactPage() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">Send a message</p>
               <h2 className="mt-5 font-display text-5xl leading-[0.94] tracking-[-0.035em] sm:text-6xl">What&rsquo;s on your mind?</h2>
               <p className="mt-5 max-w-lg text-sm leading-6 text-ink-900/58">Fill in the form and the team will get back to you as soon as possible.</p>
-              <div className="mt-10"><ContactForm fallbackEmail={site.email} /></div>
+              <div className="mt-10"><ContactForm fallbackEmail={site.email} initialTopic={initialTopic} /></div>
             </div>
           </Reveal>
         </div>

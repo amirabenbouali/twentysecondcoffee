@@ -1,48 +1,38 @@
 import { createLoyaltyMember, LoyaltyDatabaseError } from "@/lib/loyalty/db";
 import { isSameOrigin } from "@/lib/loyalty/auth";
-import { allowRequest, requestIdentifier } from "@/lib/loyalty/rate-limit";
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { checkLoyaltyRateLimit } from "@/lib/loyalty/rate-limit";
+import { validateLoyaltyRegistration } from "@/lib/loyalty/registration";
 
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) {
     return Response.json({ error: "Request not allowed." }, { status: 403 });
   }
 
-  const identifier = `join:${requestIdentifier(request)}`;
-  if (!allowRequest(identifier, 5, 60 * 60 * 1000)) {
+  let limit;
+  try {
+    limit = await checkLoyaltyRateLimit(request, "join");
+  } catch {
+    return Response.json(
+      { error: "Online joining is temporarily unavailable. Please try again later." },
+      { status: 503 },
+    );
+  }
+  if (!limit.success) {
     return Response.json(
       { error: "Too many attempts. Please ask a member of the team for help." },
       { status: 429 },
     );
   }
 
-  const body = (await request.json().catch(() => null)) as {
-    firstName?: unknown;
-    email?: unknown;
-    marketingConsent?: unknown;
-  } | null;
-
-  const firstName = typeof body?.firstName === "string" ? body.firstName.trim() : "";
-  const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
-  const marketingConsent = body?.marketingConsent === true;
-
-  if (firstName.length < 2 || firstName.length > 40) {
-    return Response.json(
-      { error: "Please enter your first name." },
-      { status: 400 },
-    );
-  }
-
-  if (email.length > 160 || !EMAIL_PATTERN.test(email)) {
-    return Response.json(
-      { error: "Please enter a valid email address." },
-      { status: 400 },
-    );
+  const registration = validateLoyaltyRegistration(
+    await request.json().catch(() => null),
+  );
+  if (!registration.success) {
+    return Response.json({ error: registration.error }, { status: 400 });
   }
 
   try {
-    const member = await createLoyaltyMember({ firstName, email, marketingConsent });
+    const member = await createLoyaltyMember(registration.data);
     return Response.json(
       { cardUrl: `/loyalty/${member.public_code}` },
       { status: 201 },
@@ -53,7 +43,7 @@ export async function POST(request: Request) {
         return Response.json(
           {
             error:
-              "That email is already registered. Ask the team to help you reopen your card.",
+              "We could not create a new card with those details. If you have joined before, ask the team to help you reopen your card.",
           },
           { status: 409 },
         );
@@ -67,10 +57,13 @@ export async function POST(request: Request) {
       }
     }
 
-    console.error("Unable to create loyalty member", error);
+    console.error("[loyalty] member_creation_failed", {
+      code: error instanceof LoyaltyDatabaseError ? error.code : undefined,
+      status: error instanceof LoyaltyDatabaseError ? error.status : undefined,
+    });
     return Response.json(
       { error: "We could not create your card. Please try again." },
-      { status: 500 },
+      { status: error instanceof LoyaltyDatabaseError ? error.status : 500 },
     );
   }
 }

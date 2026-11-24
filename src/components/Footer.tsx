@@ -77,6 +77,9 @@ export default function Footer() {
                 {item.label}
               </Link>
             ))}
+            <Link href="/privacy" className="transition-colors hover:text-paper-50">
+              Privacy
+            </Link>
           </nav>
           <p>Royal Wharf · London</p>
         </div>

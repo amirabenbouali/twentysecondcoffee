@@ -13,9 +13,13 @@ const labelClass =
 
 type ContactFormProps = {
   fallbackEmail?: string | null;
+  initialTopic?: (typeof CONTACT_TOPICS)[number]["value"];
 };
 
-export default function ContactForm({ fallbackEmail }: ContactFormProps) {
+export default function ContactForm({
+  fallbackEmail,
+  initialTopic = "feedback",
+}: ContactFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const submissionId = useRef("");
@@ -101,7 +105,7 @@ export default function ContactForm({ fallbackEmail }: ContactFormProps) {
         <select
           id="topic"
           name="topic"
-          defaultValue="feedback"
+          defaultValue={initialTopic}
           required
           className={fieldClass}
         >
@@ -159,6 +163,14 @@ export default function ContactForm({ fallbackEmail }: ContactFormProps) {
           className={fieldClass}
         />
       </div>
+
+      <p className="text-[11px] leading-5 text-ink-900/48">
+        We use the details you provide to respond to your enquiry. Read our{" "}
+        <a href="/privacy" className="font-semibold text-ink-950 underline underline-offset-4">
+          privacy notice
+        </a>
+        .
+      </p>
 
       {status === "error" && (
         <div

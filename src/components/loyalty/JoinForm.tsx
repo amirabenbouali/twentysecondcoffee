@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
+import { MARKETING_CONSENT_TEXT } from "@/lib/privacy/constants";
 
 const SAVED_CARD_KEY = "twenty-second-loyalty-card";
 
@@ -88,10 +89,18 @@ export default function JoinForm() {
           <span className="mt-2 block text-xs leading-5 text-ink-900/48">Used to identify and recover your card with help from our team.</span>
         </label>
 
-        <label className="flex items-start gap-3 text-xs leading-5 text-ink-900/58">
-          <input name="marketingConsent" type="checkbox" className="mt-1 h-4 w-4 accent-cherry-700" />
-          <span>I would like occasional news and rewards from twenty second coffee. Optional.</span>
-        </label>
+        <fieldset className="rounded-xl border border-ink-950/12 p-4">
+          <legend className="px-1 text-[9px] font-semibold uppercase tracking-[0.17em] text-ink-900/52">
+            Optional marketing
+          </legend>
+          <label className="flex items-start gap-3 text-xs leading-5 text-ink-900/62">
+            <input name="marketingConsent" type="checkbox" className="mt-1 h-4 w-4 accent-cherry-700" />
+            <span>{MARKETING_CONSENT_TEXT}</span>
+          </label>
+          <p className="mt-3 text-[11px] leading-5 text-ink-900/45">
+            Your choice does not affect your loyalty card.
+          </p>
+        </fieldset>
 
         {error && <p className="rounded-xl bg-blush-100 px-4 py-3 text-sm text-rust-600" role="alert">{error}</p>}
 
@@ -104,7 +113,13 @@ export default function JoinForm() {
         </button>
       </form>
 
-      <p className="mt-5 text-[11px] leading-5 text-ink-900/42">One account per customer. Your details are used to operate the loyalty scheme and are not shown on your public card.</p>
+      <p className="mt-5 text-[11px] leading-5 text-ink-900/48">
+        One account per customer. We use your details to operate and recover your loyalty card. Read our{" "}
+        <Link href="/privacy" className="font-semibold text-ink-950 underline underline-offset-4">
+          privacy notice
+        </Link>
+        . Marketing is optional and separate from joining.
+      </p>
     </div>
   );
 }

@@ -57,20 +57,41 @@ The rules currently award a free standard coffee after nine qualifying purchases
 
 ### Database setup
 
-1. Create a Supabase project.
-2. Open its SQL editor and run `supabase/migrations/20261019000000_create_loyalty.sql`.
+1. Create a Supabase project for staging. Do not begin with the live customer database.
+2. Open its SQL editor and run the migrations in filename order. Review and test each migration in a non-production project first.
 3. Copy `.env.example` to `.env.local`.
 4. Add the project URL and service role key from the Supabase project settings.
-5. Set a strong shared staff password and a separate random session secret.
-6. Add the same four variables to the production hosting environment and redeploy.
+5. Configure Upstash and generate a separate `LOYALTY_RATE_LIMIT_SECRET` with `openssl rand -base64 32`.
+6. Run `npm run loyalty:hash-password` in an interactive terminal for each staff member.
+7. Insert the resulting hash, a lower-case username, display name, and approved role into `loyalty_staff`. Never store the plaintext password.
+8. Run the staging integration suite and real-device workflow before preparing any production migration.
 
 The service role key is server-only and must never use a `NEXT_PUBLIC_` prefix. Row level security is enabled, and only server-side routes can read or change loyalty records.
 
-Useful local command for generating a session secret:
+The Stage 3 migration, `supabase/migrations/20261124000000_add_loyalty_consent_audit.sql`, adds versioned privacy and marketing choices plus an append-only consent event history. The Stage 4 migration, `supabase/migrations/20261124010000_harden_loyalty_operations.sql`, adds individual staff accounts, revocable sessions, roles, action attribution, idempotency, paginated search, exact scan lookup, and a durable Wallet queue. Apply approved migrations before deploying matching application code. They have not been applied automatically.
+
+Example staging staff insert after generating a password hash:
+
+```sql
+insert into public.loyalty_staff (username, display_name, role, password_hash)
+values ('approved.username', 'Approved Display Name', 'barista', 'paste-scrypt-hash-here');
+```
+
+Managers can undo actions and inspect the attributed action history. Baristas can search, scan, stamp, and redeem. The client must approve each person and role before an account is created.
+
+### Staging integration tests
+
+The integration test creates only synthetic `example.invalid` records and removes them when it finishes. It refuses to run without dedicated staging variables and an explicit mutation confirmation:
 
 ```bash
-openssl rand -base64 32
+LOYALTY_STAGING_SUPABASE_URL=https://staging-project.supabase.co \
+LOYALTY_STAGING_SUPABASE_SERVICE_ROLE_KEY=staging-only-key \
+LOYALTY_STAGING_PROJECT_REF=staging-project \
+ALLOW_STAGING_LOYALTY_MUTATIONS=STAGING_ONLY \
+npm run test:staging:loyalty
 ```
+
+Never supply production credentials to this command. The Stage 4 rollout and release gates are in `docs/stage-4-loyalty-production-plan.md`.
 
 ### Google Wallet
 
@@ -83,7 +104,9 @@ Google Wallet is optional. The button remains hidden until all four Google Walle
 5. Add the issuer ID, class suffix, service account email, and private key to the local and production environment variables.
 6. Add a test customer in demo mode, save a test pass, and then request Google publishing access.
 
-Each pass contains the customer name, card code, bean balance, reward balance, and QR code. Staff actions update saved Google Wallet passes automatically. A failure at Google never blocks an in-shop loyalty action.
+Each pass contains the customer name, card code, bean balance, reward balance, and an opaque QR payload. The site uses Google’s official Great Britain English button asset without altering its proportions or styling. Staff actions queue Wallet synchronization in the same database transaction. Inline synchronization is attempted immediately, and a protected scheduler retries temporary failures without blocking an in-shop loyalty action.
+
+Configure the hosting scheduler to request `/api/internal/loyalty/wallet-sync` with `Authorization: Bearer <CRON_SECRET>`. Use a separate secret of at least 32 random characters. Google Wallet must be tested in demo mode with test Google accounts before publishing access is requested.
 
 ### Add to Home Screen
 
@@ -106,6 +129,14 @@ The form at `/contact` validates submissions on the server and sends accepted me
 7. Send a test message only after the owner has approved the destination address.
 
 `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_TOKEN`, and `CONTACT_RATE_LIMIT_SECRET` are server-only. Never give them a `NEXT_PUBLIC_` prefix. The API returns success only after Resend returns an accepted email ID. If delivery or rate limiting is not configured, it fails safely and does not claim that the message was received.
+
+## Privacy and data requests
+
+The draft privacy notice is available at `/privacy`. It deliberately marks legal and client decisions that still need confirmation and must not be treated as a final legal notice. Contact and loyalty forms link to it, and privacy requests can be started at `/contact?topic=privacy`.
+
+Loyalty membership and marketing are separate choices. Marketing starts unchecked, and the database migration records the choice, timestamp, wording version, and source. The internal access, correction, withdrawal, and deletion procedure is documented in `docs/privacy-operations.md`.
+
+The repository-level collection points, database fields, processors, public exposure, and outstanding provider checks are recorded in `docs/privacy-data-inventory.md`.
 
 ## Project structure
 

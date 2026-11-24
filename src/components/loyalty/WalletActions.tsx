@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 type BeforeInstallPromptEvent = Event & {
@@ -39,16 +40,6 @@ function ShareIcon() {
   );
 }
 
-function GoogleWalletMark() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 6.5h14a2 2 0 0 1 2 2v9H6a2 2 0 0 1-2-2v-9Z" />
-      <path d="M6.5 6.5V5A2 2 0 0 1 8.5 3h9A2.5 2.5 0 0 1 20 5.5v3" />
-      <circle cx="16.5" cy="12.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: string | null }) {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -78,13 +69,13 @@ export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: s
 
   return (
     <>
-      <div className="mt-6 grid gap-2 sm:grid-cols-2">
+      <div className="mt-6 grid items-center gap-2 sm:grid-cols-2">
         {googleWalletUrl && (
-          <a href={googleWalletUrl} className="flex items-center justify-center gap-2 rounded-full bg-ink-950 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-paper-50 transition-opacity hover:opacity-85">
-            <GoogleWalletMark /> Add to Google Wallet
+          <a href={googleWalletUrl} aria-label="Add this loyalty card to Google Wallet" className="flex min-h-[71px] items-center justify-center p-2 transition-opacity hover:opacity-85">
+            <Image src="/add-to-google-wallet-en-gb-condensed.svg" alt="Add to Google Wallet" width={199} height={55} unoptimized />
           </a>
         )}
-        <button type="button" onClick={install} disabled={isStandalone} className={`flex items-center justify-center gap-2 rounded-full border border-ink-950/25 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-ink-950 hover:text-paper-50 disabled:cursor-default disabled:opacity-55 ${googleWalletUrl ? "" : "sm:col-span-2"}`}>
+        <button type="button" onClick={install} disabled={isStandalone} className={`flex min-h-[55px] items-center justify-center gap-2 rounded-full border border-ink-950/25 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-ink-950 hover:text-paper-50 disabled:cursor-default disabled:opacity-55 ${googleWalletUrl ? "" : "sm:col-span-2"}`}>
           <HomeScreenIcon /> {isStandalone ? "Saved to home screen" : "Save to home screen"}
         </button>
       </div>

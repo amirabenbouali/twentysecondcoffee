@@ -25,14 +25,14 @@ export default async function CustomerLoyaltyCardPage({ params }: PageProps<"/lo
   const { code } = await params;
   if (!/^[A-Za-z0-9_-]{24,64}$/.test(code)) notFound();
 
-  const member = await getPublicLoyaltyMember(code).catch(() => null);
+  const member = await getPublicLoyaltyMember(code);
   if (!member) notFound();
 
   const requestHeaders = await headers();
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const cardUrl = `${protocol}://${host}/loyalty/${member.public_code}`;
-  const qrCode = await QRCode.toDataURL(cardUrl, {
+  const qrCode = await QRCode.toDataURL(`TSC:${member.public_code}`, {
     width: 256,
     margin: 1,
     color: { dark: "#1c1613", light: "#ffffff" },

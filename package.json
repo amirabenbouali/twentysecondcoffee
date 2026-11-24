@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:staging:loyalty": "vitest run tests/staging/loyalty.integration.ts --testTimeout=60000 --hookTimeout=60000",
+    "loyalty:hash-password": "node scripts/hash-loyalty-password.mjs"
   },
   "dependencies": {
     "@upstash/ratelimit": "2.2.1",

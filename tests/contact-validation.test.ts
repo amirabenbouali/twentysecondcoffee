@@ -46,4 +46,11 @@ describe("validateContactPayload", () => {
     expect(result.success).toBe(true);
     if (result.success) expect(result.honeypotFilled).toBe(true);
   });
+
+  it("accepts the dedicated privacy request topic", () => {
+    const result = validateContactPayload({ ...validPayload, topic: "privacy" });
+
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.topic).toBe("privacy");
+  });
 });
