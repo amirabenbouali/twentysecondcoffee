@@ -36,6 +36,7 @@ Other scripts:
 npm run build   # production build
 npm run start   # serve the production build
 npm run lint    # eslint
+npm run test    # automated tests
 ```
 
 ## Editing content
@@ -92,7 +93,19 @@ Editing one of these files and redeploying is enough to update the menu, hours, 
 
 ## Contact form
 
-The form at `/contact` posts to `src/app/api/contact/route.ts`, which currently **logs submissions server-side only**. To actually receive messages, wire that route up to an email service (e.g. [Resend](https://resend.com), Postmark) or a form backend (e.g. Formspree).
+The form at `/contact` validates submissions on the server and sends accepted messages through Resend. It uses an invisible honeypot, same-origin checks, request-size limits, and a distributed Upstash Redis rate limit of five attempts per ten minutes. Submitted personal data is never written to application logs.
+
+### Contact form setup
+
+1. Create a Resend account and verify a sending domain owned by the cafe.
+2. Create a server-side Resend API key.
+3. Ask the cafe owner to approve the destination inbox and public fallback email.
+4. Create an Upstash Redis database for distributed rate limiting.
+5. Copy the contact variables from `.env.example` into `.env.local` and the hosting provider's encrypted environment settings.
+6. Generate `CONTACT_RATE_LIMIT_SECRET` with `openssl rand -base64 32`.
+7. Send a test message only after the owner has approved the destination address.
+
+`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_TOKEN`, and `CONTACT_RATE_LIMIT_SECRET` are server-only. Never give them a `NEXT_PUBLIC_` prefix. The API returns success only after Resend returns an accepted email ID. If delivery or rate limiting is not configured, it fails safely and does not claim that the message was received.
 
 ## Project structure
 

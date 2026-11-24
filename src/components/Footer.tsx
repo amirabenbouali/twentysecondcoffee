@@ -54,11 +54,17 @@ export default function Footer() {
           <div>
             <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-50/40">Say hello</p>
             <div className="mt-5 space-y-3 text-sm text-paper-50/72">
-              <a href={`mailto:${site.email}`} className="block transition-colors hover:text-paper-50">{site.email}</a>
+              {site.email ? (
+                <a href={`mailto:${site.email}`} className="block transition-colors hover:text-paper-50">{site.email}</a>
+              ) : (
+                <Link href="/contact" className="block transition-colors hover:text-paper-50">Contact form</Link>
+              )}
               <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="block transition-colors hover:text-paper-50">{site.phone}</a>
-              <a href={site.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border-b border-paper-50/30 pb-1 transition-colors hover:border-paper-50 hover:text-paper-50">
-                Instagram <span aria-hidden="true">↗</span>
-              </a>
+              {site.instagram && (
+                <a href={site.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border-b border-paper-50/30 pb-1 transition-colors hover:border-paper-50 hover:text-paper-50">
+                  Instagram <span aria-hidden="true">↗</span>
+                </a>
+              )}
             </div>
           </div>
         </div>

@@ -27,9 +27,15 @@ export default function ContactPage() {
           <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="grid grid-cols-[42px_1fr] gap-4 border-b border-ink-950/15 py-7 md:border-b-0 md:border-r md:px-7 md:py-8 md:first:pl-0">
             <span className="font-display text-3xl text-cherry-700" aria-hidden="true">⌖</span><div><h2 className="font-display text-2xl leading-none">Visit</h2><p className="mt-3 text-xs leading-5 text-ink-900/60">Royal Wharf, London E16 2TF</p></div>
           </a>
-          <a href={`mailto:${site.email}`} className="grid grid-cols-[42px_1fr] gap-4 border-b border-ink-950/15 py-7 md:border-b-0 md:border-r md:px-7 md:py-8">
-            <span className="font-display text-3xl text-cherry-700" aria-hidden="true">✉</span><div><h2 className="font-display text-2xl leading-none">Email</h2><p className="mt-3 text-xs leading-5 text-ink-900/60">{site.email}</p></div>
-          </a>
+          {site.email ? (
+            <a href={`mailto:${site.email}`} className="grid grid-cols-[42px_1fr] gap-4 border-b border-ink-950/15 py-7 md:border-b-0 md:border-r md:px-7 md:py-8">
+              <span className="font-display text-3xl text-cherry-700" aria-hidden="true">✉</span><div><h2 className="font-display text-2xl leading-none">Email</h2><p className="mt-3 text-xs leading-5 text-ink-900/60">{site.email}</p></div>
+            </a>
+          ) : (
+            <div className="grid grid-cols-[42px_1fr] gap-4 border-b border-ink-950/15 py-7 md:border-b-0 md:border-r md:px-7 md:py-8">
+              <span className="font-display text-3xl text-cherry-700" aria-hidden="true">✉</span><div><h2 className="font-display text-2xl leading-none">Message</h2><p className="mt-3 text-xs leading-5 text-ink-900/60">Use the contact form below</p></div>
+            </div>
+          )}
           <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="grid grid-cols-[42px_1fr] gap-4 py-7 md:px-7 md:py-8 md:last:pr-0">
             <span className="font-display text-3xl text-cherry-700" aria-hidden="true">☏</span><div><h2 className="font-display text-2xl leading-none">Call</h2><p className="mt-3 text-xs leading-5 text-ink-900/60">{site.phone}</p></div>
           </a>
@@ -52,7 +58,7 @@ export default function ContactPage() {
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cherry-700">Send a message</p>
               <h2 className="mt-5 font-display text-5xl leading-[0.94] tracking-[-0.035em] sm:text-6xl">What&rsquo;s on your mind?</h2>
               <p className="mt-5 max-w-lg text-sm leading-6 text-ink-900/58">Fill in the form and the team will get back to you as soon as possible.</p>
-              <div className="mt-10"><ContactForm /></div>
+              <div className="mt-10"><ContactForm fallbackEmail={site.email} /></div>
             </div>
           </Reveal>
         </div>

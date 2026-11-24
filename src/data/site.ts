@@ -1,17 +1,16 @@
-// Address, phone, and hours below are pulled from the shop's public Google
-// Business listing (Aug 2026). Double-check with the owner before relying
-// on them, since listings can go stale. Email and Instagram are still
-// placeholders: no public email or confirmed current Instagram handle was
-// found, so get the real ones from the owner.
+// Address, phone, rating, maps URL, and hours below came from the shop's public
+// Google Business listing in Aug 2026. The owner must confirm them before
+// launch because public listings can go stale. Email and Instagram remain null
+// until the owner supplies and approves the public details.
 export const site = {
   name: "twenty second coffee",
   tagline: "Royal Wharf's community coffee shop",
   neighborhood: "Royal Wharf, London",
   address: "38 Royal Crest Avenue, Royal Wharf, London E16 2TF",
-  email: "hello@22ndcoffee.co.uk",
+  email: null as string | null,
   phone: "+44 20 3990 6642",
   mapsUrl: "https://maps.google.com/?q=Twenty+Second+Coffee+Royal+Wharf",
-  instagram: "https://instagram.com/22ndcoffee",
+  instagram: null as string | null,
   googleRating: { value: 4.4, count: 388 },
   hours: [
     { day: "Sunday", time: "10:00am to 6:00pm" },
