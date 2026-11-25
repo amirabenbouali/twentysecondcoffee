@@ -1,0 +1,421 @@
+.preview {
+  --paper: var(--color-paper-50);
+  --cream: var(--color-paper-100);
+  --ink: var(--color-ink-900);
+  --accent: var(--color-cherry-700);
+  --rule: color-mix(in srgb, var(--ink), transparent 76%);
+  --gutter: clamp(1rem, 5vw, 5rem);
+  --serif: var(--font-instrument-serif), Georgia, serif;
+  padding-top: 72px;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 clamp(0.9rem, 3vw, 2rem);
+  min-height: 48px;
+  padding-inline: var(--gutter);
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.8125rem;
+}
+
+.replayOpening {
+  margin-right: auto;
+  font-weight: 600;
+}
+
+.switcher a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+}
+
+.switcher a[aria-current="page"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.refined,
+.experimental {
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.refined {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding-block: clamp(2rem, 5vw, 5rem) clamp(2.5rem, 5vw, 5rem);
+}
+
+.refinedCopy {
+  z-index: 1;
+  grid-column: 1 / 6;
+  grid-row: 1;
+  align-self: center;
+  margin-right: -1.1rem;
+  padding: clamp(1.15rem, 3vw, 3rem) clamp(1.1rem, 2.5vw, 2.5rem) clamp(1.15rem, 3vw, 3rem) 0;
+  background: var(--paper);
+}
+
+.label,
+.edition span,
+.window figcaption,
+.counter figcaption {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.label {
+  color: var(--accent);
+  margin-bottom: 1.4rem;
+}
+
+.wordmark {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.wordmark span {
+  display: block;
+}
+
+.refinedMark .wordmark {
+  font-size: clamp(3.15rem, 6vw, 7.25rem);
+  line-height: 0.86;
+  letter-spacing: -0.048em;
+}
+
+.description,
+.experimentalCopy p,
+.continuationInner p {
+  max-width: 29ch;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.5;
+}
+
+.description { margin-top: 1.35rem; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem clamp(1rem, 2vw, 1.65rem);
+  margin-top: 1.5rem;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.primary {
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.primary:hover { background: var(--accent); }
+
+.secondary {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.window {
+  grid-column: 6 / -1;
+  grid-row: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.windowPhoto,
+.counterPhoto,
+.espresso,
+.pastries {
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.windowPhoto { min-height: clamp(26rem, 46vw, 44rem); }
+.windowPhoto img { object-fit: cover; object-position: 52% 62%; }
+
+.window figcaption,
+.counter figcaption {
+  padding-top: 0.75rem;
+  color: var(--color-ink-700);
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.experimental {
+  padding-block: clamp(1.5rem, 3vw, 3.5rem) 0;
+}
+
+.edition {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.edition img { width: auto; height: 42px; }
+
+.expressiveMark {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(1rem, 2.6vw, 2.6rem) clamp(0.6rem, 1.2vw, 1rem);
+}
+
+.expressiveMark .wordmark {
+  font-size: clamp(4rem, 12.1vw, 12rem);
+  line-height: 0.78;
+  letter-spacing: -0.066em;
+  text-wrap: nowrap;
+}
+
+.expressiveMark .wordmark em { color: var(--accent); font-weight: 400; }
+.expressiveMark .wordmark span {
+  display: inline-block;
+  margin-left: 0.22em;
+  color: var(--ink);
+  font-size: 0.64em;
+  letter-spacing: -0.055em;
+}
+
+.experimentalBody {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto;
+  gap: 0 clamp(0.6rem, 1.5vw, 1.4rem);
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.experimentalCopy {
+  grid-column: 1 / 5;
+  grid-row: 1 / -1;
+  align-self: center;
+  padding-block: 1.5rem;
+}
+
+.counter {
+  grid-column: 5 / 12;
+  grid-row: 1 / -1;
+  min-width: 0;
+  margin: 0;
+}
+
+.counterPhoto { height: clamp(18rem, 35vw, 35rem); }
+.counterPhoto img { object-fit: cover; object-position: 50% 55%; }
+
+.espresso {
+  grid-column: 10 / -1;
+  grid-row: 1;
+  align-self: end;
+  aspect-ratio: 4 / 5;
+  margin: 0 0 -0.7rem;
+  border: 5px solid var(--paper);
+}
+.espresso img { object-fit: cover; object-position: 57% 66%; }
+
+.continuation,
+.darkContinuation {
+  padding: clamp(2rem, 5vw, 4rem) var(--gutter);
+  border-top: 1px solid var(--rule);
+}
+
+.continuation { background: var(--cream); }
+.darkContinuation { color: var(--paper); background: var(--color-espresso-950); }
+
+.continuationInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(1.4rem, 4vw, 4rem);
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+.continuationInner h2 {
+  margin: 0 0 0.75rem;
+  font: 400 clamp(2.6rem, 5vw, 4.5rem) / 0.95 var(--serif);
+}
+
+.pastries { aspect-ratio: 5 / 2; }
+.pastries img { object-fit: cover; object-position: 50% 63%; }
+
+.story,
+.regularsInner,
+.eventListing,
+.visitInner {
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.story {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem clamp(0.65rem, 1.6vw, 1.6rem);
+  padding-block: clamp(3.5rem, 8vw, 8rem);
+}
+
+.storyLead {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  align-self: start;
+  position: relative;
+  z-index: 1;
+}
+.storyLead h2 {
+  font: 400 clamp(4.35rem, 10vw, 10rem) / 0.82 var(--serif);
+  letter-spacing: -0.045em;
+}
+.storyLead h2 span { display: block; }
+.room {
+  margin: clamp(4rem, 10vw, 10rem) 0 0;
+  grid-column: 6 / -1;
+  grid-row: 1 / 3;
+}
+.roomPhoto,
+.frontDoor {
+  position: relative;
+  background: var(--cream);
+  overflow: hidden;
+}
+.roomPhoto { aspect-ratio: 6 / 5; }
+.roomPhoto img { object-fit: cover; object-position: 50% 59%; }
+.room figcaption { padding-top: 0.6rem; font-size: 0.8125rem; }
+.storyNote {
+  grid-column: 2 / 6;
+  grid-row: 2;
+  align-self: end;
+  max-width: 29ch;
+  padding-bottom: 1.4rem;
+}
+.storyNote p, .regulars p, .visitDetails p { line-height: 1.55; }
+.experimentalPage .storyLead { grid-column: 7 / -1; }
+.experimentalPage .room { grid-column: 1 / 7; }
+.experimentalPage .storyNote { grid-column: 8 / -1; }
+
+.regulars { background: var(--cream); }
+.experimentalPage .regulars { background: var(--accent); color: var(--paper); }
+.regularsInner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 4rem);
+  padding-block: clamp(2.5rem, 5vw, 5rem);
+}
+.regulars h2, .visit h2, .eventListing h2 {
+  margin: 0 0 0.75rem;
+  font: 400 clamp(3rem, 6.8vw, 7rem) / 0.88 var(--serif);
+  letter-spacing: -0.035em;
+}
+.stampStrip {
+  padding: 1.25rem 0;
+  border-block: 1px solid currentColor;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.stamps { display: flex; gap: clamp(0.3rem, 0.95vw, 0.9rem); margin-top: 1.25rem; }
+.stamps i {
+  display: block;
+  width: min(2rem, 8%);
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.stamps i:nth-child(-n+3) { background: currentColor; }
+.eventListing { padding-block: 3rem; }
+.eventListing li { padding-block: 1rem; border-top: 1px solid var(--rule); }
+.eventListing li span { margin-inline-end: 1.5rem; }
+
+.visit { color: var(--paper); background: var(--color-espresso-950); }
+.visitInner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 6vw, 6rem);
+  align-items: center;
+  padding-block: clamp(2.5rem, 6vw, 6rem);
+}
+.frontDoor { aspect-ratio: 5 / 4; }
+.frontDoor img { object-fit: cover; object-position: 50% 51%; }
+.visitMark { width: auto; height: 52px; margin-bottom: 1rem; }
+.visitDetails dl { margin: 1.5rem 0 0; font-size: 0.875rem; }
+.visitDetails dl div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.15rem 1rem;
+  padding-block: 0.6rem;
+  border-top: 1px solid color-mix(in srgb, var(--paper), transparent 74%);
+}
+.visitDetails dd { margin: 0; }
+
+/* The preview has its own visit section. Retain the shared utility links. */
+:global(body):has(.preview) :global(#site-footer) {
+  background: var(--color-espresso-950);
+  border-top: 1px solid color-mix(in srgb, var(--color-paper-50), transparent 74%);
+}
+:global(body):has(.preview) :global(#site-footer) > div > div:not(:last-child) {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .refinedMark .wordmark { font-size: clamp(2.7rem, 5.8vw, 4.5rem); }
+  .experimentalCopy { grid-column: 1 / 5; }
+  .counter { grid-column: 5 / -1; }
+}
+
+@media (max-width: 680px) {
+  .refined { display: block; padding-top: 1.6rem; }
+  .refinedCopy { margin-right: 0; padding: 0 0 1.5rem; }
+  .refinedMark .wordmark { font-size: clamp(3.2rem, 11.6vw, 5.2rem); }
+  .label { margin-bottom: 0.85rem; }
+  .windowPhoto { min-height: 0; aspect-ratio: 4 / 4.4; }
+
+  .expressiveMark .wordmark {
+    font-size: clamp(3.7rem, 15vw, 6.35rem);
+    line-height: 0.82;
+  }
+  .expressiveMark .wordmark span { display: block; margin: 0.08em 0 0; }
+  .experimentalBody { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .experimentalCopy { grid-column: 1 / -1; grid-row: 1; padding: 0 0 1.25rem; }
+  .counter { grid-column: 1 / 5; grid-row: 2; margin-right: 1.4rem; }
+  .counterPhoto { height: auto; aspect-ratio: 1; }
+  .espresso { grid-column: 4; grid-row: 2; margin: 0 0 2.1rem -0.7rem; border-width: 3px; }
+  .continuationInner { grid-template-columns: 1fr; }
+  .story, .regularsInner, .visitInner { grid-template-columns: 1fr; }
+  .story .storyLead, .story .room, .story .storyNote { grid-column: 1; grid-row: auto; }
+  .story .room { margin: 0; }
+  .story .storyLead h2 span { display: inline; }
+  .story .storyNote { padding-bottom: 0; }
+  .visitDetails { grid-row: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .replayOpening { display: none !important; }
+}

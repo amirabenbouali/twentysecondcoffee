@@ -10,16 +10,6 @@ import { nav, site } from "@/data/site";
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const isHome = pathname === "/";
-  const transparent = isHome && !scrolled && !open;
-
-  useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 48);
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, []);
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1024px)");
@@ -39,13 +29,7 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          transparent
-            ? "border-b border-paper-50/25 bg-transparent text-paper-50"
-            : "border-b border-ink-950/10 bg-paper-50/95 text-ink-950 shadow-[0_8px_30px_rgba(24,20,16,0.04)] backdrop-blur-xl"
-        }`}
-      >
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-ink-950/10 bg-paper-50/95 text-ink-950 shadow-[0_8px_30px_rgba(24,20,16,0.04)] backdrop-blur-xl">
         <div className="mx-auto grid h-[72px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
           <nav className="hidden items-center gap-4 lg:flex xl:gap-6" aria-label="Primary navigation">
             {nav.slice(0, 3).map((item) => (
@@ -57,7 +41,7 @@ export default function Header() {
 
           <Link href="/" className="col-start-2 flex items-center gap-2 sm:gap-2.5" aria-label={`${site.name} home`}>
             <Image
-              src={transparent ? "/logo-light-small.png" : "/logo-small.png"}
+              src="/logo-small.png"
               alt=""
               width={32}
               height={32}

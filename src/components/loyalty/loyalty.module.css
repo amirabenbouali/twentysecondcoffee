@@ -1,0 +1,225 @@
+.royalWharf {
+  --paper: var(--color-paper-50);
+  --cream: var(--color-paper-100);
+  --ink: var(--color-ink-900);
+  --brown: var(--color-ink-700);
+  --cherry: var(--color-cherry-700);
+  --serif: var(--font-instrument-serif), Georgia, serif;
+  --rule: color-mix(in srgb, var(--ink) 26%, transparent);
+  --gutter: clamp(1rem, 5vw, 5rem);
+  padding-top: 72px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.royalWharf :is(a, button, input, section):focus-visible { outline: 2px solid var(--cherry); outline-offset: 4px; }
+.royalWharf em { color: var(--cherry); }
+.frame, .rules, .joinInner, .endnote {
+  width: min(100%, 85rem);
+  padding-inline: var(--gutter);
+  margin-inline: auto;
+}
+
+.masthead { padding-block: clamp(1.25rem, 4vw, 3.3rem); }
+.folio {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .35rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: .75rem;
+}
+.label {
+  font-size: .6875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.hero { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.15fr); gap: clamp(1.5rem, 4.25vw, 4rem); align-items: center; padding-top: clamp(1.75rem, 5vw, 4.5rem); }
+.intro h1, .pageTitle {
+  font: 400 clamp(4rem, 7.5vw, 8.45rem) / .84 var(--serif);
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+.intro h1 { text-wrap: wrap; }
+.lede { margin-top: 1.25rem; max-width: 25ch; font-size: clamp(1rem, 1.6vw, 1.22rem); line-height: 1.5; color: var(--brown); }
+.actions { margin-top: 1.4rem; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.15rem; }
+.button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  border: 1px solid var(--cherry);
+  border-radius: 3px;
+  padding: .6rem 1rem;
+  background: var(--cherry);
+  color: var(--paper);
+  font-size: .875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 180ms, color 180ms;
+}
+.button:hover:not(:disabled) { background: var(--ink); border-color: var(--ink); }
+.button:disabled { background: var(--cream); color: var(--ink); cursor: wait; }
+.textLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: .35rem;
+  color: var(--cherry);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: .26em;
+}
+.textLink:hover { text-decoration-thickness: 2px; }
+
+.collectible {
+  --card-gutter: clamp(.85rem, 3vw, 2.75rem);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px -15px #351b1660;
+  animation: arrive 420ms ease-out both;
+  transition: transform 200ms ease;
+}
+.cardFace {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.15rem, 3.7vw, 3rem) var(--card-gutter) clamp(1rem, 2vw, 1.6rem);
+  background: var(--cherry);
+  color: var(--paper);
+}
+.ring {
+  position: absolute;
+  z-index: -1;
+  inset: -17% -8% auto auto;
+  width: min(62%, 22rem);
+  stroke: var(--cream);
+  opacity: .20;
+  transform: rotate(-11deg);
+}
+.cardTop { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .3rem .75rem; padding-bottom: .8rem; border-bottom: 1px solid #faf6ef72; }
+.cardBrand { font: 400 clamp(1.2rem, 2.3vw, 1.75rem) / 1 var(--serif); }
+.cardTitle { margin-block: clamp(.85rem, 2.3vw, 1.75rem); font: 400 clamp(2.25rem, 5vw, 4.75rem) / .95 var(--serif); letter-spacing: -.025em; overflow-wrap: anywhere; }
+.stamps { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: clamp(.12rem, .65vw, .55rem); }
+.stamp {
+  display: grid;
+  place-items: center;
+  gap: .3rem;
+  padding: .36rem .14rem .24rem;
+  border: 1px solid #faf6ef73;
+  border-radius: 45% 45% 3px 3px;
+  color: var(--cream);
+  transition: background-color 230ms ease, color 230ms ease, border-color 230ms ease;
+}
+.stamp svg { display: block; width: min(100%, 2.2rem); height: auto; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; }
+.stamp span { font-size: clamp(.51rem, 1vw, .7rem); font-variant-numeric: tabular-nums; }
+.stamp[data-filled="true"] { background: var(--paper); border-color: var(--paper); color: var(--cherry); }
+.beanBody { fill: transparent; transition: fill 230ms ease; }
+.beanSeam { transition: stroke 230ms ease; }
+.stamp[data-filled="true"] .beanBody { fill: currentColor; }
+.stamp[data-filled="true"] .beanSeam { stroke: var(--paper); }
+.balance { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem .55rem; margin-top: .85rem; font-size: clamp(.75rem, 1.22vw, .94rem); line-height: 1.4; }
+.balance strong { font-variant-numeric: tabular-nums; }
+.sampleStub, .stub {
+  background: var(--cream);
+  color: var(--ink);
+  border-top: 2px dashed var(--cherry);
+  padding-inline: var(--card-gutter);
+}
+.sampleStub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .35rem .6rem; padding-block: .85rem; font-size: .72rem; font-weight: 600; }
+
+.rules {
+  display: grid;
+  grid-template-columns: minmax(0, .63fr) minmax(0, 1fr);
+  gap: clamp(1rem, 5vw, 5rem);
+  align-items: center;
+  padding-block: clamp(1.8rem, 4vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+.ruleNumber { font: 400 clamp(4.2rem, 11vw, 9.5rem) / .75 var(--serif); letter-spacing: -.04em; white-space: nowrap; color: var(--cherry); }
+.ruleNumber span { display: inline-block; margin-inline: .35em; font: .24em / 1 var(--font-dm-sans), sans-serif; vertical-align: middle; }
+.rules h2, .join h2 { font: 400 clamp(2.5rem, 5vw, 4.5rem) / .88 var(--serif); letter-spacing: -.025em; }
+.rules h2 { margin-bottom: .7rem; }
+.rules p, .joinHeader > p:last-child { max-width: 53ch; color: var(--brown); line-height: 1.6; }
+.rules .finePrint { margin-top: .5rem; font-size: .82rem; }
+
+.join { background: var(--cream); padding-block: clamp(1.75rem, 5vw, 4rem); scroll-margin-top: 80px; }
+.joinInner { max-width: 50rem; }
+.joinHeader { border-bottom: 1px solid var(--rule); padding-bottom: 1.1rem; }
+.joinHeader > .label { color: var(--cherry); margin-bottom: .6rem; }
+.joinHeader > p:last-child { margin-top: .7rem; }
+.registration { padding-top: .65rem; }
+.liveForm .button { margin-top: 1rem; }
+.fillSample { min-height: 44px; color: var(--cherry); text-decoration: underline; text-underline-offset: .24em; font-size: .85rem; font-weight: 700; cursor: pointer; }
+.fillSample:disabled { opacity: .75; cursor: default; }
+.fields, .consent { min-width: 0; }
+.fields > label { display: block; font-size: .86rem; font-weight: 700; margin: .7rem 0 .3rem; }
+.fields > input {
+  width: 100%;
+  min-height: 48px;
+  padding: .6rem .7rem;
+  border: 1px solid var(--brown);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1rem;
+}
+.help, .privacy { font-size: .82rem; line-height: 1.55; color: var(--brown); }
+.help { margin-top: .4rem; }
+.consent { margin-top: 1.15rem; padding: .35rem .8rem .65rem; border: 1px solid var(--rule); }
+.consent legend { padding-inline: .3rem; font-size: .8rem; font-weight: 700; }
+.consent label { display: flex; align-items: flex-start; gap: .65rem; min-height: 44px; padding-block: .3rem; font-size: .875rem; line-height: 1.5; cursor: pointer; }
+.consent input { flex: 0 0 auto; width: 1.25rem; height: 1.25rem; margin-top: .12rem; accent-color: var(--cherry); }
+.privacy { margin-block: 1rem; }
+.privacy a { color: var(--cherry); font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+.error { border-inline-start: 3px solid var(--cherry); padding: .5rem .65rem; margin-top: .6rem; color: var(--cherry); background: var(--paper); }
+.feedback { margin-top: .5rem; font-size: .9rem; font-weight: 600; }
+.feedback:empty { margin: 0; }
+.endnote { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 1.5rem; padding-block: .75rem; font-size: .88rem; }
+
+.cardPage { max-width: 48rem; margin-inline: auto; padding: 1.5rem var(--gutter) 3.5rem; }
+.cardPageTop { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 .65rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.3rem; }
+.pageTitle { font-size: clamp(3.25rem, 7vw, 6rem); }
+.pageTitle + .collectible { margin-top: 1rem; }
+.cardIntro { margin: .7rem 0 1rem; color: var(--brown); }
+.stub { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .75rem 1.2rem; align-items: center; padding-block: 1.2rem; }
+.stubText { min-width: 0; }
+.stubText > p:nth-child(3) { font-size: .85rem; line-height: 1.5; }
+.stubTitle { font: 400 clamp(1.6rem, 4vw, 2.65rem) / .95 var(--serif); margin: .4rem 0; }
+.memberCode { display: grid; gap: .14rem; margin-top: .65rem; }
+.memberCode strong { font: 700 1.05rem / 1.2 ui-monospace, monospace; overflow-wrap: anywhere; letter-spacing: .06em; }
+.qr { width: clamp(7.75rem, 24vw, 10.75rem); text-align: center; }
+.qr img { width: 100%; height: auto; background: white; padding: 6px; }
+.cardActions { grid-column: 1 / -1; }
+.qr p { margin-top: .25rem; font-size: .7rem; }
+.states { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1rem; }
+.states legend { margin-bottom: .35rem; }
+.state { min-height: 44px; padding-inline: .7rem; border: 1px solid var(--cherry); border-radius: 3px; color: var(--cherry); font-size: .84rem; cursor: pointer; }
+.state:hover { background: var(--cream); }
+.state[aria-pressed="true"] { background: var(--cherry); color: var(--paper); }
+.cardNote { margin-top: .8rem; color: var(--brown); font-size: .82rem; line-height: 1.5; }
+
+@keyframes arrive { from { opacity: .1; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+@media (hover: hover) and (pointer: fine) {
+  .heroCard .collectible:hover { transform: translateY(-3px); }
+}
+@media (max-width: 850px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .intro h1 { font-size: clamp(3.55rem, 11.7vw, 6.1rem); }
+  .heroCard { width: min(100%, 38rem); margin-inline-start: auto; }
+  .rules { grid-template-columns: minmax(0, .45fr) minmax(0, 1fr); }
+}
+@media (max-width: 500px) {
+  .rules { grid-template-columns: 1fr; gap: .8rem; }
+  .stub { grid-template-columns: minmax(0, 1fr); }
+  .qr { width: min(100%, 10.5rem); margin-inline: auto; }
+  .qr img { margin-inline: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .royalWharf :is(.collectible, .stamp, .beanBody, .beanSeam, .button) { animation: none; transition: none; transform: none; }
+  .heroCard .collectible:hover { transform: none; }
+}

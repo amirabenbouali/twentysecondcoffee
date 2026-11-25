@@ -14,11 +14,13 @@ const labelClass =
 type ContactFormProps = {
   fallbackEmail?: string | null;
   initialTopic?: (typeof CONTACT_TOPICS)[number]["value"];
+  subjectLabel?: string;
 };
 
 export default function ContactForm({
   fallbackEmail,
   initialTopic = "feedback",
+  subjectLabel = "What’s this about?",
 }: ContactFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -38,19 +40,19 @@ export default function ContactForm({
 
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
-    submissionId.current ||= crypto.randomUUID();
-
     try {
+      submissionId.current ||= crypto.randomUUID();
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, submissionId: submissionId.current }),
       });
       const result = (await res.json().catch(() => null)) as {
+        ok?: unknown;
         error?: unknown;
       } | null;
 
-      if (!res.ok) {
+      if (!res.ok || result?.ok !== true) {
         setErrorMessage(
           typeof result?.error === "string"
             ? result.error
@@ -100,7 +102,7 @@ export default function ContactForm({
 
       <div>
         <label htmlFor="topic" className={labelClass}>
-          What&rsquo;s this about?
+          {subjectLabel}
         </label>
         <select
           id="topic"

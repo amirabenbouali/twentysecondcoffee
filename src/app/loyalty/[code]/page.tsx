@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import QRCode from "qrcode";
 import LoyaltyCard from "@/components/loyalty/LoyaltyCard";
+import styles from "@/components/loyalty/loyalty.module.css";
 import { getPublicLoyaltyMember } from "@/lib/loyalty/db";
 import { createGoogleWalletSaveUrl } from "@/lib/loyalty/google-wallet";
 
@@ -40,15 +41,16 @@ export default async function CustomerLoyaltyCardPage({ params }: PageProps<"/lo
   const googleWalletUrl = createGoogleWalletSaveUrl(member, cardUrl);
 
   return (
-    <section className="min-h-screen bg-[#e7d8c6] px-5 pb-20 pt-32 text-ink-950 sm:px-8 sm:pt-36">
-      <div className="mx-auto max-w-2xl">
-        <div className="mb-6 flex items-center justify-between gap-4">
-          <Link href="/loyalty" className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-700 hover:text-ink-950">← Rewards</Link>
-          <p className="text-[9px] uppercase tracking-[0.18em] text-ink-700">Save this page</p>
+    <div className={styles.royalWharf}>
+      <section className={styles.cardPage}>
+        <div className={styles.cardPageTop}>
+          <Link href="/loyalty" className={styles.textLink}>← Coffee Club</Link>
+          <p className={styles.label}>Save this page</p>
         </div>
+        <h1 className={styles.pageTitle}>Your coffee card<em>.</em></h1>
         <LoyaltyCard member={member} qrCode={qrCode} googleWalletUrl={googleWalletUrl} />
-        <p className="mx-auto mt-6 max-w-lg text-center text-xs leading-5 text-ink-700">Keep this page private. Anyone with your card code can display it at the counter.</p>
-      </div>
-    </section>
+        <p className={styles.cardNote}>Keep this page private. Anyone with your card code can display it at the counter.</p>
+      </section>
+    </div>
   );
 }
