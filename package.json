@@ -4,12 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:staging": "node scripts/run-staging-command.mjs preview",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "check:staging:loyalty": "node scripts/run-staging-command.mjs check",
+    "test:staging:loyalty": "node scripts/run-staging-command.mjs integration",
+    "migrate:staging:loyalty": "node scripts/run-staging-command.mjs migration",
+    "loyalty:hash-password": "node scripts/hash-loyalty-password.mjs"
   },
   "dependencies": {
-    "next": "16.3.8",
+    "@upstash/ratelimit": "2.2.1",
+    "@upstash/redis": "1.41.0",
+    "next": "16.4.6",
     "qrcode": "1.5.4",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -21,8 +29,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.3.8",
+    "eslint-config-next": "16.4.6",
+    "supabase": "3.3.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "4.1.12"
   }
 }

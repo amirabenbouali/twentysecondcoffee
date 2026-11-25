@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid gap-10 border-b border-paper-50/15 py-14 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-end lg:py-20">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-50/50">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-paper-100">
               Coffee, conversation & good company
             </p>
             <p className="mt-5 max-w-4xl font-display text-6xl leading-[0.88] tracking-[-0.045em] sm:text-8xl lg:text-[7.5rem]">
@@ -31,16 +31,16 @@ export default function Footer() {
               <Image src="/logo-light-small.png" alt="" width={38} height={38} className="h-9 w-9 object-contain" />
               <span className="font-display text-3xl tracking-[-0.03em]">{site.name}</span>
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-6 text-paper-50/50">{site.tagline}. Made for mornings, afternoons, and everything in between.</p>
+            <p className="mt-5 max-w-xs text-sm leading-6 text-paper-100">{site.tagline}. Made for mornings, afternoons, and everything in between.</p>
           </div>
 
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-50/40">Visit</p>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-100">Visit</p>
             <p className="mt-5 max-w-[15rem] text-sm leading-6 text-paper-50/72">{site.address}</p>
           </div>
 
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-50/40">Opening hours</p>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-100">Opening hours</p>
             <ul className="mt-5 space-y-3 text-sm leading-6 text-paper-50/72">
               {site.hours.map((hours) => (
                 <li key={hours.day}>
@@ -52,18 +52,24 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-50/40">Say hello</p>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-paper-100">Say hello</p>
             <div className="mt-5 space-y-3 text-sm text-paper-50/72">
-              <a href={`mailto:${site.email}`} className="block transition-colors hover:text-paper-50">{site.email}</a>
+              {site.email ? (
+                <a href={`mailto:${site.email}`} className="block transition-colors hover:text-paper-50">{site.email}</a>
+              ) : (
+                <Link href="/contact" className="block transition-colors hover:text-paper-50">Contact form</Link>
+              )}
               <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="block transition-colors hover:text-paper-50">{site.phone}</a>
-              <a href={site.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border-b border-paper-50/30 pb-1 transition-colors hover:border-paper-50 hover:text-paper-50">
-                Instagram <span aria-hidden="true">↗</span>
-              </a>
+              {site.instagram && (
+                <a href={site.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border-b border-paper-50/30 pb-1 transition-colors hover:border-paper-50 hover:text-paper-50">
+                  Instagram <span aria-hidden="true">↗</span>
+                </a>
+              )}
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 py-6 text-[10px] uppercase tracking-[0.14em] text-paper-50/35 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-6 py-6 text-[10px] uppercase tracking-[0.14em] text-paper-100 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {site.name}</p>
           <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Footer navigation">
             {nav.map((item) => (
@@ -71,6 +77,9 @@ export default function Footer() {
                 {item.label}
               </Link>
             ))}
+            <Link href="/privacy" className="transition-colors hover:text-paper-50">
+              Privacy
+            </Link>
           </nav>
           <p>Royal Wharf · London</p>
         </div>

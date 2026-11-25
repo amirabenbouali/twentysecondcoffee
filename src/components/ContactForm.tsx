@@ -1,13 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-
-const topics = [
-  { value: "feedback", label: "Feedback" },
-  { value: "event", label: "Event idea" },
-  { value: "opportunity", label: "Business opportunity" },
-  { value: "other", label: "Something else" },
-];
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { CONTACT_TOPICS } from "@/lib/contact/validation";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -15,58 +9,109 @@ const fieldClass =
   "mt-2 w-full border-0 border-b border-ink-950/25 bg-transparent px-0 py-3 text-sm text-ink-950 outline-none transition-colors focus:border-ink-950 focus:ring-0";
 
 const labelClass =
-  "block text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-900/50";
+  "block text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-700";
 
-export default function ContactForm() {
+type ContactFormProps = {
+  fallbackEmail?: string | null;
+  initialTopic?: (typeof CONTACT_TOPICS)[number]["value"];
+  subjectLabel?: string;
+};
+
+export default function ContactForm({
+  fallbackEmail,
+  initialTopic = "feedback",
+  subjectLabel = "What’s this about?",
+}: ContactFormProps) {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const submissionId = useRef("");
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success" || status === "error") {
+      statusRef.current?.focus();
+    }
+  }, [status]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
+    setErrorMessage("");
 
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
-
     try {
+      submissionId.current ||= crypto.randomUUID();
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, submissionId: submissionId.current }),
       });
+      const result = (await res.json().catch(() => null)) as {
+        ok?: unknown;
+        error?: unknown;
+      } | null;
 
-      if (!res.ok) throw new Error("Request failed");
+      if (!res.ok || result?.ok !== true) {
+        setErrorMessage(
+          typeof result?.error === "string"
+            ? result.error
+            : "We could not send your message. Please try again later.",
+        );
+        setStatus("error");
+        return;
+      }
 
       setStatus("success");
+      submissionId.current = "";
       form.reset();
     } catch {
+      setErrorMessage("We could not reach the contact service. Please try again later.");
       setStatus("error");
     }
   }
 
   if (status === "success") {
     return (
-      <div className="border-y border-ink-950/20 py-8 text-ink-950" aria-live="polite">
+      <div
+        ref={statusRef}
+        className="border-y border-ink-950/20 py-8 text-ink-950 outline-none"
+        role="status"
+        tabIndex={-1}
+      >
         <p className="font-display text-5xl">Thank you.</p>
         <p className="mt-3 text-sm leading-6 text-ink-900/65">
-          We&rsquo;ve received your message and will get back to you soon.
+          Your message has been accepted for delivery. The team will get back to you soon.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-8" aria-busy={status === "submitting"}>
+      <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Leave this field empty</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div>
         <label htmlFor="topic" className={labelClass}>
-          What&rsquo;s this about?
+          {subjectLabel}
         </label>
         <select
           id="topic"
           name="topic"
-          defaultValue="feedback"
+          defaultValue={initialTopic}
+          required
           className={fieldClass}
         >
-          {topics.map((t) => (
+          {CONTACT_TOPICS.map((t) => (
             <option key={t.value} value={t.value}>
               {t.label}
             </option>
@@ -84,6 +129,8 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
+            minLength={2}
+            maxLength={100}
             autoComplete="name"
             className={fieldClass}
           />
@@ -97,6 +144,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             required
+            maxLength={254}
             autoComplete="email"
             className={fieldClass}
           />
@@ -111,14 +159,44 @@ export default function ContactForm() {
           id="message"
           name="message"
           required
+          minLength={10}
+          maxLength={5000}
           rows={5}
           className={fieldClass}
         />
       </div>
 
+      <p className="text-[11px] leading-5 text-ink-700">
+        We use the details you provide to respond to your enquiry. Read our{" "}
+        <a href="/privacy" className="font-semibold text-ink-950 underline underline-offset-4">
+          privacy notice
+        </a>
+        .
+      </p>
+
       {status === "error" && (
-        <p className="text-sm text-cherry-700" role="alert">
-          Something went wrong sending your message. Please try again, or email us directly.
+        <div
+          ref={statusRef}
+          className="text-sm leading-6 text-cherry-700 outline-none"
+          role="alert"
+          tabIndex={-1}
+        >
+          <p>{errorMessage}</p>
+          {fallbackEmail && (
+            <p className="mt-2">
+              You can also email us at{" "}
+              <a href={`mailto:${fallbackEmail}`} className="font-semibold underline underline-offset-4">
+                {fallbackEmail}
+              </a>
+              .
+            </p>
+          )}
+        </div>
+      )}
+
+      {status === "submitting" && (
+        <p className="text-sm text-ink-700" role="status">
+          Sending your message.
         </p>
       )}
 

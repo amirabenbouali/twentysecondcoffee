@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
+import AccessibleDialog from "@/components/AccessibleDialog";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -39,16 +41,6 @@ function ShareIcon() {
   );
 }
 
-function GoogleWalletMark() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 6.5h14a2 2 0 0 1 2 2v9H6a2 2 0 0 1-2-2v-9Z" />
-      <path d="M6.5 6.5V5A2 2 0 0 1 8.5 3h9A2.5 2.5 0 0 1 20 5.5v3" />
-      <circle cx="16.5" cy="12.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: string | null }) {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -78,26 +70,32 @@ export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: s
 
   return (
     <>
-      <div className="mt-6 grid gap-2 sm:grid-cols-2">
+      <div className="mt-6 grid items-center gap-2 sm:grid-cols-2">
         {googleWalletUrl && (
-          <a href={googleWalletUrl} className="flex items-center justify-center gap-2 rounded-full bg-ink-950 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-paper-50 transition-opacity hover:opacity-85">
-            <GoogleWalletMark /> Add to Google Wallet
+          <a href={googleWalletUrl} aria-label="Add this loyalty card to Google Wallet" className="flex min-h-[71px] items-center justify-center p-2 transition-opacity hover:opacity-85">
+            <Image src="/add-to-google-wallet-en-gb-condensed.svg" alt="Add to Google Wallet" width={199} height={55} unoptimized />
           </a>
         )}
-        <button type="button" onClick={install} disabled={isStandalone} className={`flex items-center justify-center gap-2 rounded-full border border-ink-950/25 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-ink-950 hover:text-paper-50 disabled:cursor-default disabled:opacity-55 ${googleWalletUrl ? "" : "sm:col-span-2"}`}>
+        <button type="button" onClick={install} disabled={isStandalone} className={`flex min-h-[55px] items-center justify-center gap-2 rounded-full border border-ink-950/25 px-5 py-3 text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-ink-950 hover:text-paper-50 disabled:cursor-default disabled:opacity-55 ${googleWalletUrl ? "" : "sm:col-span-2"}`}>
           <HomeScreenIcon /> {isStandalone ? "Saved to home screen" : "Save to home screen"}
         </button>
       </div>
 
-      {showInstructions && (
-        <div className="fixed inset-0 z-[70] flex items-end bg-ink-950/55 p-4 backdrop-blur-sm sm:items-center sm:justify-center" role="dialog" aria-modal="true" aria-labelledby="home-screen-title" onClick={() => setShowInstructions(false)}>
-          <div className="w-full max-w-md rounded-[1.5rem] bg-paper-50 p-6 text-ink-950 shadow-2xl sm:p-8" onClick={(event) => event.stopPropagation()}>
+      <AccessibleDialog
+        open={showInstructions}
+        onClose={() => setShowInstructions(false)}
+        labelledBy="home-screen-title"
+        describedBy="home-screen-description"
+        className="w-[calc(100%-2rem)] max-w-md"
+      >
+          <div className="max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-[1.5rem] bg-paper-50 p-6 text-ink-950 shadow-2xl sm:p-8">
             <div className="flex items-start justify-between gap-5">
               <div>
                 <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-cherry-700">Keep your card close</p>
                 <h2 id="home-screen-title" className="mt-3 font-display text-4xl leading-none tracking-[-0.03em]">Save it to your iPhone.</h2>
+                <p id="home-screen-description" className="sr-only">Instructions for adding your loyalty card to an iPhone home screen.</p>
               </div>
-              <button type="button" onClick={() => setShowInstructions(false)} aria-label="Close instructions" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink-950/20 text-lg">×</button>
+              <button type="button" data-dialog-initial-focus onClick={() => setShowInstructions(false)} aria-label="Close instructions" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-950/20 text-lg">×</button>
             </div>
             <ol className="mt-7 space-y-5 text-sm leading-6 text-ink-900/65">
               <li className="grid grid-cols-[36px_1fr] items-start gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-full border border-cherry-700/30 text-cherry-700"><ShareIcon /></span><span>Open this card in Safari, then tap the Share symbol at the bottom of the screen.</span></li>
@@ -106,8 +104,7 @@ export default function WalletActions({ googleWalletUrl }: { googleWalletUrl?: s
             </ol>
             <button type="button" onClick={() => setShowInstructions(false)} className="mt-7 w-full rounded-full bg-ink-950 px-6 py-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-paper-50">Got it</button>
           </div>
-        </div>
-      )}
+      </AccessibleDialog>
     </>
   );
 }

@@ -23,7 +23,7 @@ export default function EventCard({ event, notchColor, delayMs = 0 }: EventCardP
         />
 
         <div className="p-7 sm:p-9">
-          <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-900/45">At twenty second coffee</p>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-ink-700">At twenty second coffee</p>
           <h3 className="mt-4 font-display text-4xl leading-tight text-ink-950 sm:text-5xl">
             {event.title}
           </h3>
@@ -34,7 +34,7 @@ export default function EventCard({ event, notchColor, delayMs = 0 }: EventCardP
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-950">
             {event.date}
           </p>
-          <p className="text-xs text-ink-900/55">{event.time}</p>
+          <p className="text-xs text-ink-700">{event.time}</p>
         </div>
       </article>
     </Reveal>

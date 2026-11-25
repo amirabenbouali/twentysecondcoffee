@@ -36,6 +36,7 @@ Other scripts:
 npm run build   # production build
 npm run start   # serve the production build
 npm run lint    # eslint
+npm run test    # automated tests
 ```
 
 ## Editing content
@@ -56,20 +57,39 @@ The rules currently award a free standard coffee after nine qualifying purchases
 
 ### Database setup
 
-1. Create a Supabase project.
-2. Open its SQL editor and run `supabase/migrations/20261019000000_create_loyalty.sql`.
+1. Create a Supabase project for staging. Do not begin with the live customer database.
+2. Open its SQL editor and run the migrations in filename order. Review and test each migration in a non-production project first.
 3. Copy `.env.example` to `.env.local`.
 4. Add the project URL and service role key from the Supabase project settings.
-5. Set a strong shared staff password and a separate random session secret.
-6. Add the same four variables to the production hosting environment and redeploy.
+5. Configure Upstash and generate a separate `LOYALTY_RATE_LIMIT_SECRET` with `openssl rand -base64 32`.
+6. Run `npm run loyalty:hash-password` in an interactive terminal for each staff member.
+7. Insert the resulting hash, a lower-case username, display name, and approved role into `loyalty_staff`. Never store the plaintext password.
+8. Run the staging integration suite and real-device workflow before preparing any production migration.
 
 The service role key is server-only and must never use a `NEXT_PUBLIC_` prefix. Row level security is enabled, and only server-side routes can read or change loyalty records.
 
-Useful local command for generating a session secret:
+The Stage 3 migration, `supabase/migrations/20261124000000_add_loyalty_consent_audit.sql`, adds versioned privacy and marketing choices plus an append-only consent event history. The Stage 4 migration, `supabase/migrations/20261124010000_harden_loyalty_operations.sql`, adds individual staff accounts, revocable sessions, roles, action attribution, idempotency, paginated search, exact scan lookup, and a durable Wallet queue. Apply approved migrations before deploying matching application code. They have not been applied automatically.
+
+Example staging staff insert after generating a password hash:
+
+```sql
+insert into public.loyalty_staff (username, display_name, role, password_hash)
+values ('approved.username', 'Approved Display Name', 'barista', 'paste-scrypt-hash-here');
+```
+
+Managers can undo actions and inspect the attributed action history. Baristas can search, scan, stamp, and redeem. The client must approve each person and role before an account is created.
+
+### Staging integration tests
+
+The integration test creates only synthetic `example.invalid` records and removes them when it finishes. It refuses to run without dedicated staging variables and an explicit mutation confirmation:
 
 ```bash
-openssl rand -base64 32
+npm run test:staging:loyalty
 ```
+
+Local staging setup is documented in `docs/staging-configuration.md`. The dedicated `check:staging:loyalty`, `dev:staging`, `test:staging:loyalty`, and `migrate:staging:loyalty` commands explicitly load their ignored local environment files. Values from those files override same-named variables inherited from the shell, and placeholders are rejected before a child command starts. Before running integration tests, add the approved non-secret staging project reference to `config/loyalty-staging-projects.json`. Configure `LOYALTY_PRODUCTION_SUPABASE_PROJECT_REF`, the dedicated `LOYALTY_STAGING_*` variables, and `ALLOW_STAGING_LOYALTY_MUTATIONS=STAGING_ONLY` in `.env.staging.integration.local`. The validator rejects missing references, production targets, non-allowlisted targets, and URLs that do not exactly match the approved staging reference. It never includes credentials in error output.
+
+Migration application has a separate interactive guard. Configure `ALLOW_STAGING_MIGRATIONS=STAGING_ONLY`, then run `npm run migrate:staging:loyalty`. The wrapper validates the same target, performs a Supabase dry run, and requires the exact project-specific confirmation phrase before invoking the real push. Do not bypass this wrapper for Stage 4. Never supply production credentials to either command. The Stage 4 rollout and release gates are in `docs/stage-4-loyalty-production-plan.md`.
 
 ### Google Wallet
 
@@ -82,7 +102,9 @@ Google Wallet is optional. The button remains hidden until all four Google Walle
 5. Add the issuer ID, class suffix, service account email, and private key to the local and production environment variables.
 6. Add a test customer in demo mode, save a test pass, and then request Google publishing access.
 
-Each pass contains the customer name, card code, bean balance, reward balance, and QR code. Staff actions update saved Google Wallet passes automatically. A failure at Google never blocks an in-shop loyalty action.
+Each pass contains the customer name, card code, bean balance, reward balance, and an opaque QR payload. The site uses Google’s official Great Britain English button asset without altering its proportions or styling. Staff actions queue Wallet synchronization in the same database transaction. Inline synchronization is attempted immediately, and a protected scheduler retries temporary failures without blocking an in-shop loyalty action.
+
+Configure the hosting scheduler to request `/api/internal/loyalty/wallet-sync` with `Authorization: Bearer <CRON_SECRET>`. Use a separate secret of at least 32 random characters. Google Wallet must be tested in demo mode with test Google accounts before publishing access is requested.
 
 ### Add to Home Screen
 
@@ -92,7 +114,27 @@ Editing one of these files and redeploying is enough to update the menu, hours, 
 
 ## Contact form
 
-The form at `/contact` posts to `src/app/api/contact/route.ts`, which currently **logs submissions server-side only**. To actually receive messages, wire that route up to an email service (e.g. [Resend](https://resend.com), Postmark) or a form backend (e.g. Formspree).
+The form at `/contact` validates submissions on the server and sends accepted messages through Resend. It uses an invisible honeypot, same-origin checks, request-size limits, and a distributed Upstash Redis rate limit of five attempts per ten minutes. Submitted personal data is never written to application logs.
+
+### Contact form setup
+
+1. Create a Resend account and verify a sending domain owned by the cafe.
+2. Create a server-side Resend API key.
+3. Ask the cafe owner to approve the destination inbox and public fallback email.
+4. Create an Upstash Redis database for distributed rate limiting.
+5. Copy the contact variables from `.env.example` into `.env.local` and the hosting provider's encrypted environment settings.
+6. Generate `CONTACT_RATE_LIMIT_SECRET` with `openssl rand -base64 32`.
+7. Send a test message only after the owner has approved the destination address.
+
+`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_TOKEN`, and `CONTACT_RATE_LIMIT_SECRET` are server-only. Never give them a `NEXT_PUBLIC_` prefix. The API returns success only after Resend returns an accepted email ID. If delivery or rate limiting is not configured, it fails safely and does not claim that the message was received.
+
+## Privacy and data requests
+
+The draft privacy notice is available at `/privacy`. It deliberately marks legal and client decisions that still need confirmation and must not be treated as a final legal notice. Contact and loyalty forms link to it, and privacy requests can be started at `/contact?topic=privacy`.
+
+Loyalty membership and marketing are separate choices. Marketing starts unchecked, and the database migration records the choice, timestamp, wording version, and source. The internal access, correction, withdrawal, and deletion procedure is documented in `docs/privacy-operations.md`.
+
+The repository-level collection points, database fields, processors, public exposure, and outstanding provider checks are recorded in `docs/privacy-data-inventory.md`.
 
 ## Project structure
 

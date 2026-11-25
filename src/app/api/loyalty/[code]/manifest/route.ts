@@ -9,7 +9,12 @@ export async function GET(
     return Response.json({ error: "Card not found." }, { status: 404 });
   }
 
-  const member = await getPublicLoyaltyMember(code).catch(() => null);
+  let member;
+  try {
+    member = await getPublicLoyaltyMember(code);
+  } catch {
+    return Response.json({ error: "The loyalty service is temporarily unavailable." }, { status: 503 });
+  }
   if (!member) return Response.json({ error: "Card not found." }, { status: 404 });
 
   return Response.json(

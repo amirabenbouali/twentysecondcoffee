@@ -1,0 +1,227 @@
+.diary {
+  --paper: var(--color-paper-50);
+  --cream: var(--color-paper-100);
+  --ink: var(--color-ink-900);
+  --brown: var(--color-ink-700);
+  --cherry: var(--color-cherry-700);
+  --line: color-mix(in srgb, var(--ink) 29%, transparent);
+  --serif: var(--font-instrument-serif), Georgia, serif;
+  color: var(--ink);
+  background: var(--paper);
+  padding-top: 72px;
+}
+
+.frame {
+  width: min(100%, 89rem);
+  margin-inline: auto;
+  padding: clamp(1rem, 3vw, 2.75rem) clamp(1rem, 5.3vw, 5rem) clamp(1.35rem, 4vw, 3.5rem);
+}
+
+.opening { background: var(--ink); color: var(--paper); }
+.masthead { padding-bottom: 0; }
+
+.folio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .35rem 1rem;
+  padding-block: .7rem;
+  border-block: 1px solid color-mix(in srgb, var(--cream) 32%, transparent);
+}
+
+.folio, .kicker, .listingBar p, .photo figcaption, .month {
+  font-size: .6875rem;
+  line-height: 1.4;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+
+.titleGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.1rem 2rem;
+  padding-block: clamp(1.35rem, 3.2vw, 2.9rem) clamp(1.45rem, 3.4vw, 3rem);
+}
+
+.kicker { color: var(--cream); margin-bottom: .65rem; }
+
+.titleGrid h1 {
+  font: 400 clamp(3.2rem, 6.9vw, 7.1rem) / .86 var(--serif);
+  letter-spacing: -.04em;
+}
+
+.titleGrid h1 em { color: var(--cream); }
+.emptyCopy em { color: var(--cherry); }
+.titleGrid h1 em { display: inline-block; }
+
+.ring {
+  display: block;
+  width: clamp(4rem, 18vw, 14rem);
+  margin-inline-end: clamp(.15rem, 1.5vw, 1.4rem);
+  stroke: var(--cream);
+  transform: rotate(-8deg);
+}
+
+.listings { scroll-margin-top: 84px; }
+.listingBar {
+  border-block: 1px solid var(--ink);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .35rem 1rem;
+  align-items: baseline;
+  padding-block: .6rem;
+}
+.listingBar h2 { font: 400 clamp(1.7rem, 3vw, 2.5rem) / 1 var(--serif); }
+.listingBar p { color: var(--cherry); }
+
+.empty {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(8rem, 15rem);
+  align-items: end;
+  gap: 1.3rem clamp(1.25rem, 5vw, 5rem);
+  padding: clamp(1.2rem, 3vw, 2.65rem) clamp(1rem, 4vw, 3.6rem);
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+}
+.emptyCopy { max-width: 43rem; }
+.emptyCopy h3, .eventCopy h3 {
+  font: 400 clamp(2.65rem, 5.3vw, 5.2rem) / .88 var(--serif);
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.emptyCopy > p, .eventCopy > p { margin-top: .75rem; max-width: 45ch; color: var(--brown); font-size: .9375rem; line-height: 1.55; }
+
+.photo { width: min(100%, 13.625rem); justify-self: end; }
+.photo div { position: relative; aspect-ratio: 1.75; background: var(--brown); }
+.photo img { object-fit: cover; object-position: 50% 60%; }
+.photo figcaption { margin-top: .4rem; font-size: .625rem; letter-spacing: .105em; }
+
+.sampleNotice {
+  border-bottom: 1px solid var(--line);
+  padding: .6rem .75rem;
+  background: var(--cream);
+  color: var(--brown);
+  font-size: .85rem;
+}
+.rows { list-style: none; }
+.jump, .booking {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  width: fit-content;
+  min-height: 44px;
+  margin-top: .85rem;
+  padding: .5rem .75rem;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-size: .84rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.jump { color: var(--paper); }
+.jump:hover { background: var(--cream); color: var(--ink); }
+.jump:focus-visible { outline: 2px solid var(--cream); outline-offset: 4px; }
+.booking { color: var(--paper); background: var(--cherry); border-color: var(--cherry); }
+.booking:hover { background: var(--ink); border-color: var(--ink); }
+.booking:focus-visible, .flyer:focus-visible { outline: 2px solid var(--cherry); outline-offset: 4px; }
+
+.featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, .8fr);
+  align-items: center;
+  gap: 1.3rem clamp(1.5rem, 5vw, 5rem);
+  margin-block: clamp(.85rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 4vw, 3rem);
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+.featureCopy .date { margin-bottom: 1rem; }
+.featureCopy .eventCopy h3 { font-size: clamp(2.75rem, 5vw, 5rem); }
+.featureCopy .eventDetails { margin-top: .85rem; }
+.flyer {
+  display: block;
+  width: min(100%, 16rem);
+  justify-self: center;
+  background: var(--paper);
+  padding: .3rem;
+  border: 1px solid var(--line);
+  box-shadow: 0 .65rem 1.3rem #1c161321;
+}
+.flyer img { width: 100%; height: auto; }
+.eventRow {
+  display: grid;
+  scroll-margin-top: 5rem;
+  grid-template-columns: minmax(5rem, .65fr) minmax(0, 2.3fr) minmax(0, 1fr);
+  align-items: start;
+  gap: .9rem clamp(.8rem, 3vw, 2rem);
+  padding: clamp(1rem, 3vw, 2.25rem) .25rem;
+  border-bottom: 1px solid var(--line);
+}
+.dayEntries { display: grid; gap: .9rem; }
+.dayEvent + .dayEvent { padding-top: .9rem; border-top: 1px solid var(--line); }
+.dayEvent .eventDetails { margin-top: .65rem; }
+.eventRow:focus-within { background: var(--cream); }
+
+.date {
+  display: flex;
+  gap: .55rem;
+  flex-wrap: wrap;
+  align-items: end;
+  min-width: 0;
+  color: var(--cherry);
+}
+.day { font: 400 clamp(3.2rem, 6.3vw, 6rem) / .74 var(--serif); font-variant-numeric: lining-nums; }
+.month { display: grid; padding-bottom: .14rem; }
+.month span { color: var(--brown); }
+.dateFallback { color: var(--cherry); font-weight: 700; }
+.eventCopy h3 { font-size: clamp(2rem, 4vw, 4rem); text-wrap: pretty; }
+.eventCopy h3, .dateFallback { overflow-wrap: anywhere; }
+.eventDetails { font-size: .875rem; line-height: 1.55; }
+.eventDetails p + p { color: var(--brown); margin-top: .2rem; }
+
+.textLink {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 44px;
+  align-items: center;
+  gap: .45rem;
+  color: var(--cherry);
+  font-size: .875rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+.textLink:hover { text-decoration-thickness: 2px; }
+.textLink:focus-visible { outline: 2px solid var(--cherry); outline-offset: 3px; }
+.emptyCopy .textLink { margin-top: .35rem; }
+
+.previewNav { display: flex; flex-wrap: wrap; gap: 0 1.25rem; padding-top: .4rem; }
+.previewNav [aria-current] { color: var(--ink); text-decoration-thickness: 2px; }
+
+.srOnly { position: absolute; height: 1px; width: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .titleGrid { grid-template-columns: minmax(0, 1fr) clamp(4rem, 17vw, 9rem); }
+}
+@media (max-width: 680px) {
+  .featured { grid-template-columns: minmax(0, 1fr); }
+  .featured .flyer { justify-self: start; }
+  .eventRow { grid-template-columns: minmax(4rem, .38fr) minmax(0, 1fr); }
+  .eventRow .flyer { grid-column: 2; justify-self: start; }
+  .date { display: grid; gap: .32rem; }
+  .featureCopy .date { display: flex; }
+  .month { font-size: .625rem; letter-spacing: .08em; }
+}
+@media (max-width: 560px) {
+  .titleGrid { position: relative; display: block; }
+  .kicker { padding-right: 4rem; }
+  .titleGrid h1 em { display: block; }
+  .ring { position: absolute; top: .8rem; right: 0; margin: 0; width: 3rem; }
+  .empty { grid-template-columns: minmax(0, 1fr); }
+  .emptyCopy h3 { text-wrap: wrap; }
+  .photo { justify-self: start; width: min(100%, 10.25rem); }
+}
