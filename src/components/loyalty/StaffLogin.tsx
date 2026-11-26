@@ -21,9 +21,9 @@ export default function StaffLogin() {
           password: form.get("password"),
         }),
       });
-      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+      const result = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
-      if (!response.ok) {
+      if (!response.ok || result?.ok !== true) {
         setError(result?.error ?? "Unable to sign in. Please try again.");
         return;
       }
@@ -37,7 +37,7 @@ export default function StaffLogin() {
   }
 
   return (
-    <form onSubmit={submit} aria-busy={pending} className="mx-auto max-w-md rounded-[1.5rem] border border-ink-950/15 bg-paper-50 p-6 shadow-[0_25px_70px_rgba(38,25,15,0.08)] sm:p-9">
+    <form method="post" action="/api/loyalty/staff/login" onSubmit={submit} aria-busy={pending} className="mx-auto max-w-md rounded-[1.5rem] border border-ink-950/15 bg-paper-50 p-6 shadow-[0_25px_70px_rgba(38,25,15,0.08)] sm:p-9">
       <p className="text-[9px] font-semibold uppercase tracking-[0.26em] text-cherry-700">Private access</p>
       <h1 className="mt-4 font-display text-[clamp(2.75rem,14vw,3rem)] leading-none tracking-[-0.035em]">Staff loyalty desk</h1>
       <p className="mt-4 text-sm leading-6 text-ink-700">Sign in with your individual staff account to manage customer cards.</p>

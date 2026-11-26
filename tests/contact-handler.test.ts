@@ -124,3 +124,17 @@ describe("handleContactRequest", () => {
     expect(deps.sendEmail).not.toHaveBeenCalled();
   });
 });
+
+it("handles rejected delivery promises without logging error content", async () => {
+  const deps = dependencies();
+  deps.sendEmail.mockRejectedValue(new Error("private provider information"));
+
+  const response = await handleContactRequest(contactRequest(payload), deps);
+
+  expect(response.status).toBe(502);
+  expect(await response.text()).not.toContain("private provider information");
+  expect(deps.reportOperationalError).toHaveBeenCalledWith(
+    "email_delivery_failed",
+    { reason: "provider_unavailable", providerStatus: undefined },
+  );
+});
