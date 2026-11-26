@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import EditorialAbout from "@/components/about/EditorialAbout";
-import { site } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: `About | ${site.name}`,
-  description: `The story behind ${site.name}, a community coffee shop in ${site.neighborhood}.`,
-};
+export const metadata = publicPageMetadata("/about");
 
 export default function AboutPage() {
   return <EditorialAbout />;

@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import EventDiary from "@/components/events/EventDiary";
 import { getUpcomingEvents } from "@/data/events";
-import { site } from "@/data/site";
 
-export const metadata: Metadata = {
-  title: `Events | ${site.name}`,
-  description: `Coffee mornings, tastings, pop-ups, and neighbourhood gatherings at ${site.name} in ${site.neighborhood}.`,
-};
+export const metadata = publicPageMetadata("/events");
 
 export const revalidate = 3600;
 

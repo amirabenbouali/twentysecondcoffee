@@ -5,14 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "dev:staging": "node scripts/run-staging-command.mjs preview",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
     "check:staging:loyalty": "node scripts/run-staging-command.mjs check",
     "test:staging:loyalty": "node scripts/run-staging-command.mjs integration",
     "migrate:staging:loyalty": "node scripts/run-staging-command.mjs migration",
-    "loyalty:hash-password": "node scripts/hash-loyalty-password.mjs"
+    "loyalty:hash-password": "node scripts/hash-loyalty-password.mjs",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@upstash/ratelimit": "2.2.1",
@@ -23,6 +25,8 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.1",
+    "@playwright/test": "1.65.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/qrcode": "1.5.6",

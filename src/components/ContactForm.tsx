@@ -88,7 +88,7 @@ export default function ContactForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8" aria-busy={status === "submitting"}>
+    <form method="post" action="/api/contact" onSubmit={handleSubmit} className="space-y-8" aria-busy={status === "submitting"}>
       <div className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="contact-website">Leave this field empty</label>
         <input

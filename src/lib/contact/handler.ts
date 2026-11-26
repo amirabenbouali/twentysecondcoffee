@@ -39,6 +39,28 @@ function isSameOrigin(request: Request) {
   return Boolean(host && origin === `${protocol}://${host}`);
 }
 
+async function readContactBody(request: Request) {
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let bytes = 0;
+  let body = "";
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) return body + decoder.decode();
+      bytes += value.byteLength;
+      if (bytes > MAX_REQUEST_BYTES) {
+        void reader.cancel().catch(() => {});
+        return null;
+      }
+      body += decoder.decode(value, { stream: true });
+    }
+  } finally {
+    reader.releaseLock();
+  }
+}
+
 export async function handleContactRequest(
   request: Request,
   dependencies: ContactDependencies,
@@ -77,13 +99,10 @@ export async function handleContactRequest(
     );
   }
 
-  const rawBody = await request.text();
-  if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_BYTES) {
-    return json({ error: "That message is too large." }, 413);
-  }
-
   let body: unknown = null;
   try {
+    const rawBody = await readContactBody(request);
+    if (rawBody === null) return json({ error: "That message is too large." }, 413);
     body = JSON.parse(rawBody);
   } catch {
     return json({ error: "Please submit a valid contact form." }, 400);
@@ -98,7 +117,12 @@ export async function handleContactRequest(
     return json({ error: "We could not send that message." }, 400);
   }
 
-  const delivery = await dependencies.sendEmail(validation.data);
+  let delivery: DeliveryResult;
+  try {
+    delivery = await dependencies.sendEmail(validation.data);
+  } catch {
+    delivery = { accepted: false, reason: "provider_unavailable" };
+  }
   if (!delivery.accepted) {
     dependencies.reportOperationalError("email_delivery_failed", {
       reason: delivery.reason,

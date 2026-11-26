@@ -8,13 +8,22 @@ import styles from "./loyalty.module.css";
 
 const SAVED_CARD_KEY = "twenty-second-loyalty-card";
 
+function isCardPath(value: unknown): value is string {
+  return typeof value === "string" && /^\/loyalty\/[A-Za-z0-9_-]{24,64}$/.test(value);
+}
+
 function subscribeToSavedCard(callback: () => void) {
   window.addEventListener("storage", callback);
   return () => window.removeEventListener("storage", callback);
 }
 
 function getSavedCard() {
-  return window.localStorage.getItem(SAVED_CARD_KEY);
+  try {
+    const value = window.localStorage.getItem(SAVED_CARD_KEY);
+    return isCardPath(value) ? value : null;
+  } catch {
+    return null;
+  }
 }
 
 export default function JoinForm() {
@@ -44,12 +53,16 @@ export default function JoinForm() {
         error?: string;
       } | null;
 
-      if (!response.ok || !result?.cardUrl) {
+      if (!response.ok || !isCardPath(result?.cardUrl)) {
         setError(result?.error ?? "We could not create your card. Please try again.");
         return;
       }
 
-      window.localStorage.setItem(SAVED_CARD_KEY, result.cardUrl);
+      try {
+        window.localStorage.setItem(SAVED_CARD_KEY, result.cardUrl);
+      } catch {
+        // Registration has already succeeded. The customer can still open their card.
+      }
       router.push(result.cardUrl);
     } catch {
       setError("We could not reach the loyalty service. Please check your connection and try again.");
@@ -61,13 +74,13 @@ export default function JoinForm() {
   return (
     <div className={styles.registration}>
       {savedCard && (
-        <Link href={savedCard} className="mt-6 flex items-center justify-between rounded-xl border border-cherry-700/25 bg-blush-100/45 px-4 py-3 text-sm transition-colors hover:bg-blush-100">
+        <Link href={savedCard} prefetch={false} className="mt-6 flex items-center justify-between rounded-xl border border-cherry-700/25 bg-blush-100/45 px-4 py-3 text-sm transition-colors hover:bg-blush-100">
           <span>You already have a card on this device.</span>
           <span aria-hidden="true">→</span>
         </Link>
       )}
 
-      <form onSubmit={submit} className={styles.liveForm} aria-busy={pending}>
+      <form method="post" action="/api/loyalty/join" onSubmit={submit} className={styles.liveForm} aria-busy={pending}>
         <div className={styles.fields}>
           <label htmlFor="loyalty-first-name">First name</label>
           <input

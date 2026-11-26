@@ -1,13 +1,10 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import { site } from "@/data/site";
 import styles from "./contact.module.css";
 
-export const metadata: Metadata = {
-  title: `Contact | ${site.name}`,
-  description: "Find Twenty Second Coffee in Royal Wharf or send the café a message.",
-};
+export const metadata = publicPageMetadata("/contact");
 
 function DirectionsLink({ className }: { className: string }) {
   return (

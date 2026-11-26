@@ -2,11 +2,19 @@
 // Google Business listing in Aug 2026. The owner must confirm them before
 // launch because public listings can go stale. Email and Instagram remain null
 // until the owner supplies and approves the public details.
+const postalAddress = {
+  streetAddress: "38 Royal Crest Avenue",
+  addressLocality: "London",
+  postalCode: "E16 2TF",
+  addressCountry: "GB",
+};
+
 export const site = {
   name: "twenty second coffee",
   tagline: "Royal Wharf's community coffee shop",
   neighborhood: "Royal Wharf, London",
-  address: "38 Royal Crest Avenue, Royal Wharf, London E16 2TF",
+  address: `${postalAddress.streetAddress}, Royal Wharf, ${postalAddress.addressLocality} ${postalAddress.postalCode}`,
+  postalAddress,
   email: null as string | null,
   phone: "+44 20 3990 6642",
   mapsUrl: "https://maps.google.com/?q=Twenty+Second+Coffee+Royal+Wharf",
