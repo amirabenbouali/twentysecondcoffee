@@ -3,7 +3,7 @@ import { DM_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { site } from "@/data/site";
+import { indexableSite, siteOrigin } from "@/lib/seo";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -18,8 +18,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} | ${site.tagline}`,
-  description: `${site.name} is a community coffee shop in ${site.neighborhood}. See our menu, upcoming events, and get in touch.`,
+  metadataBase: siteOrigin,
+  robots: indexableSite ? undefined : { index: false, follow: false },
   icons: {
     icon: "/icon-192.png",
     apple: "/icon-180.png",
