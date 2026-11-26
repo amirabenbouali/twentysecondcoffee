@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { createBeanScene } from "./coffeeBeanScene";
 import styles from "./CoffeeBeanIntro.module.css";
 
 const SESSION_KEY = "twenty-second-coffee-intro";
@@ -80,12 +79,19 @@ export default function CoffeeBeanIntro({ preview = false }: { preview?: boolean
       if (event.matches) stop();
     }
 
-    // Give the server-rendered hero a chance to paint first.
-    frame = requestAnimationFrame(() => {
-      if (stopped || motion.matches || document.hidden || window.scrollY > 0 ||
-          document.activeElement !== document.body || document.querySelector("dialog:modal")) return;
+    function canStart() {
+      return !stopped && !motion.matches && !document.hidden && window.scrollY === 0 &&
+        document.activeElement === document.body && !document.querySelector("dialog:modal");
+    }
 
-      const scene = createBeanScene(canvas, window.innerWidth < 600);
+    async function startIntro() {
+      if (!canStart()) return;
+      const requestedAt = performance.now();
+      const engine = await import("./coffeeBeanScene").catch(() => null);
+      // Avoid interrupting the visitor after a slow chunk download or interaction.
+      if (!engine || !canStart() || performance.now() - requestedAt > 750 || !canvas || !dialog) return;
+
+      const scene = engine.createBeanScene(canvas, window.innerWidth < 600);
       if (!scene) return;
 
       dialog.dataset.phase = "beans";
@@ -113,16 +119,27 @@ export default function CoffeeBeanIntro({ preview = false }: { preview?: boolean
         frame = requestAnimationFrame(animate);
       }
       frame = requestAnimationFrame(animate);
+    }
+
+    function stopWhenHidden() {
+      if (document.hidden) stop();
+    }
+
+    // Paint the server-rendered hero before preparing the canvas.
+    frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => void startIntro());
     });
 
     skip?.addEventListener("click", finishForUser);
     dialog.addEventListener("cancel", cancel);
     motion.addEventListener("change", stopForMotion);
+    document.addEventListener("visibilitychange", stopWhenHidden);
     return () => {
       stop();
       skip?.removeEventListener("click", finishForUser);
       dialog.removeEventListener("cancel", cancel);
       motion.removeEventListener("change", stopForMotion);
+      document.removeEventListener("visibilitychange", stopWhenHidden);
     };
   }, [sessionKey]);
 
